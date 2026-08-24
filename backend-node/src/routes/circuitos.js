@@ -8,11 +8,58 @@ const mongoose = require('mongoose')
 const Circuito = require('../models/Circuito')
 const Projeto = require('../models/Projeto')
 const requireAuth = require('../middleware/auth')
+const {
+  batchCalcRateLimit,
+  createCircuitRateLimit,
+  importRateLimit,
+} = require('../middleware/apiRateLimit')
 const { buildPythonServiceUrl } = require('../config/pythonService')
 const { buildPythonUpstreamError } = require('../utils/upstreamError')
 const { errorText } = require('../utils/errorText')
+const { assertUsageAllowed, consumeUsage } = require('../services/usage')
+const {
+  asBoolean,
+  asEnum,
+  asInteger,
+  asNumber,
+  asString,
+  assertObjectId,
+  assertPlainObject,
+  ensureNoUnknownFields,
+  rejectBlockedFields,
+  sanitizeRegexText,
+  validationError,
+} = require('../utils/validation')
 
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } })
+const ALLOWED_UPLOAD_EXTENSIONS = new Set(['.xlsx', '.xls', '.csv'])
+const ALLOWED_UPLOAD_MIME = new Set([
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/vnd.ms-excel',
+  'text/csv',
+  'application/csv',
+  'application/octet-stream',
+])
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024, files: 1 },
+  fileFilter: (_req, file, cb) => {
+    const originalName = String(file.originalname || '')
+    const lower = originalName.toLowerCase()
+    const ext = lower.includes('.') ? lower.slice(lower.lastIndexOf('.')) : ''
+    const mime = String(file.mimetype || '').toLowerCase()
+
+    if (!originalName || originalName.includes('\0') || originalName.includes('/') || originalName.includes('\\')) {
+      return cb(validationError('Nome de arquivo invalido.'))
+    }
+
+    if (!ALLOWED_UPLOAD_EXTENSIONS.has(ext) || !ALLOWED_UPLOAD_MIME.has(mime)) {
+      return cb(validationError('Arquivo invalido. Envie apenas .xlsx, .xls ou .csv.'))
+    }
+
+    cb(null, true)
+  },
+})
 const PYTHON_CALC_TIMEOUT_MS = parseInt(process.env.PYTHON_CALC_TIMEOUT_MS || '120000', 10)
 const PYTHON_BATCH_CALC_TIMEOUT_MS = parseInt(process.env.PYTHON_BATCH_CALC_TIMEOUT_MS || '180000', 10)
 const PYTHON_CALC_RETRIES = parseInt(process.env.PYTHON_CALC_RETRIES || '2', 10)
@@ -309,11 +356,7 @@ async function calcularImportacaoEmLotes(circuitos, contexto, meta = {}) {
 }
 
 async function checkProjeto(projetoId, usuarioId) {
-  if (!projetoId || !mongoose.Types.ObjectId.isValid(projetoId)) {
-    const err = new Error('ID de projeto invalido')
-    err.status = 400
-    throw err
-  }
+  assertObjectId(projetoId, 'ID de projeto')
   const projeto = await Projeto.findOne({
     _id: new mongoose.Types.ObjectId(projetoId),
     usuarioId: new mongoose.Types.ObjectId(usuarioId.toString()),
@@ -326,11 +369,147 @@ async function checkProjeto(projetoId, usuarioId) {
   return projeto
 }
 
+const CIRCUITO_INPUT_FIELDS = [
+  'projeto_id',
+  'projetoId',
+  'ordem',
+  'descricao',
+  'tensao',
+  'tensao_unidade',
+  'tipo_sistema_tensao',
+  'referencia_tensao_dc',
+  'contexto_aplicacao',
+  'potencia_kw',
+  'potencia_kva',
+  'fator_potencia',
+  'distancia_m',
+  'tipo_cabo',
+  'temp_ambiente',
+  'fases',
+  'agrupamento',
+  'corrente_ac_dc',
+  'fator_demanda',
+  'fator_eficiencia',
+  'metodo_instalacao',
+  'formacao',
+  'comprimento_real',
+  'queda_tensao_alimentador',
+  'isc_local',
+  'usar_kva_informado',
+  'configuracao_eletrica',
+  'referencia_tensao',
+  'modo_entrada',
+  'base_potencia',
+  'corrente_informada',
+  'aplicacao_circuito',
+  'secao_minima_aplicacao',
+  'secao_minima_mecanica',
+  'queda_tensao_limite',
+  'tag',
+  'from_barramento',
+  'to_equipamento',
+  'protection_device',
+  'modo_dimensionamento',
+  'modo_selecao_componentes',
+  'disjuntor_tensao_nominal',
+  'disjuntor_corrente_nominal',
+  'disjuntor_icu',
+  'disjuntor_curva',
+  'disjuntor_fabricante',
+  'classe_tensao_kv',
+  'nbi_kv',
+  'tafi_ka',
+  'sequencia_operacao',
+  'meio_extincao',
+  'tipo_acionamento',
+  'acessorios',
+  'modelo',
+  'norma_referencia',
+]
+
 function normalizarEntrada(body, projetoId) {
-  const dados = { ...body }
+  assertPlainObject(body)
+  rejectBlockedFields(body)
+  ensureNoUnknownFields(body, CIRCUITO_INPUT_FIELDS, 'circuito')
+
+  const dados = {}
   if (projetoId) dados.projetoId = projetoId
-  const tiposValidos = ['CU-PVC', 'CU-XLPE', 'AL-PVC', 'AL-XLPE']
-  if (!tiposValidos.includes(dados.tipo_cabo)) dados.tipo_cabo = 'CU-PVC'
+  if (body.ordem !== undefined) dados.ordem = asInteger(body.ordem, { label: 'ordem', min: 0, max: 100000 })
+  dados.descricao = asString(body.descricao, { label: 'descricao', max: 200, required: true })
+  dados.tensao_unidade = asEnum(body.tensao_unidade, ['V', 'kV'], { label: 'tensao_unidade', fallback: 'V' })
+  dados.tipo_sistema_tensao = asEnum(body.tipo_sistema_tensao || body.corrente_ac_dc, ['AC', 'DC'], { label: 'tipo_sistema_tensao', fallback: 'AC' })
+  dados.tensao = asNumber(body.tensao, { label: 'tensao', min: 1, max: 2000000, required: true, nullable: false })
+  dados.potencia_kw = asNumber(body.potencia_kw, { label: 'potencia_kw', min: 0, max: 1000000, required: true })
+  if (body.potencia_kva !== undefined) dados.potencia_kva = asNumber(body.potencia_kva, { label: 'potencia_kva', min: 0, max: 1000000 })
+  dados.fator_potencia = asNumber(body.fator_potencia ?? (dados.tipo_sistema_tensao === 'DC' ? 1 : 0.85), { label: 'fator_potencia', min: 0.01, max: 1, nullable: false })
+  if (dados.tipo_sistema_tensao === 'DC') dados.fator_potencia = 1
+  dados.distancia_m = asNumber(body.distancia_m, { label: 'distancia_m', min: 0, max: 100000, required: true })
+  dados.tipo_cabo = asEnum(body.tipo_cabo, ['CU-PVC', 'CU-XLPE', 'AL-PVC', 'AL-XLPE'], {
+    label: 'tipo_cabo',
+    fallback: 'CU-PVC',
+  })
+  dados.temp_ambiente = asNumber(body.temp_ambiente ?? 30, { label: 'temp_ambiente', min: -50, max: 120, nullable: false })
+  dados.fases = asInteger(body.fases ?? 3, { label: 'fases', min: 1, max: 3, nullable: false })
+  dados.agrupamento = asInteger(body.agrupamento ?? 1, { label: 'agrupamento', min: 1, max: 200, nullable: false })
+  dados.corrente_ac_dc = asEnum(body.corrente_ac_dc || dados.tipo_sistema_tensao, ['AC', 'DC'], { label: 'corrente_ac_dc', fallback: dados.tipo_sistema_tensao })
+  dados.fator_demanda = asNumber(body.fator_demanda ?? 1, { label: 'fator_demanda', min: 0, max: 1, nullable: false })
+  dados.fator_eficiencia = asNumber(body.fator_eficiencia ?? 1, { label: 'fator_eficiencia', min: 0.01, max: 1, nullable: false })
+  dados.metodo_instalacao = asString(body.metodo_instalacao ?? 'TRAY', { label: 'metodo_instalacao', max: 80, nullable: false })
+  dados.formacao = asInteger(body.formacao ?? 1, { label: 'formacao', min: 1, max: 20, nullable: false })
+
+  const numericOptionals = [
+    'comprimento_real',
+    'queda_tensao_alimentador',
+    'isc_local',
+    'corrente_informada',
+    'secao_minima_aplicacao',
+    'secao_minima_mecanica',
+    'queda_tensao_limite',
+    'disjuntor_tensao_nominal',
+    'disjuntor_corrente_nominal',
+    'disjuntor_icu',
+    'classe_tensao_kv',
+    'nbi_kv',
+    'tafi_ka',
+  ]
+  numericOptionals.forEach((field) => {
+    if (body[field] !== undefined) dados[field] = asNumber(body[field], { label: field, min: 0, max: 1000000 })
+  })
+
+  const textOptionals = [
+    'configuracao_eletrica',
+    'referencia_tensao',
+    'referencia_tensao_dc',
+    'contexto_aplicacao',
+    'modo_entrada',
+    'base_potencia',
+    'aplicacao_circuito',
+    'tag',
+    'from_barramento',
+    'to_equipamento',
+    'protection_device',
+    'modo_dimensionamento',
+    'modo_selecao_componentes',
+    'disjuntor_curva',
+    'disjuntor_fabricante',
+    'sequencia_operacao',
+    'meio_extincao',
+    'tipo_acionamento',
+    'modelo',
+    'norma_referencia',
+  ]
+  textOptionals.forEach((field) => {
+    if (body[field] !== undefined) dados[field] = asString(body[field], { label: field, max: 200 })
+  })
+
+  if (body.usar_kva_informado !== undefined) dados.usar_kva_informado = asBoolean(body.usar_kva_informado, { label: 'usar_kva_informado' })
+  if (body.acessorios !== undefined) {
+    if (typeof body.acessorios !== 'object' || Array.isArray(body.acessorios)) throw validationError('acessorios invalido.')
+    rejectBlockedFields(body.acessorios, 'acessorios')
+    if (Buffer.byteLength(JSON.stringify(body.acessorios), 'utf8') > 32 * 1024) throw validationError('acessorios excede o limite permitido.')
+    dados.acessorios = body.acessorios
+  }
+
   return dados
 }
 
@@ -347,19 +526,22 @@ function resultadoFallbackCalculo(err) {
 router.get('/projeto/:projetoId', async (req, res, next) => {
   try {
     const projeto = await checkProjeto(req.params.projetoId, req.user._id)
-    const { limit = 200, offset = 0, status, busca } = req.query
+    const limit = Math.min(asInteger(req.query.limit ?? 200, { label: 'limit', min: 1, max: 1000, nullable: false }), 1000)
+    const offset = asInteger(req.query.offset ?? 0, { label: 'offset', min: 0, max: 1000000, nullable: false })
+    const status = asString(req.query.status, { label: 'status', max: 40 })
+    const busca = sanitizeRegexText(req.query.busca, { label: 'busca', max: 80 })
     const query = { projetoId: projeto._id }
 
     if (status) query.status_final = String(status).toUpperCase()
     if (busca) {
-      const re = new RegExp(String(busca), 'i')
+      const re = new RegExp(busca, 'i')
       query.$or = [{ descricao: re }, { tag: re }]
     }
 
     const circuitos = await Circuito.find(query)
       .sort({ ordem: 1 })
-      .skip(parseInt(offset, 10))
-      .limit(Math.min(parseInt(limit, 10), 1000))
+      .skip(offset)
+      .limit(limit)
       .lean()
 
     res.json(circuitos.map((c) => ({ ...c, id: c._id.toString() })))
@@ -368,10 +550,11 @@ router.get('/projeto/:projetoId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', createCircuitRateLimit, async (req, res, next) => {
   try {
     const projetoId = req.body.projeto_id || req.body.projetoId
     const projeto = await checkProjeto(projetoId, req.user._id)
+    await assertUsageAllowed(req.user, 'circuits.create', { projetoId: projeto._id, amount: 1 })
     const entrada = normalizarEntrada(req.body, projeto._id)
 
     if (!entrada.isc_local && projeto.transformador_dados?.corrente_curto_secundario_ka) {
@@ -398,9 +581,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(id, 'ID')
     const circuito = await Circuito.findById(id).lean()
     if (!circuito) return res.status(404).json({ detail: 'Circuito nao encontrado' })
     await checkProjeto(circuito.projetoId, req.user._id)
@@ -413,9 +594,7 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(id, 'ID')
 
     const circuito = await Circuito.findById(id).lean()
     if (!circuito) return res.status(404).json({ detail: 'Circuito nao encontrado' })
@@ -450,9 +629,7 @@ router.delete('/projeto/:projetoId', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(id, 'ID')
     const circuito = await Circuito.findById(id).lean()
     if (!circuito) return res.status(404).json({ detail: 'Circuito nao encontrado' })
     await checkProjeto(circuito.projetoId, req.user._id)
@@ -463,7 +640,7 @@ router.delete('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/calcular-lote/:projetoId', async (req, res, next) => {
+router.post('/calcular-lote/:projetoId', batchCalcRateLimit, async (req, res, next) => {
   try {
     const projeto = await checkProjeto(req.params.projetoId, req.user._id)
     const circuitos = await Circuito.find({ projetoId: projeto._id }).sort({ ordem: 1 }).lean()
@@ -487,10 +664,11 @@ router.post('/calcular-lote/:projetoId', async (req, res, next) => {
   }
 })
 
-router.post('/importar-circuitos/preview', upload.single('arquivo'), async (req, res, next) => {
+router.post('/importar-circuitos/preview', importRateLimit, upload.single('arquivo'), async (req, res, next) => {
   try {
     const projetoId = req.body.projeto_id || req.body.projetoId
     await checkProjeto(projetoId, req.user._id)
+    await assertUsageAllowed(req.user, 'spreadsheet_import')
     // Mantem comportamento atual: fluxo local sem parser de planilha no Node.
     res.json({ linhas: [], colunas: [], mapeamento_sugerido: {} })
   } catch (err) {
@@ -498,13 +676,17 @@ router.post('/importar-circuitos/preview', upload.single('arquivo'), async (req,
   }
 })
 
-router.post('/importar-circuitos/confirmar', upload.single('file'), async (req, res, next) => {
+router.post('/importar-circuitos/confirmar', importRateLimit, upload.single('file'), async (req, res, next) => {
   let importLockKey = null
   try {
     const contentType = (req.headers['content-type'] || '').toLowerCase()
 
     if (contentType.includes('application/json') || (req.body && req.body.linhas)) {
+      assertPlainObject(req.body)
+      rejectBlockedFields(req.body)
       const { projeto_id, linhas = [] } = req.body
+      if (!Array.isArray(linhas)) throw validationError('linhas deve ser uma lista.')
+      if (linhas.length > 1000) throw validationError('Importacao limitada a 1000 linhas por requisicao.')
       const requestId = String(req.headers['x-import-request-id'] || `imp-${Date.now()}`)
       const userId = String(req.user?._id || 'anon')
       importLockKey = getImportLockKey(userId, projeto_id)
@@ -526,6 +708,9 @@ router.post('/importar-circuitos/confirmar', upload.single('file'), async (req, 
       })
 
       const projeto = await checkProjeto(projeto_id, req.user._id)
+      await assertUsageAllowed(req.user, 'spreadsheet_import')
+      await assertUsageAllowed(req.user, 'imported_rows', { amount: Math.max(1, linhas.length) })
+      await assertUsageAllowed(req.user, 'circuits.create', { projetoId: projeto._id, amount: Math.max(1, linhas.length) })
 
       const maxOrdemDoc = await Circuito.findOne({ projetoId: projeto._id }).sort({ ordem: -1 }).lean()
       const maxOrdem = maxOrdemDoc?.ordem || 0
@@ -654,11 +839,17 @@ router.post('/importar-circuitos/confirmar', upload.single('file'), async (req, 
         avisos: avisos.length,
       })
 
+      await consumeUsage(req.user, {
+        spreadsheetImports: 1,
+        importedRows: criados.length,
+      })
+
       return res.json({ criados: criados.length, erros, avisos, circuitos: criados })
     }
 
     const projetoId = req.body?.projeto_id || req.body?.projetoId
     await checkProjeto(projetoId, req.user._id)
+    await assertUsageAllowed(req.user, 'spreadsheet_import')
     res.json({
       criados: 0,
       erros: [],
@@ -673,4 +864,3 @@ router.post('/importar-circuitos/confirmar', upload.single('file'), async (req, 
 })
 
 module.exports = router
-

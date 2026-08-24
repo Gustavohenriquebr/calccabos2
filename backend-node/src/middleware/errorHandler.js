@@ -8,6 +8,7 @@ module.exports = function errorHandler(err, req, res, _next) {
   const status = err.status || err.statusCode || 500
   const isValidation = err.name === 'ValidationError'
   const isDuplicate = err.code === 11000
+  const isMulter = err.name === 'MulterError'
 
   let detail = err.message || 'Erro interno do servidor'
 
@@ -20,20 +21,26 @@ module.exports = function errorHandler(err, req, res, _next) {
     detail = `${field} ja cadastrado`
   }
 
+  if (isMulter) {
+    detail = err.code === 'LIMIT_FILE_SIZE' ? 'Arquivo excede o tamanho maximo permitido.' : 'Upload invalido.'
+  }
+
+  if (status >= 500) {
+    detail = 'Erro interno do servidor.'
+  }
+
   const payload =
-    err.detail && typeof err.detail === 'object'
+    status < 500 && err.detail && typeof err.detail === 'object'
       ? { ...err.detail }
       : {
           error: status >= 500 ? 'internal_server_error' : 'request_error',
           detail,
-          path: req.path,
         }
 
-  if (!payload.path) payload.path = req.path
+  if (status < 500 && !payload.path) payload.path = req.path
 
-  const logDetail = typeof detail === 'string' ? detail : JSON.stringify(detail)
+  const logDetail = status >= 500 ? err.message || 'internal_server_error' : detail
   console.error(`[ERROR] ${req.method} ${req.path} -> ${status}: ${logDetail}`)
 
   res.status(status).json(payload)
 }
-

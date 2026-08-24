@@ -1,0 +1,172 @@
+{
+  "schema_version": "golden-cases-v1",
+  "description": "Casos de ouro para validacao tecnica do CalcCabos. Estes casos aumentam confianca, mas nao comprovam conformidade normativa nem substituem validacao profissional.",
+  "cases": [
+    {
+      "id": "aula2-trifasico-potencia-ativa-4500w-440v-fp085",
+      "category": "corrente",
+      "title": "Trifasico por potencia ativa",
+      "source": "Aula2-P1-SistemasTrifasicoseTransformadorea615338.pdf; formula manual P/(sqrt(3)*V*fp)",
+      "status": "validated_by_existing_test",
+      "input": {
+        "configuracao_eletrica": "ac_trifasico",
+        "referencia_tensao": "fase_fase",
+        "modo_entrada": "potencia_ativa",
+        "base_potencia": "entrada_eletrica",
+        "tensao": 440,
+        "potencia_kw": 4.5,
+        "fator_potencia": 0.85,
+        "fator_eficiencia": 1.0,
+        "fator_demanda": 1.0,
+        "distancia_m": 20,
+        "tipo_cabo": "CU-PVC",
+        "temp_ambiente": 30,
+        "fases": 3,
+        "agrupamento": 1,
+        "formacao": 1,
+        "metodo_instalacao": "TRAY",
+        "corrente_ac_dc": "AC",
+        "queda_tensao_limite": 5,
+        "aplicacao_circuito": "GERAL",
+        "secao_minima_aplicacao": 2.5
+      },
+      "expected": {
+        "corrente_projeto": 6.946
+      },
+      "tolerance": {
+        "corrente_projeto": 0.05
+      },
+      "observation": "Caso didatico para corrente trifasica com potencia ativa de entrada."
+    },
+    {
+      "id": "aula2-motor-potencia-util-1000kw-4kv-fp085-eta09",
+      "category": "motor",
+      "title": "Motor com potencia util e rendimento",
+      "source": "Aula2-P1-SistemasTrifasicoseTransformadorea615338.pdf; formula manual Pout/(eta*sqrt(3)*V*fp)",
+      "status": "validated_by_existing_test",
+      "input": {
+        "configuracao_eletrica": "ac_trifasico",
+        "referencia_tensao": "fase_fase",
+        "modo_entrada": "potencia_ativa",
+        "base_potencia": "saida_mecanica",
+        "tensao": 4000,
+        "potencia_kw": 1000,
+        "fator_potencia": 0.85,
+        "fator_eficiencia": 0.9,
+        "fator_demanda": 1.0,
+        "distancia_m": 20,
+        "tipo_cabo": "CU-PVC",
+        "temp_ambiente": 30,
+        "fases": 3,
+        "agrupamento": 1,
+        "formacao": 1,
+        "metodo_instalacao": "TRAY",
+        "corrente_ac_dc": "AC",
+        "queda_tensao_limite": 5,
+        "aplicacao_circuito": "MOTOR",
+        "secao_minima_aplicacao": 2.5
+      },
+      "expected": {
+        "corrente_projeto": 188.68
+      },
+      "tolerance": {
+        "corrente_projeto": 0.05
+      },
+      "observation": "Garante que potencia de saida mecanica usa rendimento."
+    },
+    {
+      "id": "aula2-transformador-1000kva-13800-220",
+      "category": "transformador",
+      "title": "Correntes nominais de transformador trifasico",
+      "source": "Aula2-P1-SistemasTrifasicoseTransformadorea615338.pdf; formula S/(sqrt(3)*V)",
+      "status": "validated_by_existing_test",
+      "input": {
+        "potencia_kva": 1000,
+        "tensao_primaria": 13800,
+        "tensao_secundaria": 220
+      },
+      "expected": {
+        "corrente_nominal_primario": 41.84,
+        "corrente_nominal_secundario": 2624
+      },
+      "tolerance": {
+        "corrente_nominal_primario": 0.1,
+        "corrente_nominal_secundario": 1.0
+      },
+      "observation": "Caso de referencia para transformador trifasico."
+    },
+    {
+      "id": "protecao-sem-dados-nao-avaliada",
+      "category": "protecao",
+      "title": "Protecao sem dados nao pode virar OK",
+      "source": "Aula4-P1-ExerciciosdeDisjuntoresa615689.pdf; politica CalcCabos de dado insuficiente",
+      "status": "validated_by_existing_test",
+      "input": {
+        "configuracao_eletrica": "ac_trifasico",
+        "referencia_tensao": "fase_fase",
+        "modo_entrada": "potencia_ativa",
+        "base_potencia": "entrada_eletrica",
+        "tensao": 380,
+        "potencia_kw": 15,
+        "fator_potencia": 0.92,
+        "fator_eficiencia": 1.0,
+        "fator_demanda": 1.0,
+        "distancia_m": 20,
+        "tipo_cabo": "CU-PVC",
+        "temp_ambiente": 30,
+        "fases": 3,
+        "agrupamento": 1,
+        "formacao": 1,
+        "metodo_instalacao": "TRAY",
+        "corrente_ac_dc": "AC",
+        "queda_tensao_limite": 5,
+        "aplicacao_circuito": "GERAL",
+        "secao_minima_aplicacao": 2.5
+      },
+      "expected": {
+        "criterios.protection.status": "NOT_EVALUATED",
+        "criterios.short_circuit.status": "NOT_EVALUATED"
+      },
+      "observation": "Dado ausente deve permanecer rastreavel como nao avaliado."
+    },
+    {
+      "id": "secao-final-maior-criterio-aplicavel",
+      "category": "decisao",
+      "title": "Secao final igual ao maior criterio aplicavel",
+      "source": "Aula1-P1-IntroducaoaosProjetosEletricosIna613172.pdf; regra de projeto por criterios acumulados",
+      "status": "validated_by_existing_test",
+      "input": {
+        "configuracao_eletrica": "ac_trifasico",
+        "referencia_tensao": "fase_fase",
+        "modo_entrada": "potencia_ativa",
+        "base_potencia": "entrada_eletrica",
+        "tensao": 380,
+        "potencia_kw": 15,
+        "fator_potencia": 0.92,
+        "fator_eficiencia": 1.0,
+        "fator_demanda": 1.0,
+        "distancia_m": 180,
+        "tipo_cabo": "CU-PVC",
+        "temp_ambiente": 30,
+        "fases": 3,
+        "agrupamento": 1,
+        "formacao": 1,
+        "metodo_instalacao": "TRAY",
+        "corrente_ac_dc": "AC",
+        "queda_tensao_limite": 5,
+        "aplicacao_circuito": "GERAL",
+        "secao_minima_aplicacao": 6,
+        "disjuntor_corrente_nominal": 32,
+        "isc_local": 8,
+        "tempo_atuacao": 0.1,
+        "disjuntor_icu": 10,
+        "disjuntor_curva": "C",
+        "disjuntor_fabricante": "Fabricante de referencia"
+      },
+      "expected": {
+        "rule": "adopted_section_equals_max_applicable_required_sections"
+      },
+      "observation": "A decisao final deve adotar a maior secao exigida entre criterios aplicaveis."
+    }
+  ]
+}

@@ -7,10 +7,16 @@ const cors = require('cors')
 const morgan = require('morgan')
 const { connect } = require('./config/database')
 const errorHandler = require('./middleware/errorHandler')
+const securityHeaders = require('./middleware/securityHeaders')
 const { getPythonServiceConfig } = require('./config/pythonService')
 
 const app = express()
 app.set('strict routing', false)
+app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : false)
+
+const isProduction = process.env.NODE_ENV === 'production'
+app.disable('x-powered-by')
+app.use(securityHeaders)
 
 const DEFAULT_CORS_ORIGINS = [
   'http://localhost:5173',
@@ -33,15 +39,22 @@ const envOrigins = String(process.env.CORS_ORIGINS || '')
   .map((origin) => origin.trim())
   .filter(Boolean)
 
-const mergedOrigins = unique([...DEFAULT_CORS_ORIGINS, ...envOrigins])
+if (isProduction && envOrigins.length === 0) {
+  throw new Error('CORS_ORIGINS obrigatorio em producao.')
+}
+
+const mergedOrigins = unique([...(isProduction ? [] : DEFAULT_CORS_ORIGINS), ...envOrigins])
 const exactOrigins = mergedOrigins.filter((origin) => !origin.includes('*'))
 const wildcardOrigins = mergedOrigins.filter((origin) => origin.includes('*'))
 const wildcardOriginRegexes = wildcardOrigins.map(wildcardToRegex)
-const vercelPreviewRegex = /^https:\/\/([a-z0-9-]+\.)*vercel\.app$/i
+
+if (isProduction && wildcardOrigins.length > 0) {
+  throw new Error('CORS_ORIGINS nao deve usar wildcard em producao quando credentials=true.')
+}
 
 function isAllowedOrigin(origin) {
   if (exactOrigins.includes(origin)) return true
-  if (vercelPreviewRegex.test(origin)) return true
+  if (isProduction) return false
   return wildcardOriginRegexes.some((regex) => regex.test(origin))
 }
 
@@ -91,6 +104,9 @@ const healthRouter = require('./routes/health')
 app.use('/health', healthRouter)
 app.use('/api/health', healthRouter)
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/billing', require('./routes/billing'))
+app.use('/api/features', require('./routes/features'))
+app.use('/api/usage', require('./routes/usage'))
 app.use('/api/projetos', require('./routes/projetos'))
 app.use('/api/circuitos', require('./routes/circuitos'))
 app.use('/api/relatorios', require('./routes/relatorios'))
@@ -116,7 +132,6 @@ async function start() {
     if (wildcardOrigins.length) {
       console.log(`[APP] CORS (wildcards): ${wildcardOrigins.join(', ')}`)
     }
-    console.log('[APP] CORS (preview Vercel): *.vercel.app')
   })
 }
 

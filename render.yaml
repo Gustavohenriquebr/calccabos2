@@ -2,42 +2,87 @@ services:
   # Backend Node/Express: API publica consumida pelo frontend Vercel.
   - type: web
     name: calccabos-backend-node
-    env: node
+    runtime: node
     plan: free
+    region: oregon
     rootDir: backend-node
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /health
+    autoDeploy: false
     envVars:
       - key: NODE_ENV
         value: production
-      # Defina manualmente no Render Dashboard.
-      # Preferencial (publico): https://SEU-BACKEND-PYTHON.onrender.com
-      # Opcional (interno/private networking): URL interna do servico Python no mesmo region/workspace.
       - key: PYTHON_SERVICE_URL
         sync: false
       - key: MONGODB_URI
         sync: false
+      - key: MONGODB_DB_NAME
+        value: calccabos
+      - key: MONGODB_APP_NAME
+        value: CalcCabos API
+      - key: MONGODB_TLS
+        value: "true"
       - key: JWT_SECRET
         sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: JWT_EXPIRES
+        value: 7d
       - key: CORS_ORIGINS
         sync: false
+      - key: AI_ENABLED
+        value: "false"
+      - key: AI_PROVIDER
+        value: openai
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gpt-5.6
+      - key: AI_MAX_TOKENS
+        value: "900"
+      - key: AI_RATE_LIMIT
+        value: "30"
+      - key: AI_TIMEOUT_MS
+        value: "45000"
+      - key: PYTHON_CALC_TIMEOUT_MS
+        value: "120000"
+      - key: PYTHON_BATCH_CALC_TIMEOUT_MS
+        value: "180000"
+      - key: PYTHON_AGENT_TIMEOUT_MS
+        value: "180000"
+      - key: PYTHON_REPORT_TIMEOUT_MS
+        value: "180000"
+      - key: PYTHON_IMPORT_CALC_BATCH_SIZE
+        value: "50"
+      - key: IMPORT_CONFIRM_LOCK_TIMEOUT_MS
+        value: "600000"
 
-  # Backend Python/FastAPI: motor de calculo, relatorios PDF/Excel e IA tecnica.
+  # Backend Python/FastAPI: motor de calculo, relatorios legados e endpoints tecnicos.
   - type: web
     name: calccabos-backend-python
-    env: python
+    runtime: python
     plan: free
+    region: oregon
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
+    autoDeploy: false
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.11
+      - key: ENVIRONMENT
+        value: production
       - key: DOCS_ENABLED
         value: "false"
+      - key: SECRET_KEY
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "10080"
       - key: CORS_ORIGINS
+        sync: false
+      - key: DATABASE_URL
         sync: false
       - key: GEMINI_API_KEY
         sync: false

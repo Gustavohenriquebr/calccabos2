@@ -16,7 +16,7 @@ function buildAgentFallback({ mensagem, projeto, circuitos, reason }) {
 
   return [
     '[RESUMO OBJETIVO]',
-    'O motor Python/IA esta indisponivel no momento, entao respondi com uma analise offline baseada nos dados salvos no backend Node.',
+    'A IA online esta indisponivel no momento, entao respondi com uma analise offline baseada nos dados salvos no backend Node.',
     '',
     '[CONTEXTO]',
     `Projeto: ${projeto?.nome || 'nao informado'}`,
@@ -28,9 +28,10 @@ function buildAgentFallback({ mensagem, projeto, circuitos, reason }) {
     ...(topAlertas.length ? topAlertas : ['- Nenhum circuito em alerta/critico foi identificado nos dados salvos.']),
     '',
     '[RECOMENDACAO]',
-    '1. Verifique se o servico FastAPI Python esta ativo no Render.',
-    '2. Confira a variavel PYTHON_SERVICE_URL no backend Node.',
-    '3. Depois que o motor voltar, recalcule os circuitos e gere novamente PDF/Excel.',
+    '1. Confira os dados obrigatorios do projeto e dos circuitos.',
+    '2. Revise circuitos em ALERTA/CRITICO antes de liberar memorial.',
+    '3. Para IA online, verifique AI_ENABLED, AI_PROVIDER e OPENAI_API_KEY no backend Node.',
+    '4. Mesmo com IA online, mantenha validacao de profissional habilitado.',
     '',
     `[DIAGNOSTICO TECNICO] ${reason || 'Falha ao acessar o motor Python.'}`,
   ].join('\n')

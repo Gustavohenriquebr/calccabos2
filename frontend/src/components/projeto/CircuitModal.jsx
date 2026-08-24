@@ -3,6 +3,41 @@ import { Save, AlertTriangle, AlertCircle, Info } from 'lucide-react';
 import { SectionHeader, StatusBadge, Alert } from '../ui';
 import { ProtecaoMTATSection } from './ProtecaoMTATSection';
 
+const CONTEXTOS_APLICACAO = [
+  ['predial', 'Predial'],
+  ['industrial', 'Industrial'],
+  ['mineracao', 'Mineração'],
+  ['offshore', 'Offshore'],
+  ['subestacao', 'Subestação'],
+  ['distribuicao', 'Distribuição'],
+  ['transmissao', 'Transmissão'],
+  ['geracao', 'Geração'],
+  ['hidreletrica', 'Hidrelétrica'],
+  ['termeletrica', 'Termelétrica'],
+  ['nuclear', 'Nuclear'],
+  ['fotovoltaico', 'Fotovoltaico'],
+  ['data_center', 'Data center'],
+  ['outro', 'Outro'],
+];
+
+function tensaoEmVolts(circuito) {
+  const valor = Number(circuito?.tensao || 0);
+  if (!Number.isFinite(valor) || valor <= 0) return 0;
+  return circuito?.tensao_unidade === 'kV' ? valor * 1000 : valor;
+}
+
+function classificarTensao(circuito) {
+  const tipo = circuito?.tipo_sistema_tensao || circuito?.corrente_ac_dc || 'AC';
+  if (tipo === 'DC') return 'CC';
+  const tensaoKv = tensaoEmVolts(circuito) / 1000;
+  if (!tensaoKv) return 'Não informada';
+  if (tensaoKv <= 1) return 'BT';
+  if (tensaoKv <= 36.2) return 'MT';
+  if (tensaoKv <= 230) return 'AT';
+  if (tensaoKv <= 800) return 'EAT';
+  return 'UAT';
+}
+
 const CircuitModalComponent = ({
   modalC,
   setModalC,
@@ -63,6 +98,12 @@ const CircuitModalComponent = ({
   const dist = Number(draftC.distancia_m || 0);
   const distZero = draftC.distancia_m !== '' && draftC.distancia_m !== undefined && draftC.distancia_m !== null && dist === 0;
   const distElevada = dist > 500;
+  const tipoSistema = draftC.tipo_sistema_tensao || draftC.corrente_ac_dc || 'AC';
+  const tensaoClassificacao = classificarTensao(draftC);
+  const referenciaAtual = tipoSistema === 'DC' ? (draftC.referencia_tensao_dc || 'polo_polo') : (draftC.referencia_tensao || 'fase_fase');
+  const alertaAltaTensao = tipoSistema === 'AC' && ['AT', 'EAT', 'UAT'].includes(tensaoClassificacao);
+  const alertaDc = tipoSistema === 'DC';
+  const alertaFaseNeutro = tipoSistema === 'AC' && Number(draftC.fases || 0) === 3 && referenciaAtual === 'fase_neutro';
 
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-6">
@@ -123,21 +164,78 @@ const CircuitModalComponent = ({
           <section id="circuito-etapa-2" className="scroll-mt-4 space-y-4">
             <SectionHeader title="2. Carga Elétrica" description="Parâmetros elétricos e potência do equipamento." />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <Campo label="Tensão (V)">
-                <select className="input w-full" data-testid="select-tensao" value={draftC.tensao ?? 380} onChange={(e) => setDraftC((m) => ({ ...m, tensao: e.target.value }))}>
-                  {TENSOES.map((v) => <option key={v} value={v}>{v}</option>)}
+              <Campo label="Preset de tensão">
+                <select
+                  className="input w-full"
+                  data-testid="select-tensao"
+                  value=""
+                  onChange={(e) => {
+                    const preset = TENSOES.find((item) => item.label === e.target.value);
+                    if (!preset) return;
+                    setDraftC((m) => ({
+                      ...m,
+                      tensao: preset.value,
+                      tensao_unidade: preset.unit,
+                      tipo_sistema_tensao: 'AC',
+                      corrente_ac_dc: 'AC',
+                      referencia_tensao: preset.reference,
+                    }));
+                  }}
+                >
+                  <option value="">Outro / valor livre</option>
+                  {TENSOES.map((preset) => <option key={preset.label} value={preset.label}>{preset.label}</option>)}
                 </select>
               </Campo>
+              <Campo label="Tensão">
+                <div className="grid grid-cols-[1fr_72px] gap-2">
+                  <input type="number" step="0.01" min="0" className="input w-full" value={draftC.tensao ?? ''} onChange={(e) => setDraftC((m) => ({ ...m, tensao: e.target.value }))} />
+                  <select className="input w-full" value={draftC.tensao_unidade || 'V'} onChange={(e) => setDraftC((m) => ({ ...m, tensao_unidade: e.target.value }))}>
+                    <option value="V">V</option>
+                    <option value="kV">kV</option>
+                  </select>
+                </div>
+                <div className="mt-1 text-xs font-medium text-slate-500">Classe: {tensaoClassificacao}</div>
+              </Campo>
+              <Campo label="Tipo de sistema">
+                <select
+                  className="input w-full"
+                  value={tipoSistema}
+                  onChange={(e) => setDraftC((m) => ({
+                    ...m,
+                    tipo_sistema_tensao: e.target.value,
+                    corrente_ac_dc: e.target.value,
+                    fases: e.target.value === 'DC' ? 1 : (m.fases || 3),
+                    configuracao_eletrica: e.target.value === 'DC' ? 'dc' : m.configuracao_eletrica,
+                  }))}
+                >
+                  <option value="AC">AC</option>
+                  <option value="DC">DC</option>
+                </select>
+              </Campo>
+              <Campo label="Referência">
+                {tipoSistema === 'DC' ? (
+                  <select className="input w-full" value={draftC.referencia_tensao_dc || 'polo_polo'} onChange={(e) => setDraftC((m) => ({ ...m, referencia_tensao_dc: e.target.value }))}>
+                    <option value="polo_polo">Polo-polo</option>
+                    <option value="polo_terra">Polo-terra</option>
+                    <option value="monopolar">Monopolar</option>
+                    <option value="bipolar">Bipolar</option>
+                  </select>
+                ) : (
+                  <select className="input w-full" value={draftC.referencia_tensao || 'fase_fase'} onChange={(e) => setDraftC((m) => ({ ...m, referencia_tensao: e.target.value }))}>
+                    <option value="fase_fase">Fase-fase</option>
+                    <option value="fase_neutro">Fase-neutro</option>
+                  </select>
+                )}
+              </Campo>
               <Campo label="Fases">
-                <select className="input w-full" value={draftC.fases ?? 3} onChange={(e) => setDraftC((m) => ({ ...m, fases: e.target.value }))}>
+                <select className="input w-full" value={draftC.fases ?? 3} disabled={tipoSistema === 'DC'} onChange={(e) => setDraftC((m) => ({ ...m, fases: e.target.value }))}>
                   <option value={1}>Monofásico</option>
                   <option value={3}>Trifásico</option>
                 </select>
               </Campo>
-              <Campo label="Corrente (AC/DC)">
-                <select className="input w-full" value={draftC.corrente_ac_dc || 'AC'} onChange={(e) => setDraftC((m) => ({ ...m, corrente_ac_dc: e.target.value }))}>
-                  <option value="AC">AC</option>
-                  <option value="DC">DC</option>
+              <Campo label="Contexto de aplicação">
+                <select className="input w-full" value={draftC.contexto_aplicacao || 'industrial'} onChange={(e) => setDraftC((m) => ({ ...m, contexto_aplicacao: e.target.value }))}>
+                  {CONTEXTOS_APLICACAO.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
               </Campo>
               <Campo label="Potência (kW)">
@@ -151,7 +249,8 @@ const CircuitModalComponent = ({
                 </label>
               </Campo>
               <Campo label={<LabelWithTooltip label="Fator de Potência (FP)" tooltip="Fator de potência entre 0 e 1. Motores industriais costumam ficar entre 0,80 e 0,95." />}>
-                <input type="number" step="0.01" min="0.1" max="1" className="input w-full" data-testid="input-fator-potencia" value={draftC.fator_potencia ?? ''} onChange={(e) => setDraftC((m) => ({ ...m, fator_potencia: e.target.value }))} />
+                <input type="number" step="0.01" min="0.1" max="1" disabled={tipoSistema === 'DC'} className="input w-full disabled:bg-slate-100 disabled:text-slate-500" data-testid="input-fator-potencia" value={tipoSistema === 'DC' ? 1 : (draftC.fator_potencia ?? '')} onChange={(e) => setDraftC((m) => ({ ...m, fator_potencia: e.target.value }))} />
+                {tipoSistema === 'DC' && <div className="mt-1 text-xs text-slate-500">Não aplicado em DC; registrado como 1 apenas para compatibilidade.</div>}
               </Campo>
               <Campo label={<LabelWithTooltip label="Eficiência (η %)" tooltip="Informe em porcentagem. Exemplo: 91 significa 91%, não 0,91." />}>
                 <input type="number" step="0.1" min="1" max="100" className="input w-full" data-testid="input-fator-eficiencia" value={draftC.fator_eficiencia === '' ? '' : Number(draftC.fator_eficiencia ?? 1) * 100} onChange={(e) => setDraftC((m) => ({ ...m, fator_eficiencia: e.target.value === '' ? '' : Number(e.target.value) / 100 }))} />
@@ -164,6 +263,15 @@ const CircuitModalComponent = ({
                 <div className="col-span-full">
                   <Alert variant="warning" icon={AlertTriangle} title="Atenção">
                     O kVA informado parece incompatível com kW, FP e eficiência. O cálculo usará kW/FP/η, salvo se você marcar 'Fixar kVA informado'.
+                  </Alert>
+                </div>
+              )}
+              {(alertaAltaTensao || alertaDc || alertaFaseNeutro) && (
+                <div className="col-span-full">
+                  <Alert variant={alertaAltaTensao ? 'warning' : 'info'} icon={alertaAltaTensao ? AlertTriangle : Info} title="Tensão parametrizada">
+                    {alertaAltaTensao && `Tensão classificada como ${tensaoClassificacao}. Verificações de isolamento, coordenação e proteção dependem de dados específicos e podem ficar como NOT_EVALUATED.`}
+                    {alertaDc && 'Sistema DC: fator de potência e √3 não se aplicam ao cálculo de corrente.'}
+                    {alertaFaseNeutro && 'Tensão fase-neutro informada em sistema trifásico: confirme se a carga usa fase-neutro ou fase-fase.'}
                   </Alert>
                 </div>
               )}

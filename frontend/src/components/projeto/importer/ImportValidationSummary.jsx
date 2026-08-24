@@ -2,10 +2,11 @@ export default function ImportValidationSummary({ validation, limit = 20 }) {
   const summary = validation?.summary || { total: 0, validas: 0, invalidas: 0 }
   const invalidRows = validation?.invalidRows || []
   const mappingErrors = validation?.mappingErrors || []
+  const ignoredByFilter = Number(summary.ignoradasPorFiltro || validation?.filterStats?.ignored || 0)
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
         <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-center">
           <p className="text-xl font-bold text-slate-700">{summary.total}</p>
           <p className="text-xs text-slate-500">linhas analisadas</p>
@@ -17,6 +18,10 @@ export default function ImportValidationSummary({ validation, limit = 20 }) {
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center">
           <p className="text-xl font-bold text-red-600">{summary.invalidas}</p>
           <p className="text-xs text-red-700">linhas com erro</p>
+        </div>
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-center">
+          <p className="text-xl font-bold text-amber-700">{ignoredByFilter}</p>
+          <p className="text-xs text-amber-700">ignoradas por filtro</p>
         </div>
       </div>
 

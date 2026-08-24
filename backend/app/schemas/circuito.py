@@ -5,6 +5,11 @@ from app.models.circuito import TipoCabo
 class CircuitoBase(BaseModel):
     descricao: str
     tensao: float = 380
+    tensao_unidade: str = "V"
+    tipo_sistema_tensao: str = "AC"
+    referencia_tensao: Optional[str] = None
+    referencia_tensao_dc: Optional[str] = None
+    contexto_aplicacao: Optional[str] = None
     potencia_kw: float
     fator_potencia: float = 0.85
     distancia_m: float

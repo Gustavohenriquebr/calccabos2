@@ -9,22 +9,34 @@ export default function CircuitosToolbar({
   setFiltroModo,
   filtroProtecao,
   setFiltroProtecao,
+  filtroQuadro,
+  setFiltroQuadro,
+  filtroAmbiente,
+  setFiltroAmbiente,
+  filtroTipoCarga,
+  setFiltroTipoCarga,
+  opcoesQuadro = [],
+  opcoesAmbiente = [],
+  opcoesTipoCarga = [],
   total,
   exibindo,
   limparFiltros,
 }) {
-  const temFiltro = busca || filtroStatus !== 'TODOS' || filtroModo !== 'TODOS' || filtroProtecao !== 'TODOS'
+  const temFiltro = busca || filtroStatus !== 'TODOS' || filtroModo !== 'TODOS' || filtroProtecao !== 'TODOS' || filtroQuadro !== 'TODOS' || filtroAmbiente !== 'TODOS' || filtroTipoCarga !== 'TODOS'
 
   return (
-    <div className="bg-white border-b border-slate-200 p-3 flex flex-wrap items-center gap-3">
-      <div className="relative flex-1 min-w-[200px]">
+    <div className="border-b border-[#d2d9e0] bg-white p-3">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.3fr_1fr_1fr_1fr_1fr_92px]">
+      <label className="cc-label">
+        Busca técnica
+        <div className="relative mt-1">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
         <input
           type="text"
-          placeholder="Buscar TAG, Descricao, Painel..."
+          placeholder="Circuito, descrição, quadro ou carga..."
           value={busca}
           onChange={(event) => setBusca(event.target.value)}
-          className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 rounded text-slate-700 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400"
+          className="cc-field pl-8"
         />
         {busca && (
           <button
@@ -35,50 +47,72 @@ export default function CircuitosToolbar({
           </button>
         )}
       </div>
+      </label>
 
+      <label className="cc-label">
+        Quadro
+      <select
+        value={filtroQuadro}
+        onChange={(event) => setFiltroQuadro(event.target.value)}
+        className="cc-field mt-1"
+      >
+        <option value="TODOS">Todos</option>
+        {opcoesQuadro.map((item) => <option key={item} value={item}>{item}</option>)}
+      </select>
+      </label>
+
+      <label className="cc-label">
+        Ambiente
+      <select
+        value={filtroAmbiente}
+        onChange={(event) => setFiltroAmbiente(event.target.value)}
+        className="cc-field mt-1"
+      >
+        <option value="TODOS">Todos</option>
+        {opcoesAmbiente.map((item) => <option key={item} value={item}>{item}</option>)}
+      </select>
+      </label>
+
+      <label className="cc-label">
+        Tipo de carga
+        <select
+          value={filtroTipoCarga}
+          onChange={(event) => setFiltroTipoCarga(event.target.value)}
+          className="cc-field mt-1"
+        >
+          <option value="TODOS">Todos</option>
+          {opcoesTipoCarga.map((item) => <option key={item} value={item}>{item}</option>)}
+        </select>
+      </label>
+
+      <label className="cc-label">
+        Status
       <select
         value={filtroStatus}
         onChange={(event) => setFiltroStatus(event.target.value)}
-        className="py-1.5 px-2 text-xs border border-slate-200 rounded text-slate-700 bg-white focus:outline-none focus:border-slate-400 min-w-[120px]"
+        className="cc-field mt-1"
       >
-        <option value="TODOS">Status: Todos</option>
-        <option value="OK">Status: OK</option>
-        <option value="ALERTA">Status: Alerta</option>
-        <option value="CRITICO">Status: Critico</option>
+        <option value="TODOS">Todos</option>
+        <option value="OK">OK</option>
+        <option value="ALERTA">Alerta</option>
+        <option value="CRITICO">Bloqueado</option>
       </select>
+      </label>
 
-      <select
-        value={filtroModo}
-        onChange={(event) => setFiltroModo(event.target.value)}
-        className="py-1.5 px-2 text-xs border border-slate-200 rounded text-slate-700 bg-white focus:outline-none focus:border-slate-400 min-w-[120px]"
-      >
-        <option value="TODOS">Modo: Todos</option>
-        <option value="manual">Modo: Manual</option>
-        <option value="automatico">Modo: Automatico</option>
-      </select>
-
-      <select
-        value={filtroProtecao}
-        onChange={(event) => setFiltroProtecao(event.target.value)}
-        className="py-1.5 px-2 text-xs border border-slate-200 rounded text-slate-700 bg-white focus:outline-none focus:border-slate-400 min-w-[120px]"
-      >
-        <option value="TODOS">Protecao: Todas</option>
-        <option value="OK">Protecao: OK</option>
-        <option value="ALERTA">Protecao: Alerta</option>
-        <option value="CRITICO">Protecao: Critico</option>
-      </select>
-
-      {temFiltro && (
+      <div className="flex items-end">
+        {temFiltro ? (
         <button
           onClick={limparFiltros}
-          className="text-xs text-slate-500 hover:text-slate-800 underline decoration-slate-300 underline-offset-2 transition-colors whitespace-nowrap"
+          className="cc-button w-full"
         >
-          Limpar filtros
+          Limpar
         </button>
-      )}
-
-      <div className="ml-auto text-xs text-slate-500 font-medium bg-slate-50 px-2 py-1 rounded border border-slate-100">
-        Exibindo {exibindo} de {total}
+        ) : (
+          <div className="cc-status-pendente w-full px-2 py-2 text-center text-xs font-bold" style={{ borderRadius: 3 }}>
+            {exibindo}/{total}
+          </div>
+        )}
+      </div>
       </div>
     </div>
   )

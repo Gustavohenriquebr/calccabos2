@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import sys
+import secrets
 from pathlib import Path
 
 from pydantic_settings import BaseSettings
@@ -13,8 +14,8 @@ USER_DATA_DIR = Path(os.environ.get("APPDATA", Path.home() / "AppData" / "Roamin
 USER_DATA_DIR.mkdir(parents=True, exist_ok=True)
 DEFAULT_DATABASE_PATH = USER_DATA_DIR / "calc.db"
 DEFAULT_DATABASE_URL = f"sqlite:///{DEFAULT_DATABASE_PATH.as_posix()}"
-DEFAULT_SECRET_KEY = "calccabos-desktop-secret-key-2026-local-only"
 DEFAULT_ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
+MIN_SECRET_LENGTH = 32
 
 
 from typing import Optional
@@ -41,9 +42,29 @@ def _find_env_file() -> Optional[str]:
     return None
 
 
+def _is_production() -> bool:
+    return os.getenv("ENVIRONMENT", os.getenv("NODE_ENV", "development")).lower() == "production"
+
+
+def _secret_from_env(name: str) -> str:
+    value = os.getenv(name, "").strip()
+    if len(value) >= MIN_SECRET_LENGTH:
+        return value
+
+    if _is_production():
+        raise RuntimeError(f"{name} obrigatorio em producao e deve ter pelo menos {MIN_SECRET_LENGTH} caracteres.")
+
+    print(
+        f"[AUTH] {name} ausente ou fraco. Usando segredo temporario gerado para desenvolvimento local; "
+        "tokens serao invalidados ao reiniciar.",
+        file=sys.stderr,
+    )
+    return secrets.token_urlsafe(48)
+
+
 class Settings(BaseSettings):
     DATABASE_URL: str = os.getenv("DATABASE_URL", DEFAULT_DATABASE_URL)
-    SECRET_KEY: str = os.getenv("SECRET_KEY", DEFAULT_SECRET_KEY)
+    SECRET_KEY: str = _secret_from_env("SECRET_KEY")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(
         os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", str(DEFAULT_ACCESS_TOKEN_EXPIRE_MINUTES))
     )

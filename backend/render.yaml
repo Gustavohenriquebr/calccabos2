@@ -1,14 +1,19 @@
 # Arquivo legado para deploy isolado do engine Python.
-# Estrategia canonica do projeto web: usar o render.yaml da raiz.
+# Estrategia canonica do deploy web v1: usar /render.yaml na raiz do repositorio.
+# Nao conecte este arquivo e o render.yaml da raiz ao mesmo ambiente Render.
 services:
   - type: web
     name: calccabos-backend-python
-    env: python
+    runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        sync: false
       - key: CORS_ORIGINS
         sync: false
       - key: DOCS_ENABLED
@@ -21,4 +26,3 @@ services:
         sync: false
       - key: OPENROUTER_API_KEY
         sync: false
-

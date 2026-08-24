@@ -9,6 +9,17 @@ const Circuito = require('../models/Circuito')
 const requireAuth = require('../middleware/auth')
 const { buildPythonServiceUrl } = require('../config/pythonService')
 const { buildPythonUpstreamError } = require('../utils/upstreamError')
+const { assertUsageAllowed } = require('../services/usage')
+const {
+  asEnum,
+  asNumber,
+  asString,
+  assertObjectId,
+  assertPlainObject,
+  ensureNoUnknownFields,
+  rejectBlockedFields,
+  validationError,
+} = require('../utils/validation')
 
 const MODULO_ALIAS = {
   transformador: 'transformador',
@@ -75,11 +86,7 @@ async function calcularModulo(modulo, dados, extra = {}) {
 }
 
 async function checkProjeto(projetoId, usuarioId) {
-  if (!projetoId || !mongoose.Types.ObjectId.isValid(projetoId)) {
-    const err = new Error('ID de projeto invalido')
-    err.status = 400
-    throw err
-  }
+  assertObjectId(projetoId, 'ID de projeto')
 
   const projeto = await Projeto.findOne({
     _id: new mongoose.Types.ObjectId(projetoId),
@@ -96,6 +103,45 @@ async function checkProjeto(projetoId, usuarioId) {
   return projeto
 }
 
+const PROJETO_CREATE_FIELDS = ['nome', 'descricao', 'cliente', 'contexto', 'tensao_ref']
+const PROJETO_UPDATE_FIELDS = [
+  'nome',
+  'descricao',
+  'cliente',
+  'contexto',
+  'tensao_ref',
+  'normaVersao',
+  'responsavelTecnico',
+]
+const CONTEXTOS = ['industrial', 'offshore', 'hospitalar', 'residencial']
+
+function sanitizeProjetoPayload(body, allowedFields, { create = false } = {}) {
+  assertPlainObject(body)
+  rejectBlockedFields(body)
+  ensureNoUnknownFields(body, allowedFields)
+
+  const out = {}
+  if (body.nome !== undefined || create) out.nome = asString(body.nome, { label: 'nome', max: 200, required: create })
+  if (body.descricao !== undefined) out.descricao = asString(body.descricao, { label: 'descricao', max: 2000 })
+  if (body.cliente !== undefined) out.cliente = asString(body.cliente, { label: 'cliente', max: 200 })
+  if (body.contexto !== undefined) out.contexto = asEnum(body.contexto, CONTEXTOS, { label: 'contexto' })
+  if (body.tensao_ref !== undefined) out.tensao_ref = asNumber(body.tensao_ref, { label: 'tensao_ref', min: 1, max: 100000 })
+  if (body.normaVersao !== undefined) out.normaVersao = asString(body.normaVersao, { label: 'normaVersao', max: 80 })
+  if (body.responsavelTecnico !== undefined) {
+    out.responsavelTecnico = asString(body.responsavelTecnico, { label: 'responsavelTecnico', max: 200 })
+  }
+
+  return Object.fromEntries(Object.entries(out).filter(([, value]) => value !== undefined))
+}
+
+function sanitizeModuloPayload(body) {
+  assertPlainObject(body)
+  rejectBlockedFields(body)
+  const bytes = Buffer.byteLength(JSON.stringify(body), 'utf8')
+  if (bytes > 128 * 1024) throw validationError('Payload do modulo excede o limite permitido.')
+  return body
+}
+
 router.use(requireAuth)
 
 router.get('/', async (req, res, next) => {
@@ -109,16 +155,13 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { nome, descricao, cliente, contexto, tensao_ref } = req.body
-    if (!nome) return res.status(400).json({ detail: 'nome e obrigatorio' })
+    const payload = sanitizeProjetoPayload(req.body, PROJETO_CREATE_FIELDS, { create: true })
+    await assertUsageAllowed(req.user, 'projects.create')
 
     const projeto = await Projeto.create({
       usuarioId: req.user._id,
-      nome,
-      descricao,
-      cliente,
-      contexto,
-      tensao_ref: tensao_ref ? parseInt(tensao_ref, 10) : 380,
+      ...payload,
+      tensao_ref: payload.tensao_ref || 380,
     })
 
     res.status(201).json({ ...projeto.toObject(), id: projeto._id.toString() })
@@ -129,9 +172,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     res.json(projeto)
   } catch (err) {
@@ -141,16 +182,10 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
 
-    const allowed = ['nome', 'descricao', 'cliente', 'contexto', 'tensao_ref', 'normaVersao', 'responsavelTecnico']
-    const update = {}
-    for (const field of allowed) {
-      if (req.body[field] !== undefined) update[field] = req.body[field]
-    }
+    const update = sanitizeProjetoPayload(req.body, PROJETO_UPDATE_FIELDS)
 
     const projeto = await Projeto.findByIdAndUpdate(req.params.id, update, { new: true, lean: true })
     if (projeto) projeto.id = projeto._id.toString()
@@ -162,9 +197,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ detail: 'ID invalido' })
-    }
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
     await Circuito.deleteMany({ projetoId: req.params.id })
     await Projeto.findByIdAndDelete(req.params.id)
@@ -176,7 +209,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.get('/:id/transformador', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const resultado = await calcularModulo('transformador', projeto.transformador_dados || {})
     res.json(resultado)
@@ -187,9 +220,9 @@ router.get('/:id/transformador', async (req, res, next) => {
 
 router.put('/:id/transformador', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
-    const resultado = await calcularModulo('transformador', req.body)
+    const resultado = await calcularModulo('transformador', sanitizeModuloPayload(req.body))
     const update = { transformador_dados: resultado }
     if (resultado.tensao_secundaria) update.tensao_ref = Math.round(resultado.tensao_secundaria)
     await Projeto.findByIdAndUpdate(req.params.id, update)
@@ -201,7 +234,7 @@ router.put('/:id/transformador', async (req, res, next) => {
 
 router.get('/:id/sistema-trifasico', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const circuitos = await Circuito.find({ projetoId: projeto._id }).sort({ ordem: 1 }).lean()
     const resultado = await calcularModulo('sistema-trifasico', projeto.sistema_trifasico_dados || {}, {
@@ -216,9 +249,9 @@ router.get('/:id/sistema-trifasico', async (req, res, next) => {
 
 router.put('/:id/sistema-trifasico', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
-    const parcial = await calcularModulo('sistema-trifasico', req.body, { tensao_ref: projeto.tensao_ref })
+    const parcial = await calcularModulo('sistema-trifasico', sanitizeModuloPayload(req.body), { tensao_ref: projeto.tensao_ref })
     await Projeto.findByIdAndUpdate(req.params.id, { sistema_trifasico_dados: parcial })
     const circuitos = await Circuito.find({ projetoId: projeto._id }).sort({ ordem: 1 }).lean()
     const final = await calcularModulo('sistema-trifasico-projeto', parcial, {
@@ -233,7 +266,7 @@ router.put('/:id/sistema-trifasico', async (req, res, next) => {
 
 router.get('/:id/protecoes', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const circuitos = await Circuito.find({ projetoId: projeto._id }).sort({ ordem: 1 }).lean()
     const resultado = await calcularModulo('protecoes', projeto.protecao_geral_dados || {}, {
@@ -248,9 +281,9 @@ router.get('/:id/protecoes', async (req, res, next) => {
 
 async function salvarProtecoes(req, res, next) {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
-    const resultado = await calcularModulo('protecao-geral', req.body, {
+    const resultado = await calcularModulo('protecao-geral', sanitizeModuloPayload(req.body), {
       transformador_dados: projeto.transformador_dados || {},
     })
     await Projeto.findByIdAndUpdate(req.params.id, { protecao_geral_dados: resultado })
@@ -266,7 +299,7 @@ router.put('/:id/protecoes/geral', salvarProtecoes)
 
 router.get('/:id/para-raios', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const resultado = await calcularModulo('para-raios', projeto.para_raios_dados || {})
     res.json(resultado)
@@ -277,9 +310,9 @@ router.get('/:id/para-raios', async (req, res, next) => {
 
 async function salvarParaRaios(req, res, next) {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
-    const resultado = await calcularModulo('para-raios', req.body)
+    const resultado = await calcularModulo('para-raios', sanitizeModuloPayload(req.body))
     await Projeto.findByIdAndUpdate(req.params.id, { para_raios_dados: resultado })
     res.json(resultado)
   } catch (err) {
@@ -291,7 +324,7 @@ router.put('/:id/para-raios', salvarParaRaios)
 
 router.get('/:id/aterramento', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const resultado = await calcularModulo('aterramento', projeto.aterramento_dados || {})
     res.json(resultado)
@@ -302,9 +335,9 @@ router.get('/:id/aterramento', async (req, res, next) => {
 
 async function salvarAterramento(req, res, next) {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
-    const resultado = await calcularModulo('aterramento', req.body)
+    const resultado = await calcularModulo('aterramento', sanitizeModuloPayload(req.body))
     await Projeto.findByIdAndUpdate(req.params.id, { aterramento_dados: resultado })
     res.json(resultado)
   } catch (err) {
@@ -316,7 +349,7 @@ router.put('/:id/aterramento', salvarAterramento)
 
 router.get('/:id/areas-classificadas', async (req, res, next) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     const projeto = await checkProjeto(req.params.id, req.user._id)
     const resultado = await calcularModulo('areas-classificadas', projeto.areas_classificadas_dados || {})
     res.json(resultado)
@@ -327,9 +360,9 @@ router.get('/:id/areas-classificadas', async (req, res, next) => {
 
 async function salvarAreasClassificadas(req, res, next) {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({ detail: 'ID invalido' })
+    assertObjectId(req.params.id, 'ID')
     await checkProjeto(req.params.id, req.user._id)
-    const resultado = await calcularModulo('areas-classificadas', req.body)
+    const resultado = await calcularModulo('areas-classificadas', sanitizeModuloPayload(req.body))
     await Projeto.findByIdAndUpdate(req.params.id, { areas_classificadas_dados: resultado })
     res.json(resultado)
   } catch (err) {
@@ -340,4 +373,3 @@ router.post('/:id/areas-classificadas', salvarAreasClassificadas)
 router.put('/:id/areas-classificadas', salvarAreasClassificadas)
 
 module.exports = router
-

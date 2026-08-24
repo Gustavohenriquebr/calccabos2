@@ -11,6 +11,7 @@ from app.services.validacao_normativa import validar_circuito_normativo
 from app.services.curto_circuito import curto_por_transformador, corrente_trifasica
 from app.services.disjuntor_selector import selecionar_disjuntor
 from app.services.normativa_protecao import validar_protecao
+from app.services.tensao import analisar_tensao
 
 
 SECOES = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300]
@@ -288,7 +289,7 @@ def _configuracao_eletrica(c):
         configuracao = aliases[informado]
         origem = "informed"
     else:
-        ac_dc = str(_valor(c, "corrente_ac_dc", "AC") or "AC").upper()
+        ac_dc = str(_valor(c, "corrente_ac_dc", _valor(c, "tipo_sistema_tensao", "AC")) or "AC").upper()
         fases = _int(_valor(c, "fases", 3), 3)
         configuracao = "DC" if ac_dc == "DC" else "AC_TRIFASICO" if fases == 3 else "AC_MONOFASICO"
         origem = "derived_from_legacy"
@@ -673,7 +674,20 @@ def calcular_circuito(c, contexto="industrial"):
         "A verificação de curto-circuito térmico depende da Icc e do tempo de eliminação informados; a atuação automática exige curva tempo-corrente identificável do fabricante.",
     ]
 
-    V = _float(_valor(c, "tensao", 0), 0)
+    tipo_sistema_tensao = str(_valor(c, "tipo_sistema_tensao", _valor(c, "corrente_ac_dc", "AC")) or "AC").upper()
+    unidade_tensao = _valor(c, "tensao_unidade", "V")
+    referencia_tensao_param = _valor(c, "referencia_tensao", None)
+    if not referencia_tensao_param:
+        referencia_tensao_param = _valor(c, "referencia_tensao_dc", None) if tipo_sistema_tensao == "DC" else None
+    tensao_info = analisar_tensao(
+        valor=_valor(c, "tensao", None),
+        unidade=unidade_tensao,
+        tipo_sistema=tipo_sistema_tensao,
+        referencia=referencia_tensao_param,
+        fases=_valor(c, "fases", None),
+        contexto_aplicacao=_valor(c, "contexto_aplicacao", contexto),
+    )
+    V = _float(tensao_info.get("tensao_v"), 0)
     potencia_kw = _float(_valor(c, "potencia_kw", 0), 0)
     fp_informado = _tem_valor(c, "fator_potencia")
     fp = _float(_valor(c, "fator_potencia", 0), 0)
@@ -701,7 +715,7 @@ def calcular_circuito(c, contexto="industrial"):
     else:
         metodo = "TRAY"
         premissas.append({"field": "metodo_instalacao", "value": metodo, "reason": "Não informado; premissa legada aplicada e requer confirmação."})
-    ac_dc = str(_valor(c, "corrente_ac_dc", "AC") or "AC").upper()
+    ac_dc = str(_valor(c, "corrente_ac_dc", tipo_sistema_tensao) or tipo_sistema_tensao).upper()
     ac_dc = "DC" if ac_dc == "DC" else "AC"
     potencia_kva = _float(_valor(c, "potencia_kva", 0), 0)
     demanda = _float(_valor(c, "fator_demanda", 1.0), 1.0)
@@ -731,6 +745,11 @@ def calcular_circuito(c, contexto="industrial"):
         erros_entrada.append(("INVALID_LENGTH", "Distância não pode ser negativa."))
     if agrupamento not in FATOR_AGRUP_POR_METODO.get(metodo, {}):
         erros_entrada.append(("GROUPING_OUT_OF_TABLE", "Agrupamento fora do domínio da tabela cadastrada."))
+    for alerta_tensao in tensao_info.get("alertas", []):
+        if alerta_tensao.get("blocking"):
+            erros_entrada.append((alerta_tensao.get("code", "VOLTAGE_ERROR"), alerta_tensao.get("message", "Tensão inválida.")))
+        else:
+            alertas_auditaveis.append(alerta_tensao)
 
     if erros_entrada:
         alertas_bloqueantes = [
@@ -761,14 +780,23 @@ def calcular_circuito(c, contexto="industrial"):
             "memorial": {"schema_version": AUDIT_SCHEMA_VERSION, "steps": []},
             "alertas": alertas_bloqueantes,
             "premissas": premissas,
-            "limitacoes": limitacoes,
-            "metadados_calculo": {"engine_version": ENGINE_VERSION, "schema_version": AUDIT_SCHEMA_VERSION},
+            "limitacoes": limitacoes + tensao_info.get("limitacoes", []),
+            "metadados_calculo": {"engine_version": ENGINE_VERSION, "schema_version": AUDIT_SCHEMA_VERSION, "tensao": tensao_info},
         }
 
     corrente = corrente_info["corrente"]
     configuracao = corrente_info["configuracao"]
     fases_calculo = 3 if configuracao == "AC_TRIFASICO" else 1
     ac_dc = "DC" if configuracao == "DC" else "AC"
+    if ac_dc == "DC":
+        tensao_info = analisar_tensao(
+            valor=_valor(c, "tensao", None),
+            unidade=unidade_tensao,
+            tipo_sistema="DC",
+            referencia=referencia_tensao_param,
+            fases=_valor(c, "fases", None),
+            contexto_aplicacao=_valor(c, "contexto_aplicacao", contexto),
+        )
     fp_queda = fp if ac_dc == "AC" and fp > 0 else 1.0
     if ac_dc == "AC" and not fp_informado and corrente_info["modo_entrada"] != "POTENCIA_ATIVA":
         premissas.append({"field": "fator_potencia", "value": 1.0, "reason": "Não informado; usado apenas no modelo aproximado de queda de tensão."})
@@ -1110,6 +1138,14 @@ def calcular_circuito(c, contexto="industrial"):
             "message": "A proteção não foi integralmente verificada com curva, tempo, curto e dados do fabricante.",
             "blocking": False,
         })
+    if tensao_info.get("classificacao") in {"AT", "EAT", "UAT"} and resultado["status_final"] == "OK":
+        resultado["status_final"] = "ALERTA"
+        resultado["status"] = _status(resultado["status_final"])
+        resultado["validacao_status"] = status_mais_grave(resultado.get("validacao_status"), "ALERTA")
+        mensagem_atual = resultado.get("validacao_mensagem") or ""
+        resultado["validacao_mensagem"] = (
+            f"{mensagem_atual} Tensão {tensao_info.get('classificacao')}: validações de isolamento, coordenação e proteção específicas não avaliadas integralmente."
+        ).strip()
 
     memorial_steps = [
         {
@@ -1121,6 +1157,9 @@ def calcular_circuito(c, contexto="industrial"):
             "result": {"value": round(corrente, 6), "unit": "A"},
             "inputs": {
                 "voltage_v": V,
+                "voltage_unit": tensao_info.get("unidade"),
+                "voltage_reference": tensao_info.get("referencia"),
+                "voltage_classification": tensao_info.get("classificacao"),
                 "power_kw": potencia_kw if corrente_info["modo_entrada"] == "POTENCIA_ATIVA" else None,
                 "apparent_power_kva": potencia_kva if corrente_info["modo_entrada"] == "POTENCIA_APARENTE" else None,
                 "informed_current_a": _float(_valor(c, "corrente_informada", 0), 0) or None,
@@ -1172,8 +1211,8 @@ def calcular_circuito(c, contexto="industrial"):
         "memorial": {"schema_version": AUDIT_SCHEMA_VERSION, "steps": memorial_steps},
         "alertas": alertas_auditaveis,
         "premissas": premissas,
-        "limitacoes": limitacoes,
-        "metadados_calculo": {"engine_version": ENGINE_VERSION, "schema_version": AUDIT_SCHEMA_VERSION},
+        "limitacoes": limitacoes + tensao_info.get("limitacoes", []),
+        "metadados_calculo": {"engine_version": ENGINE_VERSION, "schema_version": AUDIT_SCHEMA_VERSION, "tensao": tensao_info},
     })
 
     return resultado

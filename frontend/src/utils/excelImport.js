@@ -1,5 +1,9 @@
 import * as XLSX from 'xlsx'
 
+export const MAX_IMPORT_FILE_BYTES = 10 * 1024 * 1024
+export const MAX_IMPORT_ROWS = 5000
+export const MAX_IMPORT_COLUMNS = 80
+
 export const REQUIRED_IMPORT_FIELDS = ['nome', 'potencia', 'tensao', 'fp', 'comprimento']
 
 export const IMPORT_FIELDS = [
@@ -13,6 +17,8 @@ export const IMPORT_FIELDS = [
   { key: 'temperatura', label: 'Temperatura Ambiente', required: false },
   { key: 'tipo_carga', label: 'Tipo de Carga', required: false },
   { key: 'tipo_cabo', label: 'Tipo de Cabo', required: false },
+  { key: 'from_barramento', label: 'Quadro / Origem', required: false },
+  { key: 'to_equipamento', label: 'Destino / Equipamento', required: false },
   { key: 'fases', label: 'Fases', required: false },
   { key: 'agrupamento', label: 'Agrupamento', required: false },
   { key: 'formacao', label: 'Formacao / Paralelos', required: false },
@@ -35,6 +41,8 @@ const FIELD_SYNONYMS = {
   temperatura: ['temperatura', 'temp', 'temperatura ambiente'],
   tipo_carga: ['tipo carga', 'carga tipo'],
   tipo_cabo: ['tipo cabo', 'cabo', 'material cabo'],
+  from_barramento: ['quadro', 'origem', 'from', 'painel', 'barramento', 'qgbt', 'qd'],
+  to_equipamento: ['destino', 'to', 'equipamento', 'carga destino'],
   fases: ['fase', 'fases'],
   agrupamento: ['agrupamento', 'agrup'],
   formacao: ['formacao', 'paralelos', 'paralelo'],
@@ -45,6 +53,18 @@ const FIELD_SYNONYMS = {
   disjuntor_curva: ['curva', 'disjuntor curva', 'curva dj'],
   disjuntor_fabricante: ['fabricante', 'disjuntor fabricante'],
 }
+
+export const FILTER_OPERATORS = [
+  { key: 'contains', label: 'contem' },
+  { key: 'not_contains', label: 'nao contem' },
+  { key: 'equals', label: 'igual a' },
+  { key: 'not_equals', label: 'diferente de' },
+  { key: 'greater_than', label: 'maior que' },
+  { key: 'less_than', label: 'menor que' },
+  { key: 'between', label: 'entre' },
+  { key: 'empty', label: 'vazio' },
+  { key: 'not_empty', label: 'nao vazio' },
+]
 
 function normalizeText(value) {
   if (value === null || value === undefined) return ''
@@ -85,6 +105,17 @@ function parseInteger(value, fallback) {
   return Math.max(0, Math.trunc(number))
 }
 
+function sanitizeCellValue(value) {
+  if (value === undefined || value === null) return ''
+  if (typeof value !== 'string') return value
+
+  const trimmed = value.trim()
+  if (/^[=+\-@]/.test(trimmed)) {
+    return `'${trimmed}`
+  }
+  return trimmed
+}
+
 function ensureMatrix(rows) {
   const safeRows = Array.isArray(rows) ? rows : []
   const maxColumns = safeRows.reduce((acc, row) => Math.max(acc, Array.isArray(row) ? row.length : 0), 0)
@@ -92,7 +123,7 @@ function ensureMatrix(rows) {
     const source = Array.isArray(row) ? row : []
     return Array.from({ length: maxColumns }, (_, index) => {
       const value = source[index]
-      return value === undefined || value === null ? '' : value
+      return sanitizeCellValue(value)
     })
   })
 }
@@ -171,6 +202,8 @@ function buildCircuitoPayload(record, mapping) {
   const metodoInstalacao = normalizeText(getMappedValue(record, mapping, 'metodo_instalacao'))
   const temperatura = parseNumber(getMappedValue(record, mapping, 'temperatura'))
   const tipoCaboRaw = normalizeText(getMappedValue(record, mapping, 'tipo_cabo'))
+  const fromBarramento = normalizeText(getMappedValue(record, mapping, 'from_barramento'))
+  const toEquipamento = normalizeText(getMappedValue(record, mapping, 'to_equipamento'))
   const fases = parseInteger(getMappedValue(record, mapping, 'fases'), null)
   const agrupamento = parseInteger(getMappedValue(record, mapping, 'agrupamento'), null)
   const formacao = parseInteger(getMappedValue(record, mapping, 'formacao'), null)
@@ -185,6 +218,8 @@ function buildCircuitoPayload(record, mapping) {
   if (metodoInstalacao) circuito.metodo_instalacao = normalizeInstallationMethod(metodoInstalacao)
   if (temperatura !== null) circuito.temp_ambiente = temperatura
   if (tipoCaboRaw) circuito.tipo_cabo = normalizeCableType(tipoCaboRaw)
+  if (fromBarramento) circuito.from_barramento = fromBarramento
+  if (toEquipamento) circuito.to_equipamento = toEquipamento
   if (fases !== null && fases > 0) circuito.fases = fases
   if (agrupamento !== null && agrupamento > 0) circuito.agrupamento = agrupamento
   if (formacao !== null && formacao > 0) circuito.formacao = formacao
@@ -207,15 +242,39 @@ export function normalizeHeader(header) {
     .trim()
 }
 
-export async function parseExcelFile(file) {
+export function validateSpreadsheetFile(file) {
   if (!file) throw new Error('Selecione um arquivo para importar.')
-  const extension = file.name.split('.').pop()?.toLowerCase()
+
+  const fileName = normalizeText(file.name)
+  const extension = fileName.split('.').pop()?.toLowerCase()
   if (!['xlsx', 'xls', 'csv'].includes(extension)) {
     throw new Error('Formato invalido. Use .xlsx, .xls ou .csv.')
   }
 
+  if (file.size && file.size > MAX_IMPORT_FILE_BYTES) {
+    throw new Error('Arquivo muito grande. Limite maximo: 10 MB.')
+  }
+
+  if (/[\\/]/.test(fileName) || fileName.includes('..')) {
+    throw new Error('Nome de arquivo invalido.')
+  }
+
+  return true
+}
+
+export async function parseExcelFile(file) {
+  validateSpreadsheetFile(file)
+
   const buffer = await file.arrayBuffer()
-  const workbook = XLSX.read(buffer, { type: 'array', raw: false, cellDates: false })
+  const workbook = XLSX.read(buffer, {
+    type: 'array',
+    raw: false,
+    cellDates: false,
+    cellFormula: false,
+    cellHTML: false,
+    cellNF: false,
+    cellStyles: false,
+  })
   const sheetNames = workbook.SheetNames || []
   const sheets = sheetNames.map((name) => {
     const worksheet = workbook.Sheets[name]
@@ -226,6 +285,12 @@ export async function parseExcelFile(file) {
       raw: false,
     })
     const matrix = ensureMatrix(rows)
+    if (matrix.length > MAX_IMPORT_ROWS) {
+      throw new Error(`A aba "${name}" tem ${matrix.length} linhas. Limite maximo: ${MAX_IMPORT_ROWS}.`)
+    }
+    if ((matrix[0]?.length || 0) > MAX_IMPORT_COLUMNS) {
+      throw new Error(`A aba "${name}" tem ${matrix[0].length} colunas. Limite maximo: ${MAX_IMPORT_COLUMNS}.`)
+    }
     return {
       name,
       rows: matrix,
@@ -306,6 +371,97 @@ export function autoMapColumns(headers) {
   return { mapping, confidence, headers: safeHeaders }
 }
 
+export function createImportFilterRule(overrides = {}) {
+  const id =
+    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `filter-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+
+  return {
+    id,
+    column: '',
+    operator: 'contains',
+    value: '',
+    valueTo: '',
+    ...overrides,
+  }
+}
+
+export function evaluateImportFilter(cellValue, rule) {
+  const operator = rule?.operator || 'contains'
+  const cellText = normalizeText(cellValue).toLowerCase()
+  const filterText = normalizeText(rule?.value).toLowerCase()
+  const filterTextTo = normalizeText(rule?.valueTo).toLowerCase()
+
+  if (operator === 'empty') return isEmptyCell(cellValue)
+  if (operator === 'not_empty') return !isEmptyCell(cellValue)
+
+  if (!filterText && !['not_contains', 'not_equals'].includes(operator)) return true
+
+  if (operator === 'contains') return cellText.includes(filterText)
+  if (operator === 'not_contains') return !cellText.includes(filterText)
+  if (operator === 'equals') return cellText === filterText
+  if (operator === 'not_equals') return cellText !== filterText
+
+  const cellNumber = parseNumber(cellValue)
+  const numberA = parseNumber(filterText)
+  const numberB = parseNumber(filterTextTo)
+
+  if (operator === 'greater_than') return cellNumber !== null && numberA !== null && cellNumber > numberA
+  if (operator === 'less_than') return cellNumber !== null && numberA !== null && cellNumber < numberA
+  if (operator === 'between') {
+    if (cellNumber === null || numberA === null || numberB === null) return false
+    const min = Math.min(numberA, numberB)
+    const max = Math.max(numberA, numberB)
+    return cellNumber >= min && cellNumber <= max
+  }
+
+  return true
+}
+
+export function applyImportFilters({ rows, headerRowIndex = 0, headers = [], rules = [] }) {
+  const safeRows = ensureMatrix(rows)
+  if (!safeRows.length) {
+    return {
+      rows: [],
+      ignoredRows: [],
+      stats: { total: 0, kept: 0, ignored: 0, activeFilters: 0 },
+    }
+  }
+
+  const safeHeaderIndex = Math.max(0, Math.min(headerRowIndex, safeRows.length - 1))
+  const safeHeaders = headers.length ? uniqueHeaders(headers) : uniqueHeaders(safeRows[safeHeaderIndex] || [])
+  const activeRules = (Array.isArray(rules) ? rules : []).filter((rule) => {
+    if (!rule?.column) return false
+    if (['empty', 'not_empty'].includes(rule.operator)) return true
+    if (rule.operator === 'between') return normalizeText(rule.value) || normalizeText(rule.valueTo)
+    return normalizeText(rule.value)
+  })
+
+  const prefixRows = safeRows.slice(0, safeHeaderIndex + 1)
+  const dataRows = safeRows.slice(safeHeaderIndex + 1)
+  const keptRows = []
+  const ignoredRows = []
+
+  dataRows.forEach((row, offset) => {
+    const record = toRecord(safeHeaders, row)
+    const keep = activeRules.every((rule) => evaluateImportFilter(record[rule.column], rule))
+    if (keep) keptRows.push(row)
+    else ignoredRows.push({ linha: safeHeaderIndex + offset + 2, row })
+  })
+
+  return {
+    rows: [...prefixRows, ...keptRows],
+    ignoredRows,
+    stats: {
+      total: dataRows.length,
+      kept: keptRows.length,
+      ignored: ignoredRows.length,
+      activeFilters: activeRules.length,
+    },
+  }
+}
+
 export function normalizeCircuitoForImport(circuito = {}) {
   const normalized = {
     ...circuito,
@@ -319,6 +475,8 @@ export function normalizeCircuitoForImport(circuito = {}) {
   const tag = normalizeText(circuito.tag)
   const metodo = normalizeText(circuito.metodo_instalacao)
   const tipoCabo = normalizeText(circuito.tipo_cabo)
+  const fromBarramento = normalizeText(circuito.from_barramento)
+  const toEquipamento = normalizeText(circuito.to_equipamento)
   const temperatura = parseNumber(circuito.temp_ambiente)
   const fases = parseInteger(circuito.fases, null)
   const agrupamento = parseInteger(circuito.agrupamento, null)
@@ -334,6 +492,10 @@ export function normalizeCircuitoForImport(circuito = {}) {
   else delete normalized.metodo_instalacao
   if (tipoCabo) normalized.tipo_cabo = normalizeCableType(tipoCabo)
   else delete normalized.tipo_cabo
+  if (fromBarramento) normalized.from_barramento = fromBarramento
+  else delete normalized.from_barramento
+  if (toEquipamento) normalized.to_equipamento = toEquipamento
+  else delete normalized.to_equipamento
   if (temperatura !== null) normalized.temp_ambiente = temperatura
   else delete normalized.temp_ambiente
   if (fases !== null && fases > 0) normalized.fases = fases

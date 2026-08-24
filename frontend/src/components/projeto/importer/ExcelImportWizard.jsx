@@ -3,6 +3,7 @@ import { AlertTriangle, CheckCircle, ChevronLeft, ChevronRight, FileSpreadsheet,
 import api from '../../../services/api'
 import SheetSelector from './SheetSelector'
 import DataPreviewTable from './DataPreviewTable'
+import ImportFilterBuilder from './ImportFilterBuilder'
 import ColumnMapper from './ColumnMapper'
 import ImportValidationSummary from './ImportValidationSummary'
 import ImportReviewTable from './ImportReviewTable'
@@ -11,6 +12,7 @@ import {
   REQUIRED_IMPORT_FIELDS,
   parseExcelFile,
   cleanRows,
+  applyImportFilters,
   autoMapColumns,
   validateImportedRows,
   validateCircuitoForImport,
@@ -20,6 +22,7 @@ const STEP_LABELS = [
   'Upload',
   'Aba e Cabecalho',
   'Pre-visualizacao',
+  'Filtros',
   'Mapeamento',
   'Validacao',
 ]
@@ -42,6 +45,10 @@ function getApiError(error, fallback) {
   }
   if (error?.code === 'ECONNABORTED') {
     return 'A importacao demorou mais que o esperado (timeout). Tente novamente com menos linhas por arquivo.'
+  }
+  const data = error?.response?.data || {}
+  if (data.code === 'USAGE_LIMIT_EXCEEDED' || data.code === 'FEATURE_NOT_AVAILABLE') {
+    return `${data.message || fallback} Alternativa: reduza a quantidade de linhas ou solicite o plano ${data.recommendedPlan || 'pro'}.`
   }
   const detail = error?.response?.data?.detail
   if (typeof detail === 'string') return detail
@@ -88,6 +95,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
   })
   const [mapping, setMapping] = useState({})
   const [confidence, setConfidence] = useState({})
+  const [filterRules, setFilterRules] = useState([])
   const [reviewRows, setReviewRows] = useState([])
   const [replaceExisting, setReplaceExisting] = useState(false)
   const confirmLockRef = useRef(false)
@@ -114,6 +122,16 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
     [cleanedRows, effectiveHeaderRowIndex],
   )
 
+  const filteredData = useMemo(
+    () => applyImportFilters({
+      rows: cleanedRows,
+      headerRowIndex: effectiveHeaderRowIndex,
+      headers,
+      rules: filterRules,
+    }),
+    [cleanedRows, effectiveHeaderRowIndex, headers.join('|'), filterRules],
+  )
+
   useEffect(() => {
     if (!headers.length) return
     const auto = autoMapColumns(headers)
@@ -129,8 +147,8 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
   }, [headers.join('|')])
 
   const validation = useMemo(
-    () => validateImportedRows({ rows: cleanedRows, headerRowIndex: effectiveHeaderRowIndex, mapping }),
-    [cleanedRows, effectiveHeaderRowIndex, mapping],
+    () => validateImportedRows({ rows: filteredData.rows, headerRowIndex: effectiveHeaderRowIndex, mapping }),
+    [filteredData.rows, effectiveHeaderRowIndex, mapping],
   )
 
   const requiredMapped = REQUIRED_IMPORT_FIELDS.every((fieldKey) => Boolean(mapping[fieldKey]))
@@ -181,6 +199,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
       })
       setMapping({})
       setConfidence({})
+      setFilterRules([])
       setReviewRows([])
       setReplaceExisting(false)
       setStep(2)
@@ -223,14 +242,14 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
       setError('Selecione um arquivo para continuar.')
       return
     }
-    if (step === 4 && !requiredMapped) {
+    if (step === 5 && !requiredMapped) {
       setError('Mapeie todos os campos obrigatorios antes de validar.')
       return
     }
-    if (step === 4) {
+    if (step === 5) {
       setReviewRows(buildReviewRows())
     }
-    setStep((current) => Math.min(5, current + 1))
+    setStep((current) => Math.min(6, current + 1))
   }
 
   function editReviewRow(rowId, field, value) {
@@ -397,7 +416,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
           <div>
             <h2 className="text-sm font-semibold text-slate-800">Importar Circuitos (Excel)</h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Fluxo: upload, aba, cabecalho, limpeza, mapeamento e validacao.
+              Fluxo: upload, aba, cabecalho, pre-visualizacao, filtros, mapeamento e validacao.
             </p>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
@@ -484,16 +503,22 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
                 onSelectSheet={(value) => {
                   setSelectedSheetName(value)
                   setHeaderRowIndex(0)
+                  setFilterRules([])
+                  setReviewRows([])
                   resetError()
                 }}
                 headerRowIndex={headerRowIndex}
                 onHeaderRowChange={(value) => {
                   setHeaderRowIndex(value)
+                  setFilterRules([])
+                  setReviewRows([])
                   resetError()
                 }}
                 options={cleanOptions}
                 onOptionsChange={(nextOptions) => {
                   setCleanOptions(nextOptions)
+                  setFilterRules([])
+                  setReviewRows([])
                   resetError()
                 }}
                 selectedSheetRows={selectedSheet.rows}
@@ -514,6 +539,23 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
 
           {step === 4 && (
             <div className="pt-2">
+              <ImportFilterBuilder
+                headers={headers}
+                rules={filterRules}
+                onRulesChange={(nextRules) => {
+                  setFilterRules(nextRules)
+                  setReviewRows([])
+                  resetError()
+                }}
+                filterStats={filteredData.stats}
+                filteredRows={filteredData.rows}
+                headerRowIndex={effectiveHeaderRowIndex}
+              />
+            </div>
+          )}
+
+          {step === 5 && (
+            <div className="pt-2">
               <ColumnMapper
                 fields={IMPORT_FIELDS}
                 headers={headers}
@@ -527,7 +569,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
             </div>
           )}
 
-          {step === 5 && (
+          {step === 6 && (
             <div className="pt-2 space-y-4">
               <ImportValidationSummary
                 validation={{
@@ -536,8 +578,10 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
                     total: reviewStats.total,
                     validas: reviewStats.valid,
                     invalidas: reviewStats.invalid,
+                    ignoradasPorFiltro: filteredData.stats.ignored,
                   },
                   invalidRows: reviewRows.filter((row) => !row.removed && !row.valido),
+                  filterStats: filteredData.stats,
                 }}
               />
               <ImportReviewTable
@@ -627,7 +671,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
                 Voltar
               </button>
             )}
-            {step < 5 && (
+            {step < 6 && (
               <button
                 onClick={goNext}
                 disabled={loadingFile || importing || (step === 1 && !workbook)}
@@ -637,7 +681,7 @@ export default function ExcelImportWizard({ onClose, onImportacaoConcluida, proj
                 Proximo
               </button>
             )}
-            {step === 5 && (
+            {step === 6 && (
               <button
                 onClick={confirmImport}
                 disabled={importing || reviewValidRows.length === 0 || validation.mappingErrors.length > 0}

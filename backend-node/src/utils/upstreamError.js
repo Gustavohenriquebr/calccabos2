@@ -32,7 +32,6 @@ function buildPythonUpstreamError(err, { operation, pythonUrl }) {
     detail: `Falha ao executar ${operation} no motor Python.`,
     upstream: {
       service: 'python-fastapi',
-      url: pythonUrl,
       status: err.response?.status || null,
       reason: toJsonSafe(detail),
     },
@@ -43,4 +42,3 @@ function buildPythonUpstreamError(err, { operation, pythonUrl }) {
 module.exports = {
   buildPythonUpstreamError,
 }
-

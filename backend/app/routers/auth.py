@@ -18,6 +18,8 @@ from app.config import settings
 router = APIRouter()
 pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2 = OAuth2PasswordBearer(tokenUrl="/api/auth/login", auto_error=False)
+MIN_PASSWORD_LENGTH = 8
+WEAK_PASSWORDS = {"12345678", "password", "password1", "senha123", "admin123", "calccabos"}
 
 
 class LoginJSON(BaseModel):
@@ -31,6 +33,18 @@ def criar_token(data: dict):
     # FIX: datetime.utcnow() is deprecated in Python 3.12+. Use timezone-aware datetime.
     exp = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     return jwt.encode({**data, "exp": exp}, settings.SECRET_KEY, algorithm="HS256")
+
+def validar_senha(senha: str) -> Optional[str]:
+    value = str(senha or "")
+    normalized = value.strip().lower()
+
+    if len(value) < MIN_PASSWORD_LENGTH:
+        return f"A senha deve ter no mínimo {MIN_PASSWORD_LENGTH} caracteres."
+    if not any(ch.isalpha() for ch in value) or not any(ch.isdigit() for ch in value):
+        return "A senha deve conter pelo menos uma letra e um número."
+    if normalized in WEAK_PASSWORDS:
+        return "Use uma senha menos previsível."
+    return None
 
 def usuario_atual(token: str = Depends(oauth2), db: Session = Depends(get_db)):
     try:
@@ -51,12 +65,13 @@ def registro(dados: RegistroSchema, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="E-mail é obrigatório.")
     if not dados.nome or not dados.nome.strip():
         raise HTTPException(status_code=400, detail="Nome é obrigatório.")
-    if not dados.senha or len(dados.senha) < 4:
-        raise HTTPException(status_code=400, detail="A senha deve ter no mínimo 4 caracteres.")
+    erro_senha = validar_senha(dados.senha)
+    if erro_senha:
+        raise HTTPException(status_code=400, detail=erro_senha)
 
     # Check for existing email
     if db.query(Usuario).filter(Usuario.email == email_clean).first():
-        raise HTTPException(status_code=400, detail="Este e-mail já está cadastrado.")
+        raise HTTPException(status_code=400, detail="Não foi possível concluir o cadastro com os dados informados.")
 
     # Create new user with hashed password
     hashed_password = pwd_ctx.hash(dados.senha)
@@ -76,8 +91,8 @@ def registro(dados: RegistroSchema, db: Session = Depends(get_db)):
         from sqlalchemy.exc import IntegrityError
         db.rollback()
         if isinstance(e, IntegrityError):
-            raise HTTPException(status_code=400, detail="Este e-mail já está cadastrado.")
-        raise HTTPException(status_code=500, detail=f"Erro ao cadastrar usuário: {str(e)}")
+            raise HTTPException(status_code=400, detail="Não foi possível concluir o cadastro com os dados informados.")
+        raise HTTPException(status_code=500, detail="Erro ao cadastrar usuário.")
     token = criar_token({"sub": u.email})
     return {"access_token": token, "token_type": "bearer", "usuario": {"id": u.id, "nome": u.nome, "email": u.email, "crea": u.crea, "empresa": u.empresa}}
 

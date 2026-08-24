@@ -124,7 +124,7 @@ router.get('/', async (_req, res) => {
       readyState: mongoReadyState,
       readyStateLabel: mongoStateLabel(mongoReadyState),
       dbName: mongoose.connection?.name || null,
-      host: mongoose.connection?.host || null,
+      configured: Boolean(process.env.MONGODB_URI),
     },
     python,
     pythonServiceUrlConfigured: Boolean(python.pythonServiceUrlConfigured),
@@ -133,4 +133,3 @@ router.get('/', async (_req, res) => {
 })
 
 module.exports = router
-

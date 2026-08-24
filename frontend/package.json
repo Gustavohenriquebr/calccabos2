@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "test:importer": "node --test tests/importer-utils.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

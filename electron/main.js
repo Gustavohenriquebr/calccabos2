@@ -24,6 +24,7 @@ const StartupProfiler = {}; // Placeholder to avoid undefined errors
 // ── 1. BOOT SESSION ID GLOBAL ────────────────────────────────────────────────
 const BOOT_SESSION_ID = crypto.randomUUID();
 process.env.BOOT_SESSION_ID = BOOT_SESSION_ID;
+const DESKTOP_SECRET_KEY = crypto.randomBytes(48).toString('hex');
 
 // ── SINGLE INSTANCE LOCK (Movido para o topo) ────────────────────────────────
 if (!app.requestSingleInstanceLock()) { 
@@ -297,7 +298,7 @@ class BackendManager {
       ...process.env,
       PORT: String(this.port), HOST: BACKEND_HOST, PYTHONUNBUFFERED: '1',
       DATABASE_URL: `sqlite:///${path.join(app.getPath('userData'), 'calc.db').replace(/\\/g, '/')}`,
-      SECRET_KEY: 'calccabos-desktop-key', ENVIRONMENT: 'desktop'
+      SECRET_KEY: DESKTOP_SECRET_KEY, ENVIRONMENT: 'desktop'
     };
 
     try {

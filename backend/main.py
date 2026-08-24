@@ -47,17 +47,26 @@ app = FastAPI(
     redoc_url="/redoc" if os.environ.get("DOCS_ENABLED", "true").lower() != "false" else None,
 )
 
-# ── CORS — read from environment (no hardcoded origins) ─────────────────────
-_raw_origins = os.environ.get(
-    "CORS_ORIGINS",
-    "http://localhost:5173,http://localhost:5174,http://localhost:3000,http://localhost:8000,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:3000,http://127.0.0.1:8000,https://calccabos.onrender.com",
+IS_PRODUCTION = os.environ.get("ENVIRONMENT", "development").lower() == "production"
+DEFAULT_DEV_CORS_ORIGINS = (
+    "http://localhost:5173,http://localhost:5174,http://localhost:3000,http://localhost:8000,"
+    "http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:3000,http://127.0.0.1:8000"
 )
+
+# ── CORS — read from environment (no wildcard with credentials) ──────────────
+_raw_origins = os.environ.get("CORS_ORIGINS", "" if IS_PRODUCTION else DEFAULT_DEV_CORS_ORIGINS)
 _origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
+if IS_PRODUCTION and not _origins:
+    raise RuntimeError("CORS_ORIGINS obrigatorio em producao.")
+
+if IS_PRODUCTION and any("*" in origin for origin in _origins):
+    raise RuntimeError("CORS_ORIGINS nao deve usar wildcard em producao quando credentials=true.")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_origins,
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origin_regex=None if IS_PRODUCTION else r"http://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

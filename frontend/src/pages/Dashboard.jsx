@@ -4,16 +4,15 @@ import {
   AlertTriangle,
   Cable,
   CheckCircle2,
-  Clock3,
   FileText,
   FolderOpen,
   LogOut,
   Plus,
-  Rocket,
+  Search,
   Trash2,
 } from 'lucide-react'
-import api from '../services/api'
 import toast from 'react-hot-toast'
+import api from '../services/api'
 import {
   Alert,
   Button,
@@ -22,8 +21,6 @@ import {
   EmptyState,
   Input,
   LoadingState,
-  MetricCard,
-  SectionHeader,
   Select,
   StatusBadge,
   Textarea,
@@ -54,17 +51,28 @@ const TENSOES = [
   [13800, '13,8 kV'],
 ]
 
-const PASSOS = [
-  ['Crie um projeto', 'Defina cliente, contexto normativo e tensao de referencia.'],
-  ['Cadastre entrada/transformador', 'Informe dados eletricos de origem e curto-circuito.'],
-  ['Importe ou crie circuitos', 'Monte a lista de cargas e calcule em lote.'],
-  ['Gere o memorial tecnico', 'Revise pendencias e exporte PDF/Excel.'],
-]
-
 function projetoStatus(projeto) {
   const bruto = projeto.status_geral || projeto.status_final || projeto.status
-  if (!bruto) return null
-  return normalizeStatus(bruto, null)
+  return normalizeStatus(bruto || 'PENDENTE', 'PENDENTE')
+}
+
+function dado(projeto, campo, fallback = '') {
+  return projeto?.[campo] || projeto?.dados_universais?.[campo] || fallback
+}
+
+function localProjeto(projeto) {
+  const uf = dado(projeto, 'uf')
+  const cidade = dado(projeto, 'cidade')
+  if (uf || cidade) return [uf, cidade].filter(Boolean).join(' / ')
+  return projeto.localidade || projeto.contexto || 'N/D'
+}
+
+function concessionariaProjeto(projeto) {
+  return dado(projeto, 'concessionaria', 'N/D')
+}
+
+function revisaoProjeto(projeto) {
+  return `Rev. ${projeto.revisao || dado(projeto, 'revisao', '0')}`
 }
 
 function formatarData(valor) {
@@ -74,106 +82,63 @@ function formatarData(valor) {
   return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(data)
 }
 
-function ProjetoCard({ projeto, onOpen, onDelete }) {
-  const status = projetoStatus(projeto)
-  const atualizado = projeto.atualizado_em || projeto.criado_em
+function normalizarBusca(valor) {
+  return String(valor || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+}
+
+function StatBox({ label, value, helper, tone = 'neutral', icon: Icon }) {
+  const tones = {
+    neutral: 'border-[#d2d9e0] bg-white text-[#121820]',
+    review: 'border-[#d2d9e0] bg-[#fbfcfd] text-[#121820]',
+    alert: 'border-[#f4d58f] bg-[#fff9e8] text-[#8a5b08]',
+    ok: 'border-[#bfe6cc] bg-[#f4fbf6] text-[#106f46]',
+  }
 
   return (
-    <Card
-      as="article"
-      data-testid={"projeto-card-" + projeto._id}
-      className="group cursor-pointer p-4 transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-md hover:shadow-slate-200/70"
-      onClick={onOpen}
-    >
+    <div className={`border px-4 py-3 ${tones[tone] || tones.neutral}`} style={{ borderRadius: 4 }}>
       <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="truncate text-sm font-semibold text-slate-950 group-hover:text-primary-900">
-            {projeto.nome}
-          </h3>
-          <p className="mt-1 truncate text-xs text-slate-500">{projeto.cliente || 'Cliente nao informado'}</p>
-        </div>
-        <button
-          type="button"
-          onClick={onDelete}
-          className="rounded-md p-1 text-slate-300 transition-colors hover:bg-red-50 hover:text-red-600"
-          title="Excluir projeto"
-        >
-          <Trash2 size={15} />
-        </button>
-      </div>
-
-      {projeto.descricao && (
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">{projeto.descricao}</p>
-      )}
-
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {status ? <StatusBadge status={status} /> : (
-          <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-500">
-            Status N/D
-          </span>
-        )}
-        <span className="rounded-full border border-primary-100 bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-900">
-          {projeto.contexto || 'industrial'}
-        </span>
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-3 text-xs text-slate-500">
         <div>
-          <div className="font-medium text-slate-400">Tensao ref.</div>
-          <div className="mt-0.5 text-slate-700">{projeto.tensao_ref ? `${projeto.tensao_ref} V` : 'N/D'}</div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[#606e7d]">{label}</p>
+          <p className="mt-1 text-2xl font-bold leading-7">{value}</p>
         </div>
-        <div>
-          <div className="font-medium text-slate-400">Atualizado</div>
-          <div className="mt-0.5 text-slate-700">{formatarData(atualizado)}</div>
-        </div>
+        {Icon && <Icon size={18} className="mt-1 text-[#606e7d]" />}
       </div>
-
-      <div className="mt-4">
-        <Button variant="secondary" size="sm" className="w-full">Abrir projeto</Button>
-      </div>
-    </Card>
+      <p className="mt-2 text-sm leading-5 text-[#606e7d]">{helper}</p>
+    </div>
   )
 }
 
-function OnboardingCard({ compact = false }) {
-  return (
-    <Card className="p-4">
-      <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary-900 text-white">
-          <Rocket size={16} />
-        </div>
-        <div>
-          <h2 className="text-sm font-semibold text-slate-950">Comece em 4 passos</h2>
-          {!compact && <p className="text-xs text-slate-500">Fluxo recomendado para montar o primeiro memorial.</p>}
-        </div>
-      </div>
-      <div className="space-y-3">
-        {PASSOS.map(([titulo, descricao], index) => (
-          <div key={titulo} className="flex gap-3">
-            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-50 text-xs font-semibold text-primary-900">
-              {index + 1}
-            </div>
-            <div>
-              <div className="text-sm font-medium text-slate-800">{titulo}</div>
-              <p className="text-xs leading-5 text-slate-500">{descricao}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Card>
-  )
+function usoTexto(atual, limite) {
+  if (limite === null || limite === undefined) return `${atual || 0}`
+  return `${atual || 0}/${limite}`
+}
+
+function mensagemLimite(error, fallback) {
+  const data = error?.response?.data || {}
+  if (data.code === 'USAGE_LIMIT_EXCEEDED' || data.code === 'FEATURE_NOT_AVAILABLE') {
+    return `${data.message || fallback} Plano recomendado: ${data.recommendedPlan || 'pro'}.`
+  }
+  return data.message || data.detail || fallback
 }
 
 export default function Dashboard() {
   const [projetos, setProjetos] = useState([])
+  const [planoUso, setPlanoUso] = useState(null)
   const [modal, setModal] = useState(false)
   const [form, setForm] = useState(FORM_INICIAL)
   const [loading, setLoading] = useState(true)
   const [erroCarregar, setErroCarregar] = useState('')
   const [salvando, setSalvando] = useState(false)
   const [erroCriar, setErroCriar] = useState('')
+  const [busca, setBusca] = useState('')
+  const [filtroStatus, setFiltroStatus] = useState('TODOS')
+  const [filtroLocalidade, setFiltroLocalidade] = useState('TODOS')
   const nav = useNavigate()
-  let usuario = {}; try { usuario = JSON.parse(localStorage.getItem('usuario') || '{}') } catch { usuario = {} }
+  let usuario = {}
+  try { usuario = JSON.parse(localStorage.getItem('usuario') || '{}') } catch { usuario = {} }
 
   useEffect(() => { carregar() }, [])
 
@@ -181,9 +146,13 @@ export default function Dashboard() {
     setLoading(true)
     setErroCarregar('')
     try {
-      const r = await api.get('/projetos')
+      const [r, plano] = await Promise.all([
+        api.get('/projetos'),
+        api.get('/billing/current-plan').catch(() => ({ data: null })),
+      ])
       const lista = Array.isArray(r.data) ? r.data : (r.data?.items || [])
       setProjetos(lista)
+      setPlanoUso(plano.data)
     } catch {
       setErroCarregar('Nao foi possivel carregar seus projetos agora.')
       toast.error('Erro ao carregar projetos')
@@ -203,18 +172,15 @@ export default function Dashboard() {
     setSalvando(true)
     setErroCriar('')
     try {
-      const payload = {
-        ...form,
-        tensao_ref: parseInt(form.tensao_ref, 10),
-      }
+      const payload = { ...form, tensao_ref: parseInt(form.tensao_ref, 10) }
       const r = await api.post('/projetos', payload)
       setModal(false)
       toast.success('Projeto criado')
-      const targetId = r.data.id || r.data._id
-      nav(`/projeto/${targetId}`)
-    } catch {
-      setErroCriar('Nao foi possivel criar o projeto. Revise os campos e tente novamente.')
-      toast.error('Erro ao criar projeto')
+      nav(`/projeto/${r.data.id || r.data._id}`)
+    } catch (error) {
+      const msg = mensagemLimite(error, 'Nao foi possivel criar o projeto. Revise os campos e tente novamente.')
+      setErroCriar(msg)
+      toast.error(msg)
     } finally {
       setSalvando(false)
     }
@@ -232,159 +198,250 @@ export default function Dashboard() {
     }
   }
 
-  function abrirDemo() {
-    toast('Projeto demonstrativo sera disponibilizado em breve.')
-  }
-
   function logout() {
     localStorage.clear()
     nav('/login')
   }
 
-  const metricas = useMemo(() => {
-    const lista = Array.isArray(projetos) ? projetos : []
-    const conhecidos = lista.map(projetoStatus).filter(Boolean)
-    const contar = (status) => conhecidos.filter((item) => item === status).length
-    const semStatus = conhecidos.length === 0
-
-    return {
-      total: lista.length,
-      ok: semStatus ? 'N/D' : contar('OK'),
-      alerta: semStatus ? 'N/D' : contar('ALERTA'),
-      critico: semStatus ? 'N/D' : contar('CRITICO'),
-      recentes: lista.length ? Math.min(lista.length, 5) : 0,
-    }
-  }, [projetos])
-
-  const recentes = useMemo(() => {
-    const lista = Array.isArray(projetos) ? projetos : []
-    return [...lista]
-      .sort((a, b) => new Date(b.atualizado_em || b.criado_em || 0) - new Date(a.atualizado_em || a.criado_em || 0))
-      .slice(0, 5)
-  }, [projetos])
-
   const listaProjetos = Array.isArray(projetos) ? projetos : []
 
+  const localidades = useMemo(() => {
+    const set = new Set()
+    listaProjetos.forEach((projeto) => {
+      const local = localProjeto(projeto)
+      const concessionaria = concessionariaProjeto(projeto)
+      const valor = [local, concessionaria].filter((item) => item && item !== 'N/D').join(' | ')
+      if (valor) set.add(valor)
+    })
+    return [...set].sort((a, b) => a.localeCompare(b, 'pt-BR'))
+  }, [listaProjetos])
+
+  const projetosFiltrados = useMemo(() => {
+    const texto = normalizarBusca(busca)
+    return listaProjetos.filter((projeto) => {
+      const status = projetoStatus(projeto)
+      const localidade = [localProjeto(projeto), concessionariaProjeto(projeto)].filter(Boolean).join(' | ')
+      const alvoBusca = normalizarBusca([
+        projeto.nome,
+        projeto.cliente,
+        localProjeto(projeto),
+        concessionariaProjeto(projeto),
+      ].join(' '))
+
+      return (!texto || alvoBusca.includes(texto))
+        && (filtroStatus === 'TODOS' || status === filtroStatus)
+        && (filtroLocalidade === 'TODOS' || localidade === filtroLocalidade)
+    })
+  }, [listaProjetos, busca, filtroStatus, filtroLocalidade])
+
+  const metricas = useMemo(() => {
+    const emRevisao = listaProjetos.filter((projeto) => ['ALERTA', 'PENDENTE'].includes(projetoStatus(projeto))).length
+    const criticos = listaProjetos.filter((projeto) => projetoStatus(projeto) === 'CRITICO').length
+    const liberados = listaProjetos.filter((projeto) => projetoStatus(projeto) === 'OK' || projeto.relatorio_liberado).length
+    return { total: listaProjetos.length, emRevisao, criticos, liberados }
+  }, [listaProjetos])
+
   return (
-    <div className="min-h-screen bg-surface-base text-ink-primary">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#121820]">
+      <header className="border-b border-[#d2d9e0] bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-900 text-white">
+            <div className="flex h-10 w-10 items-center justify-center bg-[#13202e] text-white" style={{ borderRadius: 4 }}>
               <Cable size={20} />
             </div>
             <div>
-              <h1 className="text-base font-semibold text-slate-950">CalcCabos</h1>
-              <p className="text-xs text-slate-500">Ola, {usuario.nome || 'engenheiro'}</p>
+              <h1 className="text-xl font-bold leading-6 text-[#121820]">CalcCabos</h1>
+              <p className="mt-0.5 text-sm text-[#606e7d]">Projetos eletricos, revisoes e memoriais tecnicos.</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="secondary" icon={Rocket} onClick={abrirDemo}>Abrir demonstracao</Button>
-            <Button icon={Plus} onClick={abrirModal} data-testid="btn-novo-projeto-header">Novo projeto</Button>
+            <span className="hidden text-sm text-[#606e7d] sm:inline">Sessao: {usuario.nome || 'engenheiro'}</span>
+            <Button
+              icon={Plus}
+              onClick={abrirModal}
+              className="border-[#13202e] bg-[#13202e] text-white hover:border-[#1b2a39] hover:bg-[#1b2a39]"
+              data-testid="btn-novo-projeto-header"
+            >
+              Novo projeto
+            </Button>
             <Button variant="ghost" icon={LogOut} onClick={logout} title="Sair" />
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-700">Dashboard</div>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Central de projetos</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
-              Acompanhe seus memoriais eletricos industriais, pendencias tecnicas e projetos recentes.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" icon={FolderOpen} onClick={abrirDemo}>Abrir demonstracao</Button>
-            <Button icon={Plus} onClick={abrirModal} data-testid="btn-novo-projeto-hero">Criar projeto</Button>
-          </div>
-        </div>
-
+      <main className="mx-auto max-w-7xl px-5 py-6">
         {erroCarregar && (
           <Alert variant="danger" icon={AlertTriangle} className="mb-5">
             {erroCarregar}
           </Alert>
         )}
 
-        {loading ? (
-          <LoadingState message="Carregando projetos..." />
-        ) : (
-          <>
-            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              <MetricCard label="Total de projetos" value={metricas.total} description="Projetos cadastrados" icon={FolderOpen} />
-              <MetricCard label="Projetos OK" value={metricas.ok} description="Com status conhecido" status={metricas.ok === 'N/D' ? undefined : 'OK'} icon={CheckCircle2} />
-              <MetricCard label="Em ALERTA" value={metricas.alerta} description="Requerem atencao" status={metricas.alerta === 'N/D' ? undefined : 'ALERTA'} icon={AlertTriangle} />
-              <MetricCard label="CRITICOS" value={metricas.critico} description="Nao liberados" status={metricas.critico === 'N/D' ? undefined : 'CRITICO'} icon={ShieldIcon} />
-              <MetricCard label="Recentes" value={metricas.recentes} description="Ultimos projetos" icon={Clock3} />
-            </section>
+        <section className="mb-5 grid gap-3 md:grid-cols-4">
+          <StatBox label="Total de projetos" value={metricas.total} helper="Base cadastrada" icon={FolderOpen} />
+          <StatBox label="Em revisao" value={metricas.emRevisao} helper="Pendentes ou com alerta" tone="review" icon={AlertTriangle} />
+          <StatBox label="Criticos" value={metricas.criticos} helper="Nao liberados" tone="alert" icon={AlertTriangle} />
+          <StatBox label="Relatorios liberados" value={metricas.liberados} helper="Aptos para emissao" tone="ok" icon={CheckCircle2} />
+        </section>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
-              <section>
-                <div className="mb-4">
-                  <SectionHeader
-                    title="Meus projetos"
-                    description={listaProjetos.length ? 'Abra, revise ou continue um memorial existente.' : 'Crie o primeiro projeto para iniciar seu fluxo tecnico.'}
-                  />
+        {planoUso && (
+          <section className="cc-panel mb-5 p-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <div className="cc-label">Plano atual</div>
+                <h2 className="mt-1 text-lg font-bold text-[#121820]">{planoUso.plan?.name || 'Free'}</h2>
+                <p className="mt-1 text-sm text-[#606e7d]">
+                  Uso mensal de staging. Upgrade e pagamento ainda nao estao habilitados.
+                </p>
+              </div>
+              <div className="grid gap-3 text-sm sm:grid-cols-3 lg:min-w-[620px]">
+                <div className="border border-[#d2d9e0] bg-[#fbfcfd] p-3">
+                  <div className="cc-label">Projetos</div>
+                  <div className="mt-1 font-bold">{usoTexto(planoUso.usage?.activeProjects, planoUso.plan?.limits?.activeProjects)}</div>
                 </div>
-
-                {listaProjetos.length === 0 ? (
-                  <EmptyState
-                    icon={FolderOpen}
-                    title="Nenhum projeto ainda"
-                    description="Crie um projeto para cadastrar transformador, circuitos, protecoes e gerar seu memorial tecnico."
-                    actionLabel="Criar primeiro projeto"
-                    onAction={abrirModal}
-                    data-testid="btn-novo-projeto-empty"
-                  />
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {listaProjetos.map((p) => {
-                      const projId = p.id || p._id
-                      return (
-                        <ProjetoCard
-                          key={projId}
-                          projeto={p}
-                          onOpen={() => nav(`/projeto/${projId}`)}
-                          onDelete={(e) => deletar(projId, e)}
-                        />
-                      )
-                    })}
+                <div className="border border-[#d2d9e0] bg-[#fbfcfd] p-3">
+                  <div className="cc-label">PDF / Excel</div>
+                  <div className="mt-1 font-bold">
+                    {usoTexto(planoUso.usage?.pdfExports, planoUso.plan?.limits?.pdfExports)} PDF · {usoTexto(planoUso.usage?.excelExports, planoUso.plan?.limits?.excelExports)} XLSX
                   </div>
-                )}
-              </section>
-
-              <aside className="space-y-4">
-                <OnboardingCard compact={listaProjetos.length > 0} />
-
-                <Card className="p-4">
-                  <SectionHeader
-                    title="Projetos recentes"
-                    description="Acesso rapido aos ultimos memoriais."
-                  />
-                  <div className="mt-4 space-y-2">
-                    {recentes.length ? recentes.map((projeto) => {
-                      const projId = projeto.id || projeto._id
-                      return (
-                        <button
-                          key={projId}
-                          type="button"
-                          onClick={() => nav(`/projeto/${projId}`)}
-                          className="w-full rounded-md border border-slate-100 bg-slate-50 px-3 py-2 text-left transition-colors hover:border-primary-100 hover:bg-primary-50"
-                        >
-                          <div className="truncate text-sm font-medium text-slate-800">{projeto.nome}</div>
-                          <div className="mt-0.5 text-xs text-slate-500">{formatarData(projeto.atualizado_em || projeto.criado_em)}</div>
-                        </button>
-                      )
-                    }) : (
-                      <p className="text-sm text-slate-500">Nenhum projeto recente.</p>
-                    )}
+                </div>
+                <div className="border border-[#d2d9e0] bg-[#fbfcfd] p-3">
+                  <div className="cc-label">IA / Importacao</div>
+                  <div className="mt-1 font-bold">
+                    {usoTexto(planoUso.usage?.aiMessages, planoUso.plan?.limits?.aiMessages)} IA · {usoTexto(planoUso.usage?.importedRows, planoUso.plan?.limits?.importedRows)} linhas
                   </div>
-                </Card>
-              </aside>
+                </div>
+              </div>
+              <Button variant="secondary" disabled>Upgrade em breve</Button>
             </div>
-          </>
+          </section>
         )}
+
+        <section className="cc-panel overflow-hidden">
+          <div className="border-b border-[#d2d9e0] bg-white px-4 py-4">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+              <div>
+                <h2 className="text-lg font-bold leading-6 text-[#121820]">Projetos</h2>
+                <p className="mt-1 text-sm text-[#606e7d]">
+                  Consulte, filtre e continue revisoes tecnicas sem trocar a estrutura do sistema por localidade.
+                </p>
+              </div>
+              <div className="grid gap-3 md:grid-cols-[minmax(240px,1fr)_180px_260px] xl:w-[720px]">
+                <label className="cc-label">
+                  Buscar
+                  <div className="relative mt-1">
+                    <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#606e7d]" />
+                    <input
+                      value={busca}
+                      onChange={(event) => setBusca(event.target.value)}
+                      className="cc-field pl-8"
+                      placeholder="Projeto ou cliente"
+                    />
+                  </div>
+                </label>
+                <label className="cc-label">
+                  Status
+                  <select value={filtroStatus} onChange={(event) => setFiltroStatus(event.target.value)} className="cc-field mt-1">
+                    <option value="TODOS">Todos</option>
+                    <option value="OK">OK</option>
+                    <option value="ALERTA">Alerta</option>
+                    <option value="CRITICO">Critico</option>
+                    <option value="PENDENTE">Pendente</option>
+                  </select>
+                </label>
+                <label className="cc-label">
+                  Concessionaria / localidade
+                  <select value={filtroLocalidade} onChange={(event) => setFiltroLocalidade(event.target.value)} className="cc-field mt-1">
+                    <option value="TODOS">Todas</option>
+                    {localidades.map((item) => <option key={item} value={item}>{item}</option>)}
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="p-6">
+              <LoadingState message="Carregando projetos..." />
+            </div>
+          ) : listaProjetos.length === 0 ? (
+            <div className="p-6">
+              <EmptyState
+                icon={FolderOpen}
+                title="Nenhum projeto cadastrado"
+                description="Crie o primeiro projeto para configurar entrada, circuitos, protecoes e memorial tecnico."
+                actionLabel="Criar primeiro projeto"
+                onAction={abrirModal}
+                data-testid="btn-novo-projeto-empty"
+              />
+            </div>
+          ) : (
+            <div className="overflow-auto">
+              <table className="cc-table w-full min-w-[1080px] border-collapse">
+                <thead>
+                  <tr>
+                    <th>Projeto</th>
+                    <th>Cliente</th>
+                    <th>UF / cidade</th>
+                    <th>Concessionaria</th>
+                    <th>Tensao ref.</th>
+                    <th>Revisao</th>
+                    <th>Status</th>
+                    <th>Ultima atualizacao</th>
+                    <th>Acoes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projetosFiltrados.map((projeto) => {
+                    const projId = projeto.id || projeto._id
+                    const status = projetoStatus(projeto)
+                    return (
+                      <tr
+                        key={projId}
+                        data-testid={`projeto-card-${projId}`}
+                        className="cursor-pointer hover:bg-[#fbfcfd]"
+                        onClick={() => nav(`/projeto/${projId}`)}
+                      >
+                        <td>
+                          <div className="font-bold text-[#121820]">{projeto.nome}</div>
+                          {projeto.descricao && <div className="mt-0.5 max-w-[280px] truncate text-sm text-[#606e7d]">{projeto.descricao}</div>}
+                        </td>
+                        <td>{projeto.cliente || 'N/D'}</td>
+                        <td>{localProjeto(projeto)}</td>
+                        <td>{concessionariaProjeto(projeto)}</td>
+                        <td className="font-mono">{projeto.tensao_ref ? `${projeto.tensao_ref} V` : dado(projeto, 'tensao_referencia', 'N/D')}</td>
+                        <td className="font-mono">{revisaoProjeto(projeto)}</td>
+                        <td><StatusBadge status={status} /></td>
+                        <td>{formatarData(projeto.atualizado_em || projeto.updatedAt || projeto.criado_em || projeto.createdAt)}</td>
+                        <td onClick={(event) => event.stopPropagation()}>
+                          <div className="flex items-center gap-2">
+                            <Button size="sm" variant="secondary" onClick={() => nav(`/projeto/${projId}`)}>Abrir</Button>
+                            <button
+                              type="button"
+                              onClick={(event) => deletar(projId, event)}
+                              className="rounded border border-[#d2d9e0] bg-white p-2 text-[#606e7d] hover:border-red-200 hover:bg-red-50 hover:text-red-700"
+                              title="Excluir projeto"
+                            >
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+              {projetosFiltrados.length === 0 && (
+                <div className="border-t border-[#e6eaee] bg-[#fbfcfd] px-4 py-8 text-center">
+                  <FileText size={24} className="mx-auto text-[#606e7d]" />
+                  <p className="mt-2 text-sm font-semibold text-[#121820]">Nenhum projeto encontrado com os filtros atuais.</p>
+                  <button type="button" onClick={() => { setBusca(''); setFiltroStatus('TODOS'); setFiltroLocalidade('TODOS') }} className="cc-button mt-4">
+                    Limpar filtros
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </section>
       </main>
 
       {modal && (
@@ -457,7 +514,12 @@ export default function Dashboard() {
                   <Button type="button" variant="secondary" className="flex-1" onClick={() => setModal(false)}>
                     Cancelar
                   </Button>
-                  <Button type="submit" loading={salvando} className="flex-1" data-testid="btn-salvar-projeto">
+                  <Button
+                    type="submit"
+                    loading={salvando}
+                    className="flex-1 border-[#13202e] bg-[#13202e] text-white hover:border-[#1b2a39] hover:bg-[#1b2a39]"
+                    data-testid="btn-salvar-projeto"
+                  >
                     Criar projeto
                   </Button>
                 </div>
@@ -468,8 +530,4 @@ export default function Dashboard() {
       )}
     </div>
   )
-}
-
-function ShieldIcon(props) {
-  return <FileText {...props} />
 }

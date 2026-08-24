@@ -32,6 +32,13 @@ function statusProjeto(health) {
   return health?.status || health?.statusGeral || health?.overallStatus || 'ALERTA'
 }
 
+function providerLabel(message) {
+  if (message.provider === 'node-fallback') return 'fallback local'
+  if (message.provider === 'mock') return 'mock seguro'
+  if (message.provider === 'openai') return 'IA servidor'
+  return message.modelo
+}
+
 export default function FloatingAssistant({
   open,
   onOpen,
@@ -106,7 +113,7 @@ export default function FloatingAssistant({
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h3 className="truncate text-sm font-semibold">Assistente CalcCabos</h3>
-              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-200">online</span>
+              <span className="rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-slate-200">apoio técnico</span>
             </div>
             <p className="mt-0.5 truncate text-xs text-slate-300">{projetoNome} · {abaLabel}</p>
           </div>
@@ -144,7 +151,7 @@ export default function FloatingAssistant({
       </div>
 
       <div className="border-b border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-600">
-        Pergunte sobre o site, o projeto, circuitos, módulos técnicos, memorial, diagrama, PDF, Excel ou critérios de engenharia.
+        Assistente de apoio técnico. Não substitui validação de engenheiro habilitado.
       </div>
 
       <div ref={listRef} className="min-h-[280px] flex-1 overflow-y-auto bg-slate-50/70 p-4">
@@ -157,8 +164,8 @@ export default function FloatingAssistant({
                   : 'rounded-bl-md border border-slate-200 bg-white text-slate-800'
               }`}>
                 {message.content}
-                {message.modelo && (
-                  <div className="mt-1 text-[10px] italic text-slate-400">via {message.modelo}</div>
+                {(message.modelo || message.provider) && (
+                  <div className="mt-1 text-[10px] italic text-slate-400">via {providerLabel(message)}</div>
                 )}
               </div>
             </div>
