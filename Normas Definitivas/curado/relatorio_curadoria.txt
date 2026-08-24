@@ -1,0 +1,74 @@
+RELATORIO DE CURADORIA - TIER 1 DEFINITIVO
+
+Pasta bruta: C:\Users\GUSTAVO\Desktop\Normas Definitivas\bruto
+Pasta curada: C:\Users\GUSTAVO\Desktop\Normas Definitivas\curado
+
+N-1997
+- tabelas: 9 -> 9
+- criterios_dimensionamento: 17 -> 10
+- formulas: 0 -> 0
+- valores_minimos: 12 -> 13
+- referencias_normativas: 27 -> 17
+- nota: Título oficial padronizado em caixa normal.
+- nota: Critérios foram reescritos para eliminar cabeçalhos de tabela capturados como falso positivo.
+
+N-2039
+- tabelas: 1 -> 1
+- criterios_dimensionamento: 8 -> 10
+- formulas: 0 -> 0
+- valores_minimos: 14 -> 15
+- referencias_normativas: 35 -> 10
+- nota: Fragmentos de HVAC foram consolidados em critérios completos e verificáveis.
+
+N-2040
+- tabelas: 0 -> 0
+- criterios_dimensionamento: 4 -> 3
+- formulas: 0 -> 0
+- valores_minimos: 15 -> 15
+- referencias_normativas: 113 -> 68
+- nota: Conteúdo foi mantido como requisitos de documentação técnica relevantes ao memorial de cálculo.
+
+N-2547
+- tabelas: 4 -> 4
+- criterios_dimensionamento: 12 -> 15
+- formulas: 20 -> 11
+- valores_minimos: 19 -> 30
+- referencias_normativas: 32 -> 29
+- nota: Títulos genéricos de tabelas foram substituídos pelos títulos oficiais das páginas 6 e 22.
+- nota: Critérios e fórmulas foram filtrados para remover nomes de normas em inglês e linhas de formulário.
+
+N-2830
+- tabelas: 3 -> 3
+- criterios_dimensionamento: 0 -> 5
+- formulas: 1 -> 3
+- valores_minimos: 24 -> 25
+- referencias_normativas: 24 -> 13
+- nota: Títulos genéricos das três tabelas foram corrigidos pelos títulos oficiais do sumário e do corpo da norma.
+
+N-2918
+- tabelas: 60 -> 60
+- criterios_dimensionamento: 20 -> 7
+- formulas: 11 -> 5
+- valores_minimos: 7 -> 10
+- referencias_normativas: 33 -> 28
+- nota: Título oficial e tipo documental foram corrigidos a partir da capa real.
+- nota: Tabelas de páginas 99 e 230 receberam seus títulos reais; critérios ruidosos de anexos e sumário foram removidos.
+
+N-2919
+- tabelas: 15 -> 14
+- criterios_dimensionamento: 63 -> 10
+- formulas: 11 -> 11
+- valores_minimos: 12 -> 19
+- referencias_normativas: 96 -> 94
+- nota: Títulos genéricos das tabelas 2, 3, 4, 5, 6 e 10 foram corrigidos.
+- nota: A tabela-formulário do anexo foi removida por duplicar o conteúdo documental já representado pelas tabelas 10 e 11.
+- nota: Critérios foram reduzidos ao conjunto técnico de seleção Ex, partida e documentação mandatória.
+
+N-2928
+- tabelas: 1 -> 1
+- criterios_dimensionamento: 1 -> 7
+- formulas: 5 -> 14
+- valores_minimos: 5 -> 16
+- referencias_normativas: 57 -> 52
+- nota: Título oficial, tipo documental e escopo foram recompostos a partir das páginas iniciais.
+- nota: A tabela de acessórios foi limpa e a lista de fórmulas passou a refletir as faixas reais de tensão, potência e rendimento.

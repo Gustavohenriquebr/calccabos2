@@ -1,0 +1,145 @@
+{
+  "codigo_norma": "N-2830",
+  "titulo": "Critérios de Segurança para Ambientes e Serviços em Painéis Elétricos com Risco de Arco Elétrico",
+  "tipo_documento": "Procedimento",
+  "revisao": "REV. B",
+  "data_norma": "08/2018",
+  "escopo": "Esta Norma estabelece requisitos mínimos de segurança em projeto, construção de ambientes de subestações e serviços de montagem, incluindo instalação, operação, inspeção e manutenção de painéis elétricos de alta e baixa tensão, a fim de eliminar ou evitar, e na impossibilidade desta situação, minimizar os danos às pessoas e às instalações elétricas, causados por arco elétrico. Esta Norma não se aplica a redes elétricas de transmissão e distribuição e seus equipamentos e acessórios, tais como: transformador de distribuição, capacitor e para-raios. Painéis elétricos do tipo Centro de Controle de Motores (CCM) ou Centro de Distribuição de Carga (CDC) não são enquadrados nos conceitos de Máquinas e Equipamentos da NR-12. Esta exceção é prevista em 12.2 da NR-12, quanto a sua aplicabilidade. Esta Norma se aplica a partir da data de sua edição. Esta Norma contém Requisitos Técnicos e Práticas Recomendadas.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Requisitos de Segurança",
+      "cabecalho": [
+        "Situação - Painel ensaiado para resistência a arco elétrico",
+        "Problema potencial - Distância entre o \"flap\" de exaustão e teto menor que a recomendada pelo fabricante - Cabos na área de escape de gases",
+        "Riscos - Risco de incêndio e acidente pessoal - Risco de incêndio",
+        "Recomendação - Instalar dutos de gases quentes direcionados para uma área adequada, segura e não classificada - Realocar o bandejamento ou instalar dutos de exaustão. (ver NOTA)"
+      ],
+      "linhas": [
+        {
+          "Situação - Painel ensaiado para resistência a arco elétrico": "NOTA Na impossibilidade destas soluções, proteger os cabos (\"fireproofing\").",
+          "Problema potencial - Distância entre o \"flap\" de exaustão e teto menor que a recomendada pelo fabricante - Cabos na área de escape de gases": "",
+          "Riscos - Risco de incêndio e acidente pessoal - Risco de incêndio": "",
+          "Recomendação - Instalar dutos de gases quentes direcionados para uma área adequada, segura e não classificada - Realocar o bandejamento ou instalar dutos de exaustão. (ver NOTA)": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 2 - Extração ou inserção de dispositivos",
+      "cabecalho": [
+        "Dispositivo - Disjuntor, Contator ou Gaveta Extraível",
+        "Painel ensaiado para resistência a arco elétrico - Sim",
+        "Porta aberta - Não",
+        "Nível de proteção a energia incidente mínimo da vestimenta de proteção - AE - 2"
+      ],
+      "linhas": [
+        {
+          "Dispositivo - Disjuntor, Contator ou Gaveta Extraível": "",
+          "Painel ensaiado para resistência a arco elétrico - Sim": "Sim",
+          "Porta aberta - Não": "Sim",
+          "Nível de proteção a energia incidente mínimo da vestimenta de proteção - AE - 2": "'AE – 2', 'AE – 3' ou 'AE – 4' Conforme o nível de energia incidente"
+        },
+        {
+          "Dispositivo - Disjuntor, Contator ou Gaveta Extraível": "",
+          "Painel ensaiado para resistência a arco elétrico - Sim": "Não",
+          "Porta aberta - Não": "Não",
+          "Nível de proteção a energia incidente mínimo da vestimenta de proteção - AE - 2": ""
+        },
+        {
+          "Dispositivo - Disjuntor, Contator ou Gaveta Extraível": "",
+          "Painel ensaiado para resistência a arco elétrico - Sim": "Não",
+          "Porta aberta - Não": "Sim",
+          "Nível de proteção a energia incidente mínimo da vestimenta de proteção - AE - 2": ""
+        },
+        {
+          "Dispositivo - Disjuntor, Contator ou Gaveta Extraível": "NOTA 1 Informações sobre EPI podem ser encontradas na Tabela 3. Para conhecer suas características devem ser consultadas as Especificações Técnicas (ET) no Canal Fornecedor da Petrobras. NOTA 2 A vestimenta de segurança não protege contra riscos mecânicos de projeção de partes do painel no caso de arco elétrico. Este risco deve ser avaliado caso a caso.",
+          "Painel ensaiado para resistência a arco elétrico - Sim": "",
+          "Porta aberta - Não": "",
+          "Nível de proteção a energia incidente mínimo da vestimenta de proteção - AE - 2": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 3 - EPI para Eletricista",
+      "cabecalho": [
+        "Nível de proteção",
+        "EPI exigido"
+      ],
+      "linhas": [
+        {
+          "Nível de proteção": "AE -1",
+          "EPI exigido": "Especificações idênticas aos níveis de proteção AE - 2."
+        },
+        {
+          "Nível de proteção": "AE - 2",
+          "EPI exigido": "Calça, camisa, jaqueta, macacão de utilização diária, casaco, macacão de parada, luva isolante, luva de cobertura de couro (ver NOTA 1) ou luvas de proteção compostas, balaclava (ver NOTA 2), capacete, protetor facial (ver NOTA 5), calçado de segurança para eletrricista e conjunto impermeável, (quando aplicável)."
+        },
+        {
+          "Nível de proteção": "AE - 3",
+          "EPI exigido": "Calça de manobra e blusão de manobra, capuz tipo carrasco, luva de tecido em sobreposição a luva isolante, quando aplicável, e calçado de segurança para eletricista."
+        },
+        {
+          "Nível de proteção": "AE - 4",
+          "EPI exigido": "Calça de manobra e blusão de manobra, capuz tipo carrasco, luva de tecido em sobreposição a luva isolante, quando aplicável, e calçado de segurança para eletricista."
+        },
+        {
+          "Nível de proteção": "NOTA 1 Quando houver potencial de choque elétrico a luva isolante deve ser utilizada com sobreposição da luva de proteção. A manga da luva isolante deve ultrapassar o comprimento da manga da luva de proteção. NOTA 2 A utilização da balaclava em serviços de nível de proteção AE - 1 deve seguir a NOTA 5, e em serviços de nível de proteção AE - 2, para atividades de manobras, deve estar sempre associada à utilização de protetor facial, com nível de energia incidente compatível. NOTA 3 Conforme as orientações corporativas somente os conjuntos impermeáveis FR&AE devem ser especificados e utilizados. São proibidas as capas impermeáveis FR&AE no Sistema PETROBRAS. NOTA 4 O Certificado de Aprovação do Ministério do Trabalho (CA) do protetor facial está vinculado ao fabricante e modelo do capacete para eletricista. NOTA 5 Para tensão de 440 V ou acima, mesmo com energia incidente abaixo de 8 cal/cm2, é necessário a utilização do protetor facial com nível de proteção 'AE – 2'. Também se aplica a cubículos não compartimentados onde partes energizadas (com tensões de 440 V ou acima) não estão segregadas. Para cubículos de comando (ou painéis) de tensões até 220 V, não é exigido à utilização do protetor facial.",
+          "EPI exigido": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "Alterações no sistema de geração, na topologia da rede de distribuição ou nos ajustes de proteção exigem reavaliação da energia incidente de arco dos painéis elétricos.",
+    "Para atividades de manobra devem ser usados EPI compatíveis com o nível de energia incidente calculado.",
+    "Intervenções em circuitos e dispositivos do compartimento de controle de baixa tensão com tensão de 440 V ou superior exigem protetor facial de nível AE-2, mesmo com energia incidente abaixo de 8 cal/cm².",
+    "Para cubículos ou painéis de tensões até 220 V não é exigido protetor facial.",
+    "A extração ou inserção completa de disjuntor, contator ou gaveta só deve ser executada com o dispositivo devidamente aberto."
+  ],
+  "formulas": [
+    "100 V x 0,85 = 85 V c.a.",
+    "tensão ≥ 440 V",
+    "energia incidente < 8 cal/cm²"
+  ],
+  "valores_minimos": [
+    "1 000 V",
+    "1 500 V",
+    "24 kV",
+    "36 kV",
+    "240 V",
+    "600 V",
+    "120 V",
+    "2,3 kV",
+    "7,2 kV",
+    "125 V",
+    "1 kV",
+    "1 A",
+    "2 A",
+    "440 V",
+    "220 V",
+    "1000 V",
+    "30 kV",
+    "100 V",
+    "15 000 V",
+    "85 V",
+    "50 V",
+    "100 kV",
+    "2 000 V",
+    "110 V",
+    "8 cal/cm²"
+  ],
+  "referencias_normativas": [
+    "NBR IEC 60079-17",
+    "NBR IEC 60529",
+    "NBR IEC 61892",
+    "IEC 60079-17",
+    "IEC 60529",
+    "IEC 61892",
+    "IEC 60903",
+    "IEC 60855-1",
+    "IEC 61010-1",
+    "IEC 61230",
+    "IEC 61478",
+    "NFPA 70E",
+    "IEEE 1584"
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "codigo_norma": "N-2039",
+  "titulo": "Projeto de Subestações em Instalações Terrestres",
+  "tipo_documento": "Procedimento",
+  "revisao": "REV. D",
+  "data_norma": "06/2021",
+  "escopo": "Esta Norma fixa as condições mínimas exigidas para o projeto de subestações ao tempo ou abrigadas em instalações terrestres, para a PETROBRAS. Esta Norma não se aplica a instalações em plataformas marítimas. Esta Norma se aplica a projetos iniciados a partir da data de sua edição. Esta norma se aplica às subestações novas e ampliações de instalações existentes. NOTA Modificações destinadas a, por exemplo, acomodar novos equipamentos ou substituir os existentes não implicam necessariamente ampliação da subestação. Esta Norma contém Requisitos Técnicos e Práticas Recomendadas. A aplicação desta Norma não dispensa o atendimento aos regulamentos de órgãos públicos para os equipamentos, os serviços e as instalações.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Distâncias Mínimas (m)",
+      "cabecalho": [
+        "Distâncias mínimas",
+        "69 kV",
+        "138 kV",
+        "230 kV"
+      ],
+      "linhas": [
+        {
+          "Distâncias mínimas": "Entre fases, para barras rígidas",
+          "69 kV": "2,15",
+          "138 kV": "2,40",
+          "230 kV": "3,60"
+        },
+        {
+          "Distâncias mínimas": "Entre fases, para barras flexíveis",
+          "69 kV": "2,50",
+          "138 kV": "3,00",
+          "230 kV": "4,50"
+        },
+        {
+          "Distâncias mínimas": "Entre fase e terra, para barras rígidas",
+          "69 kV": "1,50",
+          "138 kV": "1,50",
+          "230 kV": "2,50"
+        },
+        {
+          "Distâncias mínimas": "Entre fase e terra, para barras flexíveis",
+          "69 kV": "2,00",
+          "138 kV": "2,20",
+          "230 kV": "3,40"
+        },
+        {
+          "Distâncias mínimas": "Altura mínima do solo, das partes vivas (Nota 2)",
+          "69 kV": "4,00",
+          "138 kV": "4,50",
+          "230 kV": "5,00"
+        },
+        {
+          "Distâncias mínimas": "Altura mínima do solo, das partes em tensão reduzidas a zero (porcelana, isoladores)",
+          "69 kV": "2,50",
+          "138 kV": "2,50",
+          "230 kV": "3,00"
+        },
+        {
+          "Distâncias mínimas": "NOTA 1 As chaves no barramento são consideradas como barras flexíveis. NOTA 2 As distâncias das partes vivas de barras flexíveis são do ponto de flecha máxima ao solo.",
+          "69 kV": "",
+          "138 kV": "",
+          "230 kV": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "Barramentos aéreos e derivações devem ser preferencialmente de cabos nus, sem alma de aço, do mesmo material e seção dos cabos da linha de transmissão que chega à subestação.",
+    "As distâncias mínimas da Tabela 1 devem ser obedecidas, com atendimento adicional à concessionária local e à coordenação de isolamento conforme ABNT NBR 6939.",
+    "Barramentos e derivações devem ser calculados para suportar esforços de curto-circuito, ventos e demais condições climáticas e ambientais.",
+    "O sistema de HVAC deve manter temperatura, umidade, pressurização, filtragem e renovação de ar adequadas aos equipamentos instalados.",
+    "Em subestações pressurizadas, a pressão positiva mínima deve ser de 2,5 mm de coluna d'água, com cascata de pressão entre ambientes quando houver comunicação interna.",
+    "A vazão de ar de pressurização deve considerar acréscimo de 25% para compensar frestas não identificadas.",
+    "A temperatura máxima no interior da sala de painéis não deve ultrapassar 40 °C e a média diária não deve exceder 35 °C.",
+    "Para baterias chumbo-ácidas ventiladas e alcalinas, a temperatura máxima da sala não deve ultrapassar 40 °C e a média diária não deve exceder 35 °C.",
+    "Para baterias chumbo-ácidas de recombinação reguladas a válvula, a sala de baterias deve ter temperatura máxima controlada em 25 °C.",
+    "A distribuição de ar deve garantir temperatura e movimentação de ar homogêneas nos ambientes da subestação."
+  ],
+  "formulas": [],
+  "valores_minimos": [
+    "1,0 kV",
+    "36,2 kV",
+    "1 kV",
+    "52 kV",
+    "2 A",
+    "3 A",
+    "4 A",
+    "70 mm2",
+    "69 kV",
+    "138 kV",
+    "230 kV",
+    "40 °C",
+    "35 °C",
+    "25 °C",
+    "2,5 mm"
+  ],
+  "referencias_normativas": [
+    "NBR IEC 60079-13",
+    "NBR IEC 60947-1",
+    "NBR IEC 61439-1",
+    "NBR IEC 62271-200",
+    "IEC 60079-13",
+    "IEC 60947-1",
+    "IEC 61439-1",
+    "IEC 62271-200",
+    "IEC 61936-1",
+    "IEC 62485-2"
+  ]
+}

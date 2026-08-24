@@ -1,0 +1,72 @@
+{
+  "name": "calccabos",
+  "version": "1.0.11",
+  "description": "Sistema de dimensionamento de cabos elétricos",
+  "main": "electron/main.js",
+  "author": "Gustavo Henrique",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 && electron .\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && uvicorn main:app --reload --port 8000",
+    "build": "npm run build:frontend && npm run build:backend && npm run dist",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && powershell -Command \"if (Test-Path dist) { Remove-Item -Recurse -Force dist }\" && venv\\Scripts\\pyinstaller main.spec --clean -y",
+    "dist": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^29.0.0",
+    "electron-builder": "^24.9.1",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "br.com.calccabos",
+    "productName": "CalcCabos",
+    "copyright": "Copyright © 2026 CalcCabos",
+    "directories": {
+      "output": "release"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Gustavohenriquebr",
+      "repo": "calccabos"
+    },
+    "files": [
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "frontend/dist",
+        "to": "frontend"
+      },
+      {
+        "from": "backend/dist/main",
+        "to": "backend"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CalcCabos",
+      "installerLanguages": ["pt_BR"],
+      "language": "1046"
+    }
+  }
+}

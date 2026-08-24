@@ -1,0 +1,418 @@
+{
+  "codigo_norma": "N-1997",
+  "titulo": "PROJETO DE REDES ELÉTRICAS EM SISTEMAS DE BANDEJAMENTO PARA CABOS",
+  "tipo_documento": "Procedimento",
+  "revisao": "REV. B",
+  "data_norma": "04/2019",
+  "escopo": "Esta Norma fixa as condições mínimas exigíveis para os procedimentos de projeto, instalação e inspeção de redes elétricas em sistemas de bandejamento para cabos, a serem utilizados em salas de controle, subestações, salas de painéis, galerias, instalações ao tempo, em áreas classificadas ou não. Esta Norma se aplica a todas as instalações da PETROBRAS. Esta Norma se aplica à execução dos procedimentos de projeto, instalação e inspeção de redes elétricas em sistemas de bandejamento para cabos, a partir da data de sua edição. Esta Norma contém Requisitos mandatórios.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Requisitos de Área Metálica quando o Sistema de Bandejamento for Utilizado como Condutor de Proteção",
+      "cabecalho": [
+        "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)",
+        "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço",
+        "Bandejamento em Alumínio"
+      ],
+      "linhas": [
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "60",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "130",
+          "Bandejamento em Alumínio": "130"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "100",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "260",
+          "Bandejamento em Alumínio": "130"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "200",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "450",
+          "Bandejamento em Alumínio": "130"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "400",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "650",
+          "Bandejamento em Alumínio": "260"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "600",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "970",
+          "Bandejamento em Alumínio": "260"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "1 000",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "-",
+          "Bandejamento em Alumínio": "390"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "1 200",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "-",
+          "Bandejamento em Alumínio": "650"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "1 600",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "-",
+          "Bandejamento em Alumínio": "970"
+        },
+        {
+          "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)": "2 000",
+          "Seção Transversal Mínima da Área Metálica (mm2) - Bandejamento em Aço": "-",
+          "Bandejamento em Alumínio": "1 290"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 2 - Seção Mínima de Cordoalhas para Sistemas de Bandejamento utilizados como Condutores de Proteção",
+      "cabecalho": [
+        "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)",
+        "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre"
+      ],
+      "linhas": [
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "de 15 a 300",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "25,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "400",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "35,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "500",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "35,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "600",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "50,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "800",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "70,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "1 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "70,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "1 200",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "95,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "1 600",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "120,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "2 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "150,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "2 500",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "185,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "3 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "240,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "4 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "300,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "5 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "400,0"
+        },
+        {
+          "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)": "6 000",
+          "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre": "400,0"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 3 - Comprimento Máximo de Trecho Reto para Dilatação Térmica de 25 mm",
+      "cabecalho": [
+        "Diferença de Aço Temperatura (°C)",
+        "(m) Alumínio (m)",
+        "Fibra de Vidro (m)"
+      ],
+      "linhas": [
+        {
+          "Diferença de Aço Temperatura (°C)": "14 1",
+          "(m) Alumínio (m)": "56 79",
+          "Fibra de Vidro (m)": "203"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "28 7",
+          "(m) Alumínio (m)": "8 40",
+          "Fibra de Vidro (m)": "102"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "42 5",
+          "(m) Alumínio (m)": "2 27",
+          "Fibra de Vidro (m)": "68"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "56 3",
+          "(m) Alumínio (m)": "9 20",
+          "Fibra de Vidro (m)": "51"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "70 3",
+          "(m) Alumínio (m)": "1 16",
+          "Fibra de Vidro (m)": "41"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "83 2",
+          "(m) Alumínio (m)": "6 13",
+          "Fibra de Vidro (m)": "34"
+        },
+        {
+          "Diferença de Aço Temperatura (°C)": "97 2",
+          "(m) Alumínio (m)": "2 11",
+          "Fibra de Vidro (m)": "29"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 4 - Espaçamento entre Bandejamentos de Força e de Sinal de Acordo com o Tipo de Sinal",
+      "cabecalho": [
+        "Tensão do Circuito do Cabo de Força",
+        "Espaçamento entre Bandejamentos de Força e de Sinal (mm)",
+        "coluna_3"
+      ],
+      "linhas": [
+        {
+          "Tensão do Circuito do Cabo de Força": "",
+          "Espaçamento entre Bandejamentos de Força e de Sinal (mm)": "Sinal de Baixo Nível (mV)",
+          "coluna_3": "Sinal do Tipo 4 mA a 20 mA CC"
+        },
+        {
+          "Tensão do Circuito do Cabo de Força": "Até 125 V @ 20 A",
+          "Espaçamento entre Bandejamentos de Força e de Sinal (mm)": "750 mm",
+          "coluna_3": "375 mm"
+        },
+        {
+          "Tensão do Circuito do Cabo de Força": "De 125 V a 500 V @ 200 A",
+          "Espaçamento entre Bandejamentos de Força e de Sinal (mm)": "1 500 mm",
+          "coluna_3": "750 mm"
+        },
+        {
+          "Tensão do Circuito do Cabo de Força": "Acima de 500 V",
+          "Espaçamento entre Bandejamentos de Força e de Sinal (mm)": "4 500 mm",
+          "coluna_3": "2 400 mm"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 5 - Espaçamento entre Bandejamento e Eletroduto de Acordo com o tipo de Sinal",
+      "cabecalho": [
+        "Tensão do Circuito do Cabo de Potência",
+        "Espaçamento entre Bandejamento e Eletroduto (mm)",
+        "coluna_3"
+      ],
+      "linhas": [
+        {
+          "Tensão do Circuito do Cabo de Potência": "",
+          "Espaçamento entre Bandejamento e Eletroduto (mm)": "Sinal de Baixo Nível (mV)",
+          "coluna_3": "Sinal do Tipo 4 mA a 20 mA CC"
+        },
+        {
+          "Tensão do Circuito do Cabo de Potência": "Até 125 V @ 20 A",
+          "Espaçamento entre Bandejamento e Eletroduto (mm)": "750 mm",
+          "coluna_3": "375 mm"
+        },
+        {
+          "Tensão do Circuito do Cabo de Potência": "de 125 V a 500 V @ 200 A",
+          "Espaçamento entre Bandejamento e Eletroduto (mm)": "750 mm",
+          "coluna_3": "375 mm"
+        },
+        {
+          "Tensão do Circuito do Cabo de Potência": "Acima de 500 V",
+          "Espaçamento entre Bandejamento e Eletroduto (mm)": "1 500 mm",
+          "coluna_3": "750 mm"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 6 - Dimensões da Abertura na Parede em Função da Largura da Bandeja ou do Leito, para a Instalação de Caixas de Areia (mm)",
+      "cabecalho": [
+        "Altura da Parede",
+        "Dimensão da Abertura na Parede - Largura da Bandeja ou do Leito",
+        "coluna_3",
+        "coluna_4",
+        "Dimensão D",
+        "Dimensão E"
+      ],
+      "linhas": [
+        {
+          "Altura da Parede": "",
+          "Dimensão da Abertura na Parede - Largura da Bandeja ou do Leito": "Bandeja ou Leito de 200",
+          "coluna_3": "Bandeja o Leito de 40",
+          "coluna_4": "u Bandeja ou 0 Leito de 800",
+          "Dimensão D": "",
+          "Dimensão E": ""
+        },
+        {
+          "Altura da Parede": "Externa - 254",
+          "Dimensão da Abertura na Parede - Largura da Bandeja ou do Leito": "263",
+          "coluna_3": "465",
+          "coluna_4": "865",
+          "Dimensão D": "275",
+          "Dimensão E": "188"
+        },
+        {
+          "Altura da Parede": "Interna - 152",
+          "Dimensão da Abertura na Parede - Largura da Bandeja ou do Leito": "261",
+          "coluna_3": "461",
+          "coluna_4": "861",
+          "Dimensão D": "290",
+          "Dimensão E": "197"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 7 - Dimensões da Passagem Horizontal na Parede, para a Instalação de Caixas de Areia (mm)",
+      "cabecalho": [
+        "Passagem Horizontal",
+        "Bandeja ou Leito de 200",
+        "Bandeja ou Leito de 400",
+        "Bandeja ou Leito de 800"
+      ],
+      "linhas": [
+        {
+          "Passagem Horizontal": "A",
+          "Bandeja ou Leito de 200": "245",
+          "Bandeja ou Leito de 400": "445",
+          "Bandeja ou Leito de 800": "845"
+        },
+        {
+          "Passagem Horizontal": "B",
+          "Bandeja ou Leito de 200": "240",
+          "Bandeja ou Leito de 400": "440",
+          "Bandeja ou Leito de 800": "840"
+        },
+        {
+          "Passagem Horizontal": "C",
+          "Bandeja ou Leito de 200": "120",
+          "Bandeja ou Leito de 400": "220",
+          "Bandeja ou Leito de 800": "420"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 8 - Dimensões da Viga “U” para a Instalaçao de Caixas de Areia em Parede de Alvenaria (mm)",
+      "cabecalho": [
+        "coluna_1",
+        "Dimensões da Viga “U”"
+      ],
+      "linhas": [
+        {
+          "coluna_1": "Parede Externa",
+          "Dimensões da Viga “U”": "254 x 69.6 x 9.63"
+        },
+        {
+          "coluna_1": "Parede Interna",
+          "Dimensões da Viga “U”": "152 x 51.7 x 7.98"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 9 - Exemplo de Lista de Material para a Instalação de Caixas de Areia em Parede de Alvenaria",
+      "cabecalho": [
+        "Item",
+        "Descrição do Material"
+      ],
+      "linhas": [
+        {
+          "Item": "1",
+          "Descrição do Material": "Ferro chato, em aço-carbono ASTM A 283 Gr. C, 2” x 1/8”"
+        },
+        {
+          "Item": "2",
+          "Descrição do Material": "Cantoneira “L” de abas iguais, em aço-carbono ASTM A 36, 3/4” x 1/8”"
+        },
+        {
+          "Item": "3",
+          "Descrição do Material": "Chapa em aço-carbono ASTM A 283 Gr. C, 1/8”"
+        },
+        {
+          "Item": "4",
+          "Descrição do Material": "Tubo em aço-carbono ASTM A 53 Gr. B, ponta lisa, ø 3/4”"
+        },
+        {
+          "Item": "5",
+          "Descrição do Material": "Cantoneira “L” de abas iguais, em aço-carbono ASTM A 36, 1 1/2” x 3/16”"
+        },
+        {
+          "Item": "6",
+          "Descrição do Material": "Viga “U” em aço-carbono ASTM A 283 Gr. C, 10”"
+        },
+        {
+          "Item": "7",
+          "Descrição do Material": "Cantoneira “L” de abas iguais, em aço-carbono ASTM A 36, 1/2” x 1/8”"
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "Sistemas de bandejamento em fibra de vidro não devem ser utilizados em locais sujeitos à temperatura ambiente acima daquela para a qual os sistemas de bandejamento foram certificados e marcados.",
+    "Para as instalações offshore, bandejamento em fibra de vidro não deve ser utilizado em locais confinados (áreas internas). Bandejamento em fibra de vidro também não deve ser permitido em áreas externas que, de acordo com o estudo de propagação de incêndio, possam atingir temperaturas superiores à temperatura máxima de utilização definida pelo fabricante.",
+    "É permitida a utilização de sistemas de bandejamento metálicos como condutores de proteção desde que as eletrocalhas ou os leitos atendam à área da seção transversal disponível mínima requerida conforme Tabela 1 desta Norma. Neste caso, as cordoalhas de aterramento de interligação entre trechos devem ser dimensionadas conforme requisitos da ABNT NBR 5410 e instaladas em ambas as laterais nas eletrocalhas ou leitos, conforme ilustrado nas Figuras de 6 a 9.",
+    "Seção Transversal Mínima da Área Metálica (mm2)",
+    "Máxima Corrente Nominal do Fusível, Ajuste de “Trip” do Disjuntor, Ajuste de “Trip” do Relé de Proteção para Falta à Terra em Quaisquer Circuitos no Sistema de Bandejamento (A)",
+    "Se a área da seção transversal disponível da eletrocalha ou leito não for compatível com o ajuste da corrente de atuação do mecanismo de proteção, conforme Tabela 1 desta Norma, um condutor de aterramento em separado deve ser instalado, conforme indicado no item 8.2 desta Norma.",
+    "As cordoalhas de aterramento são aplicáveis quando o sistema de bandejamento for utilizado como condutor de aterramento. O dimensionamento da seção mínima das cordoalhas de aterramento deve ser de acordo com a Tabela 2 desta Norma.",
+    "Tabela 2 - Seção Mínima de Cordoalhas para Sistemas de Bandejamento utilizados como Condutores de Proteção",
+    "Seção Transversal do Condutor de Aterramento (mm2) Condutor de Cobre",
+    "Valor Máximo para o Ajuste do Dispositivo de Proteção de Sobre-Corrente à Montante do Circuito (A)",
+    "A seção nominal mínima do condutor de aterramento deve estar de acordo com a ABNT NBR 5410 e ABNT NBR 14039.",
+    "O aterramento deve ser efetuado com cabos de cobre nu com seção nominal de, no mínimo, 25 mm2.",
+    "Para o dimensionamento das cargas uniformemente distribuídas devem ser consideradas a carga dos cabos instalados e a carga dos cabos futuros. Para o dimensionamento dos cabos futuros, considerar que a seção reserva definida por projeto está totalmente preenchida por cabos.",
+    "Os materiais a serem utilizados na proteção contra fogo deve atender a ASTM E1725 com a curva de elevação de temperatura da ASTM E1529 durante 30 minutos para fogo de hidrocarboneto.",
+    "O comprimento do trecho reto é definido em função da diferença de temperatura ambiente entre os dias mais quentes e os dias mais frios do ano, para a região em que se localiza o sistema de bandejamento, de acordo com a Tabela 3 e conforme NEMA VE2.",
+    "A seção ocupada pelo total de cabos instalados em uma eletrocalha ou leito não deve ultrapassar a seção transversal útil total interna da eletrocalha ou leito.",
+    "São considerados sinais de baixo nível sinais de termopares, saídas de sinais de pontes do tipo “strain gauge” e sinais do tipo pulsos digitais, tais como sinais de rede de dados, sinais de telefonia e sinais de CFTV. São considerados sinais de médio nível sinais analógicos do tipo 4 mA a 20 mA ou do tipo 10 V a 50 V, sinais de instrumentos eletrônicos em corrente contínua, dispositivos de medição de temperatura por resistência (RTD), circuitos de sinalização ou com chaveamento em 28 VCC ou meno"
+  ],
+  "formulas": [],
+  "valores_minimos": [
+    "1,0 kV",
+    "36,2 kV",
+    "600 A",
+    "2 000 A",
+    "1 000 V",
+    "125 V",
+    "20 A",
+    "500 V",
+    "200 A",
+    "10 V",
+    "50 V",
+    "120 V"
+  ],
+  "referencias_normativas": [
+    "N-0057",
+    "N-2918",
+    "N-1882",
+    "NBR 5410",
+    "NBR 14039",
+    "NBR 15708-1",
+    "NBR 15708-4",
+    "NBR IEC 60079-14",
+    "NBR IEC 60079-17",
+    "NBR IEC 61537",
+    "NBR 6323",
+    "NBR 13231",
+    "NBR IEC 60079-10",
+    "IEC 60079-14",
+    "IEC 60079-17",
+    "IEC 61537",
+    "IEC 61892-6",
+    "IEC 60079-10",
+    "API RP 552",
+    "API RP 2218",
+    "API 2218",
+    "API 552",
+    "UL 1709",
+    "NEMA VE 1",
+    "NEMA VE 2",
+    "NEMA VE1",
+    "NEMA VE2"
+  ]
+}

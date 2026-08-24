@@ -1,0 +1,1240 @@
+{
+  "codigo_norma": "N-2919",
+  "titulo": "Motores Elétricos Trifásicos de Indução ou Síncronos",
+  "tipo_documento": "Especificação",
+  "revisao": "REV. A",
+  "data_norma": "04/2015",
+  "escopo": "Esta Norma fixa os requisitos mínimos necessários para a aquisição de motor elétrico trifásico do tipo de indução ou síncrono para utilização nas instalações da PETROBRAS. Esta Norma apresenta em seus Anexos os formulários padronizados para as Folhas de Dados de motores elétricos trifásicos dos tipos de indução ou síncronos. Esta Norma se aplica a projetos iniciados a partir da data de sua publicação. Esta Norma contém somente Requisitos Técnicos.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Critérios de Seleção de Tipo de Proteção \"Ex\" e de EPL de Motor com Partida Direta na Rede para Instalação em Áreas Classificadas de Gases Inflamáveis",
+      "cabecalho": [
+        "Tensão nominal do motor (U) N (kV)",
+        "Classificação da área de gases inflamáveis",
+        "coluna_3",
+        "coluna_4",
+        "coluna_5"
+      ],
+      "linhas": [
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "Zona 1",
+          "coluna_3": "",
+          "coluna_4": "Zona 2",
+          "coluna_5": ""
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "Tipo de proteção Ex",
+          "coluna_3": "EPL",
+          "coluna_4": "Tipo de proteção",
+          "coluna_5": "EPL"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≤ 1,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"e\" ou Ex \"de\" (Ver 7.2.3)",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"e\"",
+          "coluna_5": "Gb"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "",
+          "coluna_3": "",
+          "coluna_4": "Ex \"nA\"",
+          "coluna_5": "Gc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "1,0 < U < 11,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"e\" ou Ex \"pxb\"",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"e\"",
+          "coluna_5": "Gb"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "",
+          "coluna_3": "",
+          "coluna_4": "Ex \"pzc\"",
+          "coluna_5": "Gc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "",
+          "coluna_3": "",
+          "coluna_4": "Ex \"nA\" (Ver 7.2.4)",
+          "coluna_5": ""
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≥ 11,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"pxb\"",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"pzc\"",
+          "coluna_5": "Gc"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 2 - Critérios de Seleção de Tipo de Proteção \"Ex\" e de EPL de Motor para Instalação em Áreas Classificadas de Poeiras Combustíveis",
+      "cabecalho": [
+        "Tensão nominal do motor (U) N (kV)",
+        "Classificação da área de poeiras combustíveis",
+        "coluna_3",
+        "coluna_4",
+        "coluna_5"
+      ],
+      "linhas": [
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de poeiras combustíveis": "Zona 21",
+          "coluna_3": "",
+          "coluna_4": "Zona 22",
+          "coluna_5": ""
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de poeiras combustíveis": "Tipo de proteção Ex",
+          "coluna_3": "EPL",
+          "coluna_4": "Tipo de proteção Ex",
+          "coluna_5": "EPL"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≤ 1,0 N",
+          "Classificação da área de poeiras combustíveis": "Ex \"tb\"",
+          "coluna_3": "Db",
+          "coluna_4": "Ex \"tc\"",
+          "coluna_5": "Dc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "1,0 < U < 11,0 N",
+          "Classificação da área de poeiras combustíveis": "Ex \"pxb\" ou Ex \"tb\"",
+          "coluna_3": "Db",
+          "coluna_4": "Ex \"pzc\"",
+          "coluna_5": "Dc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de poeiras combustíveis": "",
+          "coluna_3": "",
+          "coluna_4": "Ex \"tc\" (Ver 7.2.5)",
+          "coluna_5": "Dc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≥ 11,0 N",
+          "Classificação da área de poeiras combustíveis": "Ex \"pxb\"",
+          "coluna_3": "Db",
+          "coluna_4": "Ex \"pzc\"",
+          "coluna_5": "Dc"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 3 - Critérios de Seleção de Tipo de Proteção \"Ex\" e de EPL de Motor com Controle por Conversor de Frequência para Instalação em Áreas Classificadas de Gases Inflamáveis",
+      "cabecalho": [
+        "Tensão nominal do motor (U) N (kV)",
+        "Classificação da área de gases inflamáveis",
+        "coluna_3",
+        "coluna_4",
+        "coluna_5"
+      ],
+      "linhas": [
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "Zona 1",
+          "coluna_3": "",
+          "coluna_4": "Zona 2",
+          "coluna_5": ""
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "",
+          "Classificação da área de gases inflamáveis": "Tipo de proteção Ex",
+          "coluna_3": "EPL",
+          "coluna_4": "Tipo de proteção Ex",
+          "coluna_5": "EPL"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≤ 1,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"e\" ou Ex \"de\"",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"nA\"",
+          "coluna_5": "Gc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "1,0 < U < 11,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"pxb\"",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"nA\" ou Ex \"pzc\"",
+          "coluna_5": "Gc"
+        },
+        {
+          "Tensão nominal do motor (U) N (kV)": "U ≥ 11,0 N",
+          "Classificação da área de gases inflamáveis": "Ex \"pxb\"",
+          "coluna_3": "Gb",
+          "coluna_4": "Ex \"pzc\"",
+          "coluna_5": "Gc"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 4 - Lista de Testes Aplicáveis a Motores do Tipo de Indução e Síncrono",
+      "cabecalho": [
+        "Descrição do teste",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição do teste": "Verificação da documentação técnica certificada do fabricante (ver NOTA 1)",
+          "Método de teste / Critério de aceitação": "PETROBRAS N-2919"
+        },
+        {
+          "Descrição do teste": "Verificação da calibração e dos certificados de calibração dos instrumentos utilizados nos testes (ver NOTA 1)",
+          "Método de teste / Critério de aceitação": "Conforme organismo de calibração (RBC ou equivalente no exterior)"
+        },
+        {
+          "Descrição do teste": "Inspeção visual e verificação dos dados de placa (ver NOTA 1)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Verificação do sistema de pintura de proteção (cor, espessura, aderência e demais requisitos indicados na ISO 12944-6)",
+          "Método de teste / Critério de aceitação": "ISO 12944-6, ISO 4624 e ISO 4628 - Partes 2, 3, 4, 5"
+        },
+        {
+          "Descrição do teste": "Inspeção dimensional",
+          "Método de teste / Critério de aceitação": "Conforme documentação certificada do fabricante"
+        },
+        {
+          "Descrição do teste": "Verificação do grau de proteção dos invólucros (Código IP)",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60034-5"
+        },
+        {
+          "Descrição do teste": "Verificação do centro magnético no caso de motores mancais hidrodinâmicos sem escora (\"thrust bearing\")",
+          "Método de teste / Critério de aceitação": "A ser definido pelo fabricante do motor"
+        },
+        {
+          "Descrição do teste": "Verificação do processo de isolamento das bobinas do estator",
+          "Método de teste / Critério de aceitação": "PETROBRAS N-2919"
+        },
+        {
+          "Descrição do teste": "Medição da resistência de isolamento e índices de polarização",
+          "Método de teste / Critério de aceitação": "IEC 60034-1 e IEEE 43"
+        },
+        {
+          "Descrição do teste": "Medição de tangente de perdas (tan  e ∆ tan ) do isolamento",
+          "Método de teste / Critério de aceitação": "IEC TR 60894"
+        },
+        {
+          "Descrição do teste": "Medição das resistências ôhmica dos enrolamentos (a frio)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Teste de detecção de pontos quentes no pacote magnético do estator (\"Stator core test\")",
+          "Método de teste / Critério de aceitação": "API RP 541"
+        },
+        {
+          "Descrição do teste": "Medição do entreferro e da excentricidade para motores acima de 375 kW",
+          "Método de teste / Critério de aceitação": "API RP 541"
+        },
+        {
+          "Descrição do teste": "Medição de descargas parciais (PD) para motores com tensão nominal U ≥ 6,0 kV N",
+          "Método de teste / Critério de aceitação": "IEC TS 60034-27, IEC TS 60034-27-2 e IEC 60270"
+        },
+        {
+          "Descrição do teste": "Testes em vazio",
+          "Método de teste / Critério de aceitação": "IEC 60034-2-1"
+        },
+        {
+          "Descrição do teste": "Medição da corrente e perdas em vazio com tensão e frequência nominais",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 4 - Lista de Testes Aplicáveis a Motores do Tipo de Indução e Síncrono (Continuação)",
+      "cabecalho": [
+        "Descrição do teste",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição do teste": "Medição do rendimento",
+          "Método de teste / Critério de aceitação": "IEC 60034-2-1 e PETROBRAS N-2919"
+        },
+        {
+          "Descrição do teste": "Medição do nível ruído",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60034-9"
+        },
+        {
+          "Descrição do teste": "Medição da corrente e torque com rotor bloqueado com tensão e frequência nominais",
+          "Método de teste / Critério de aceitação": "PETROBRAS N-2919"
+        },
+        {
+          "Descrição do teste": "Medição de tensão e corrente no eixo para motores com mancais isolados",
+          "Método de teste / Critério de aceitação": "IEEE STD 112"
+        },
+        {
+          "Descrição do teste": "Medição de tensão no eixo para motores com tensão acima de 1,0 kV alimentados por conversor de frequência",
+          "Método de teste / Critério de aceitação": "IEC TS 60034-17"
+        },
+        {
+          "Descrição do teste": "Medição de vibração mecânica",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60034-14"
+        },
+        {
+          "Descrição do teste": "Teste de avaliação de enrolamentos selados (Spray-test)",
+          "Método de teste / Critério de aceitação": "NEMA MG-1"
+        },
+        {
+          "Descrição do teste": "Teste de suportabilidade de tensão (tensão aplicada à frequência industrial - Hi-Pot) (ver NOTA 2)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Teste de suportabilidade de impulso de tensão para isolação entre espiras de bobinas pré-formadas (\"Turn insulation test\")",
+          "Método de teste / Critério de aceitação": "IEC 60034-15"
+        },
+        {
+          "Descrição do teste": "Teste de efeito corona em câmara escura (\"Black-out test\")",
+          "Método de teste / Critério de aceitação": "IEEE 1434"
+        },
+        {
+          "Descrição do teste": "Teste de isolação dos mancais (se aplicável)",
+          "Método de teste / Critério de aceitação": "A ser definido pelo fabricante do mancal"
+        },
+        {
+          "Descrição do teste": "Sentido de rotação e marcação dos terminais",
+          "Método de teste / Critério de aceitação": "IEC 60034-8"
+        },
+        {
+          "Descrição do teste": "Sobrevelocidade",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Inspeção nos detectores de temperatura e resistências de aquecimento",
+          "Método de teste / Critério de aceitação": "A ser definido pelo fabricante do motor"
+        },
+        {
+          "Descrição do teste": "Verificação do espaço interno e dos componentes da caixa de terminais (ver NOTA 1)",
+          "Método de teste / Critério de aceitação": "A ser definido pelo fabricante do motor"
+        },
+        {
+          "Descrição do teste": "Teste de elevação de temperatura do motor",
+          "Método de teste / Critério de aceitação": "IEC 60034-1 / IEC 60034-29. Para instalações offshore são aplicáveis os requisitos da ABNT NBR IEC 61892-3"
+        },
+        {
+          "Descrição do teste": "Teste de elevação de temperatura dos mancais hidrodinâmicos",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Teste hidrostático para trocadores de calor ar/água",
+          "Método de teste / Critério de aceitação": "PETROBRAS N-2919"
+        },
+        {
+          "Descrição do teste": "Teste de excesso de corrente ocasional para motores com potência nominal até 375 kW",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Teste de excesso de torque momentâneo",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição do teste": "Descargas parciais em motores alimentados por conversores de frequência – Sistema de isolamento tipo I",
+          "Método de teste / Critério de aceitação": "IEC 60034-18-41"
+        },
+        {
+          "Descrição do teste": "Descargas parciais em motores alimentados por conversores de frequência – Sistema de isolamento tipo II (acima de 700 V)",
+          "Método de teste / Critério de aceitação": "IEC TS 60034-18-42"
+        },
+        {
+          "Descrição do teste": "Verificação dos relatórios e dos certificados de conformidade para motores \"Ex\"",
+          "Método de teste / Critério de aceitação": "Série ABNT NBR IEC 60079 e legislação vigente"
+        },
+        {
+          "Descrição do teste": "Teste de elevação de temperatura à plena carga para verificação da classe de temperatura para atmosferas explosivas",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-0"
+        },
+        {
+          "Descrição do teste": "Teste de máxima sobrepressão para motores Ex \"pzc\" ou Ex \"pxb\"",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-2"
+        },
+        {
+          "Descrição do teste": "Teste de mínima sobrepressão para motores Ex \"pzc\" ou Ex \"pxb\"",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-2"
+        },
+        {
+          "Descrição do teste": "Teste de vazamento para motores Ex \"pzc\" ou Ex \"pxb\"",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-2"
+        },
+        {
+          "Descrição do teste": "Teste de purga para motores Ex \"pzc\" ou Ex \"pxb\"",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-2"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 4 - Lista de Testes Aplicáveis a Motores do Tipo de Indução e Síncrono (Continuação)",
+      "cabecalho": [
+        "Descrição do teste",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição do teste": "Verificação da limitação de pressão interna para motores Ex \"pzc\" ou Ex \"pxb\"",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-2"
+        },
+        {
+          "Descrição do teste": "Testes adicionais indicados na ABNT NBR IEC 60079-7 para motores Ex \"e\" com tensão nominal acima de 1,0 kV",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-7"
+        },
+        {
+          "Descrição do teste": "Testes adicionais indicados na ABNT NBR IEC 60079-15 para motores Ex \"nA\" com tensão nominal acima de 1,0 kV",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-15"
+        },
+        {
+          "Descrição do teste": "Verificação dos relatórios para o conjunto motor / conversor de frequência (se aplicável)",
+          "Método de teste / Critério de aceitação": "Série ABNT NBR IEC 60079 e legislação vigente"
+        },
+        {
+          "Descrição do teste": "NOTA 1 Para todos os testes testemunhados. NOTA 2 Quando o teste de elevação de temperatura for realizado, o teste de tensão suportável deve ser realizado imediatamente após o mesmo. O teste de tensão suportável à plena tensão, na aceitação, não deve ser repetido em nenhum enrolamento. Testes adicionais, quando necessários, devem seguir os requisitos da IEC 60034-1. Reparos nas terminações dos enrolamentos, no caso de até duas falhas durante os testes são aceitáveis. No caso de mais de duas falhas nas terminações dos enrolamentos ou falha na parte da bobina a ser inserida nas ranhuras, a bobina deve ser rejeitada e substituída por uma nova bobina.",
+          "Método de teste / Critério de aceitação": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 5 - Lista de Testes Aplicáveis Somente a Motores do Tipo de Indução",
+      "cabecalho": [
+        "Descrição dos testes",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição dos testes": "Levantamento dos valores de corrente e torque de rotor bloqueado (locked rotor)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Levantamento das curvas de torque e corrente versus escorregamento, incluindo a verificação dos valores de torque mínimo (pull-up torque) e torque máximo (breakdown torque)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Medição do fator de potência com tensão e frequência nominais para cargas de 100%, 75%, 50% e 25% da potência nominal",
+          "Método de teste / Critério de aceitação": "IEEE 112"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 6 - Lista de Testes Aplicáveis Somente a Motores do Tipo Síncrono",
+      "cabecalho": [
+        "Descrição dos testes",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição dos testes": "Corrente de excitação em vazio com tensão nominal através do teste de circuito aberto",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Perdas em vazio com fator de potência unitário",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Torque máximo em sincronismo (Pull-out torque of synchronous motor)",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Medição da corrente de excitação com tensão, corrente e fator de potência nominais",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Medição de desbalanço de tensão e distorções na forma de onda",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Teste de polaridade para os polos do campo",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Verificação das bobinas curto-circuitadas do enrolamento de excitação",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Testes com o sistema de excitação",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Testes nos alarmes, medição, controles, sinalização, chaves e relés do sistema de excitação",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Testes completos de funcionalidade para aceitação do motor",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Medição das características de tensão de circuito aberto (curva em vazio - curva \"V\")",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Medição das características de tensão de curto-circuito (curva de curto-circuito)",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "Rotação versus correntes de armadura e torques durante a partida",
+          "Método de teste / Critério de aceitação": "IEC 60034-4"
+        },
+        {
+          "Descrição dos testes": "NOTA São adicionalmente aplicáveis a motores síncronos demais testes indicados na IEC 60034-4.",
+          "Método de teste / Critério de aceitação": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 7 - Lista de Testes para o Conjunto Motor e Máquina Acionada (String-test)",
+      "cabecalho": [
+        "Descrição dos testes",
+        "Método de teste / Critério de aceitação"
+      ],
+      "linhas": [
+        {
+          "Descrição dos testes": "Verificação da documentação técnica",
+          "Método de teste / Critério de aceitação": "PETROBRAS N-2919"
+        },
+        {
+          "Descrição dos testes": "Certificado de calibração de instrumentos de medição utilizados nos testes",
+          "Método de teste / Critério de aceitação": "Conforme organismo de calibração (RBC ou equivalente)"
+        },
+        {
+          "Descrição dos testes": "Vibração e balanceamento, incluindo operação do sistema de lubrificação",
+          "Método de teste / Critério de aceitação": "A ser definido pelo responsável pelo fornecimento do conjunto"
+        },
+        {
+          "Descrição dos testes": "Teste de elevação de temperatura à plena carga",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Medição do fator de potência",
+          "Método de teste / Critério de aceitação": "IEC 60034-1. Para instalações offshore são aplicáveis os requisitos da ABNT NBR IEC 61892-3"
+        },
+        {
+          "Descrição dos testes": "Medição do nível de ruído",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60034-9 e PETROBRAS N-2919"
+        },
+        {
+          "Descrição dos testes": "Teste de elevação de temperatura para mancais hidrodinâmicos",
+          "Método de teste / Critério de aceitação": "IEC 60034-1"
+        },
+        {
+          "Descrição dos testes": "Teste de elevação de temperatura à plena carga para verificação da classe de temperatura para atmosferas explosivas",
+          "Método de teste / Critério de aceitação": "ABNT NBR IEC 60079-0"
+        },
+        {
+          "Descrição dos testes": "Medição de tensão no eixo",
+          "Método de teste / Critério de aceitação": "IEC TS 60034-17"
+        },
+        {
+          "Descrição dos testes": "Teste de 4 horas de operação contínua a plena carga",
+          "Método de teste / Critério de aceitação": "IEC 60034-1. Para instalações offshore são aplicáveis os requisitos da ABNT NBR IEC 61892-3"
+        },
+        {
+          "Descrição dos testes": "Medições a plena carga e tensão e frequência nominais",
+          "Método de teste / Critério de aceitação": "A ser definido pelo responsável do conjunto"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 8 - Documentação Técnica a ser Apresentada Juntamente com a Proposta",
+      "cabecalho": [
+        "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante",
+        "BT",
+        "MT",
+        "AT",
+        "MS"
+      ],
+      "linhas": [
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1 Desenhos dimensionais preliminares, informações técnicas sobre mancais, informações técnicas sobre sistema de pressurização (quando aplicável) e informação de massas, tanto do motor como de eventuais acessórios e conjuntos necessários ao seu funcionamento, tais como: instrumentos, painel de instrumentos e console de lubrificação.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.2 Catálogos contendo informações e características técnicas do motor e de seus sistemas auxiliares",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.3 Relação de normas técnicas aplicáveis aos respectivos fornecimentos, que complementem a relação de normas indicadas na Seção 2 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.4 Folha de Dados, de acordo com o formulário padronizado nesta Norma, devidamente preenchida e autenticada, com nome e assinatura do responsável técnico pelo preenchimento (fabricante do motor), de acordo com a Seção 4 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.5 Relação de testes de rotina, de tipo e especiais, a serem aplicados ao motor ou aos seus sistemas auxiliares, de acordo com o requerido na Seção 4 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.6 Especificação completa dos sistemas de pintura a serem aplicados no motor. A especificação e os respectivos relatórios dos resultados dos testes, de acordo com os requisitos das normas da Série ISO 12944, devem ser apresentados pelo fabricante juntamente com a proposta, para aprovação da PETROBRAS.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.7 Certificados de conformidade para instalação em atmosferas explosivas, tanto para o motor como seus acessórios, instrumentos e sistemas auxiliares, indicando os tipos de proteção \"Ex\" e EPL, de acordo com 7.1 e 10.3.7 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.8 Curva de \"torque permissível versus frequência de alimentação\" que o motor suporta levando-se em conta os efeitos de aquecimento causado pelas variações de frequência, no caso de motor acionado por conversor de frequência, de acordo com 5.4.3 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.9 Informação sobre o \"tempo de aceleração\" ou \"tempo de partida\", com as respectivas curvas de \"torque do motor versus rotação\" e \"torque resistente da carga versus rotação\", desenhadas no mesmo gráfico, para motor com potência nominal acima de 55 kW. Devem ser calculados os tempos de aceleração nas condições de motor alimentado com \"tensão nominal\" e com \"tensão mínima disponível para partida\" indicado na Folha de Dados.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.10 Desenho preliminar contendo as dimensões e informações sobre as características básicas do conjunto do trocador de calor tubular do tipo \"ar/água\", quando for especificado na Folha de Dados este método de resfriamento.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.11 Lista de peças sobressalentes requeridas para um período de operação, caso tenha sido solicitado na RM. Esta lista deve indicar as codificações adotadas pelo fabricante do motor (\"Part-Number\") bem como seus respectivos preços unitários.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.12 Lista de sobressalentes para comissionamento, caso tenha sido solicitado na RM. Esta lista deve indicar as codificações adotadas pelo fabricante do motor (\"Part-Number\").",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.13 Lista de desvios, relacionando os desvios entre a proposta e os requisitos técnicos indicados na documentação de compra, incluindo Folha de Dados, Especificação Técnica e RM.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 9 - Documentação Adicional a ser Fornecida Juntamente com a Proposta para Motores Síncronos, Excitatriz \"Brushless\" e Sistemas Digitais de Excitação",
+      "cabecalho": [
+        "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante",
+        "BT",
+        "MT",
+        "AT",
+        "MS"
+      ],
+      "linhas": [
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.1 Lista de referência contendo a relação de outros motores síncronos e sistemas de excitação similares já fornecidos, operando satisfatoriamente, em aplicações equivalentes ao tipo de máquina acionada.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.2 Relação de fornecimentos de sistemas de excitação utilizando o tipo de controlador digital proposto, em aplicações de porte semelhante.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.3 Descrição geral do sistema de aplicação de campo, dos circuitos de força, controle e automação e dos dispositivos de sincronização.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.4 Diagrama de blocos geral e função de transferência típicas do sistema de excitação, indicando as constantes de tempo e ganhos normalmente utilizados para aplicações similares de motores síncronos para a indústria do petróleo.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.5 Catálogos contendo características técnicas gerais do sistema digital de excitação, evidenciando o atendimento dos requisitos técnicos indicados nesta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "1.1 - Descrição dos documentos e/ou informações a serem fornecidos pelo fabricante": "1.1.6 Descrição geral do sistema de excitação a ser fornecido, mostrando a arquitetura dos módulos de eletrônica de potência e módulos de proteção, controle e comunicação, evidenciando o atendimento dos requisitos, arquitetura e redundâncias requeridos na Folha de Dados.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 10 - Documentação a ser Fornecida após a Colocação do PC",
+      "cabecalho": [
+        "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante",
+        "BT",
+        "MT",
+        "AT",
+        "MS"
+      ],
+      "linhas": [
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.1 Desenhos dimensionais do motor, vistas e locações, incluindo, no mínimo, as informações relacionadas a seguir, quando aplicável:",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "a) Dimensões, posição e características técnicas de todas as conexões elétricas, incluindo eletrodutos e dutos",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "b) Posições de conexões para instrumentos",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "c) Dimensões e localização das aberturas para chumbadores de fixação, bem como, a espessura das seções por onde passam os chumbadores",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "d) Massa do equipamento completo (motor, trocador de calor, caixas de terminais de força e equipamentos auxiliares), diagramas de carga, massa da maior peça, centro de gravidade e indicação das partes componentes do motor",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "e) Esforços transmitidos à base",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "f) Dimensões externas bem como os espaços vertical e horizontal necessários para os trabalhos de desmontagem e a posição aproximada dos olhais ou pontos de içamento",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "g) Altura da linha de centro do eixo",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "h) Dimensões da ponta de eixo e tolerâncias para o acoplamento",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "i) Sentido de rotação, olhando o motor pelo lado acoplado (Drive-End)",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "j) Posição de caixas e acessórios",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "k) Indicação da posição dos instrumentos",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "l) Posição dos terminais de aterramento",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "m) Vistas, cortes e detalhes dos mancais hidrodinâmicos (quando aplicável), indicando os intervalos da folga axial mínima e das folgas diametrais, nominal e máxima",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.2 Lista de materiais, partes, peças, acessórios, dispositivos e componentes integrantes do motor e de seus sistemas auxiliares.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.3 Desenhos eletromecânicos e Folhas de Dados de acessórios ou sistemas auxiliares do motor principal, tais como:",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "a) Instrumentos;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "b) Sensores e transmissores;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "c) Painel de instrumentos e de controle;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "d) Sistema de óleo de lubrificação ou macaco hidráulico (\"jack-oil pump system\");",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "e) Conjunto do trocador de calor para motores com resfriamento do tipo ar/ar ou ar/água;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "f) Sistema de pressurização, para motores com tipos de proteção Ex \"pzc\" ou Ex \"pxb\"",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "g) Dimensões, posição e características técnicas de todas as conexões mecânicas, incluindo tubulações de sistemas de água de resfriamento, de pressurização de ar e de óleo de lubrificação forçada. Devem ser indicadas as normas técnicas aplicáveis para a especificação dos flanges;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "h) Sistema de monitoração de Descargas Parciais (PD), caso requerido;",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "i) Listas de materiais indicando, para cada item, o fabricante, modelo, número de catálogo e suas características técnicas.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.4 Diagramas de interligação de força e controle do motor, dos instrumentos, dos sensores, acessórios e sistemas auxiliares. Os diagramas de interligação devem detalhar os circuitos de força, controle e automação sob escopo de responsabilidade do fabricante do motor e de seus sistemas auxiliares.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 10 - Documentação a ser Fornecida após a Colocação do PC (Continuação)",
+      "cabecalho": [
+        "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante",
+        "BT",
+        "MT",
+        "AT",
+        "MS"
+      ],
+      "linhas": [
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.5 Desenhos dimensionais, folha de informações e curvas de saturação dos transformadores de corrente, quando aplicável.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.6 Desenhos de arranjo interno e de detalhes das caixas de terminais de força e de controle, com as cotas indicativas da posição dos pontos de conexão das entradas dos eletrodutos ou prensa-cabos.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.7 Desenhos das placas de dados principais, de identificação complementar e de advertência de segurança, contendo as informações indicadas na Seção 6.8 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.8 Atualização da Folha de Dados, de acordo com os formulários padronizados nos Anexos desta Norma, com todos os campos devidamente preenchidos, de acordo com a Seção 4 (Requisitos Gerais do Motor) desta Norma e determinações do parecer técnico.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.9 Curvas de \"torque versus rotação\", \"corrente versus rotação\" e limite de nível térmico para tensão nominal e tensão mínima, especificadas na Folha de Dados, para motores de qualquer potência nominal (ver NOTA 1).",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.10 Curvas de \"torque versus rotação\" da máquina acionada referente à condição operacional de processo prevista para a partida da máquina (por exemplo, válvula de descarga aberta ou fechada).",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.11 Curvas de \"corrente versus rotação\" para tensão nominal e tensão mínima, especificadas na Folha de Dados, para motores de potência nominal superior a 55 kW.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.12 Curvas de limite térmico do estator e do rotor, em função de múltiplos da corrente nominal do motor, de acordo com 6.13.4 desta Norma.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.13 Curva de \"torque suportado pelo motor versus frequência de alimentação do motor\", levando-se em consideração o limite térmico para motor acionado por conversor de frequência (IEC TS 60034-25).",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.14 Vazões e pressões de ar requeridas pelos sistemas de purga e pressurização (motor Ex \"pzc\" ou Ex \"pxb\"), bem como os tempos envolvidos.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.15 PIT, indicando todos os testes a serem realizados ou evidenciados por meio de relatório de protótipos. Este PIT deve conter, no mínimo, os testes de rotina, de tipo, especiais e \"string-tests\", de acordo com o requerido na Folha de Dados, na RM e em outros documentos do processo de compra do motor, sistemas auxiliares e da máquina acionada.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.16 Informações completas e necessárias, que sejam suficientes para possibilitar a realização de serviços de reparo e de reenrolamento do estator e do rotor. Devem incluir desenhos dimensionais e de cortes das bobinas e fios, quantidade de bobinas, número de espiras por bobina, dados de isolamento e de espessura entre espiras, isolamento da bobina e massa total de cobre.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.17 Para motores com tensão nominal acima de 1,0 kV, devem ser informados os valores dos seguintes parâmetros elétricos e mecânicos: a) Torque de rotor bloqueado (\"locked-rotor\"), torque mínimo (\"pull-up\" torque) e torque máximo (\"breakdown\" torque); b) Momento de inércia do rotor; c) Momento de inércia da máquina acionada (relativo à rotação do rotor e incluindo redutor, acoplamento, máquina acionada e todos os outros equipamentos conectados, menos o motor); d) Constantes de tempo do rotor; e) Fator de potência na condição de rotor bloqueado e nominal.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "2.18 Para motores com tensão nominal acima de 1,0 kV devem ser informados os parâmetros do modelo equivalente do motor, considerando a potência e a tensão nominal como valores base. Devem ser informados os seguintes parâmetros, para as condições de escorregamento nominal e unitário (ver NOTA 2): a) Resistência do estator (r); 1 b) Reatância do estator (X); 1 c) Resistência do rotor, relativa ao estator (r); 2 d) Reatância do rotor, relativa ao estator (X) 2 e) Resistência de magnetização (r) (perdas no ferro); c f) Reatância de magnetização (X). m",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        },
+        {
+          "2 - Descrição dos documentos e/ou informações a serem apresentados pelo fornecedor ou fabricante": "NOTA 1 Para motores com tensão nominal acima de 1,0 kV, os valores a serem apresentados para as variáveis de torque, corrente e limites de nível térmico devem estar em forma de gráfico e também de tabela, contendo no mínimo 30 pontos (30 pares de dados). Os dados indicados nestas tabelas devem possibilitar a sua aplicação, por parte do usuário ou projetista, em estudos eletromecânicos e em simulações de sistemas elétricos. NOTA 2 A resistência suplementar deve ser considerada relativa aos efeitos do atrito, ruído, ventilação e perdas suplementares.",
+          "BT": "",
+          "MT": "",
+          "AT": "",
+          "MS": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 11 - Documentação Adicional a ser Fornecida após a Colocação do PC para Motores Síncronos, Excitatriz Brushless e Sistemas Digitais de Excitação",
+      "cabecalho": [
+        "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante",
+        "AT",
+        "MT",
+        "BT",
+        "MS"
+      ],
+      "linhas": [
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.1 Diagramas de blocos e função de transferência do sistema de excitação do motor, incluindo valores de ganhos, constantes e pontos de ajuste (set-points) do sistema. Devem ser fornecidas todas as informações necessárias para permitir o modelamento do sistema de excitação em programas de simulação de comportamento dinâmico do sistema de potência, proteção, controle e automação, tanto em sistemas off-line como em sistemas digitais de simulação em tempo real.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.2 Manuais descritivos do sistema digital de excitação, evidenciando o atendimento dos requisitos técnicos indicados nesta Norma.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.3 Descrição específica do sistema a ser fornecido, mostrando a arquitetura dos módulos de eletrônica de potência e módulos de proteção, controle e comunicação, evidenciando o atendimento dos requisitos, arquitetura e redundâncias requeridos na Folha de Dados.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.4 Desenhos eletromecânicos do painel de excitação, incluindo desenhos dimensionais, vista frontal (porta aberta e porta fechada), dimensões da base de fixação, área requerida no piso para a passagem de cabos de força, controle e comunicação de dados.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.5 Diagramas unifilar, trifilar, funcionais e de interligação do sistema digital de excitação, indicando todos os componentes internos do sistema (circuitos de força, de controle, de comando, de proteção e de alarmes). Devem ser indicados também os pontos de interface com sistemas externos, tanto para circuitos discretos como para circuitos de comunicação de dados.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.6 Lista de componentes do sistema digital de excitação, incluindo lista de materiais com identificação de modelo, fabricante e \"Part-Number\" dos módulos de eletrônica de potência, controle, proteção e comunicação.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.7 Lista de softwares necessários para as funções de configuração, parametrização, monitoração e controle do sistema digital, a serem fornecidos pelo fabricante do sistema.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.8 Lista de pontos de ajuste, parâmetros, constantes, ganhos, set-points e demais dados de configuração, programação e parametrização do sistema digital de excitação e da função de transferência do sistema.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.9 Lista de peças sobressalentes para comissionamento e para operação, recomendados para os módulos de eletrônica de potência e módulos eletrônicos para os sistemas digitais de controle, monitoração, proteção e comunicação serial.",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.10 Especificações técnicas, diagrama de blocos, diagramas de interligação, lista de componentes, manuais de instalação, operação, inspeção, manutenção e reparo do sistema de monitoração de temperatura do rotor (caso requerido)",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        },
+        {
+          "2.1 - Descrição do documento e/ou informação a ser apresentada pelo fabricante": "2.1.11 Procedimentos de instalação, operação, inspeção, manutenção e reparo para motores síncronos de ímãs permanentes (PMSM)",
+          "AT": "",
+          "MT": "",
+          "BT": "",
+          "MS": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "Motores para instalação em áreas classificadas com partida direta na rede devem obedecer aos critérios de seleção de tipo de proteção Ex e EPL da Tabela 1.",
+    "Motores para instalação em áreas classificadas de poeiras combustíveis devem obedecer aos critérios de seleção de tipo de proteção Ex e EPL da Tabela 2.",
+    "Motores acionados por conversor de frequência ou soft-starter em áreas classificadas de gases inflamáveis devem obedecer aos critérios da Tabela 3.",
+    "Para motores trifásicos com potência nominal até 55 kW, a relação de corrente de partida deve atender IA/IN ≤ 8,0.",
+    "Para motores trifásicos com potência nominal acima de 55 kW até 150 kW, a relação de corrente de partida deve atender IA/IN ≤ 7,5.",
+    "Para motores trifásicos com potência nominal acima de 150 kW até 375 kW, a relação de corrente de partida deve atender IA/IN ≤ 7,0.",
+    "O tempo de rotor bloqueado a tensão nominal deve atender TRB ≥ 1,5 TP ou TRB ≥ TP + 5 s, prevalecendo o maior.",
+    "Para a condição de tensão mínima especificada, o tempo de rotor bloqueado deve atender TRB ≥ TP + 2 s.",
+    "Para motores Ex \"e\", o tempo tE deve atender tE ≥ TP + 2 s.",
+    "Os testes aplicáveis aos motores de indução e síncronos devem seguir as Tabelas 4 a 7 e a documentação técnica deve seguir as Tabelas 8 a 11."
+  ],
+  "formulas": [
+    "IA/IN ≤ 8,0",
+    "IA/IN ≤ 7,5",
+    "IA/IN ≤ 7,0",
+    "TRB ≥ 1,5 TP",
+    "TRB ≥ TP + 5 s",
+    "TRB ≥ TP + 2 s",
+    "tE ≥ TP + 2 s",
+    "UN ≤ 1,0 kV",
+    "1,0 kV < UN < 11,0 kV",
+    "UN ≥ 11,0 kV",
+    "UN ≥ 6,0 kV"
+  ],
+  "valores_minimos": [
+    "1,0 kV",
+    "2 A",
+    "6,0 kV",
+    "16 kV",
+    "10 mm²",
+    "4,0 kV",
+    "11,0 kV",
+    "13,8 kV",
+    "700 V",
+    "0 °C",
+    "6.0 kV",
+    "1.0 kV",
+    "55 kW",
+    "150 kW",
+    "375 kW",
+    "5 s",
+    "2 s",
+    "4 a",
+    "8 a"
+  ],
+  "referencias_normativas": [
+    "NBR IEC 60034-5",
+    "NBR IEC 60034-6",
+    "NBR IEC 60034-7",
+    "NBR IEC 60034-9",
+    "NBR IEC 60034-14",
+    "NBR IEC 60079-0",
+    "NBR IEC 60079-1",
+    "NBR IEC 60079-2",
+    "NBR IEC 60079-7",
+    "NBR IEC 60079-13",
+    "NBR IEC 60079-14",
+    "NBR IEC 60079-15",
+    "NBR IEC 60079-19",
+    "NBR IEC 60079-31",
+    "NBR IEC 60085",
+    "NBR IEC 60529",
+    "NBR IEC 61892-3",
+    "NBR IEC 60079",
+    "IEC 60034-5",
+    "IEC 60034-6",
+    "IEC 60034-7",
+    "IEC 60034-9",
+    "IEC 60034-14",
+    "IEC 60079-0",
+    "IEC 60079-1",
+    "IEC 60079-2",
+    "IEC 60079-7",
+    "IEC 60079-13",
+    "IEC 60079-14",
+    "IEC 60079-15",
+    "IEC 60079-19",
+    "IEC 60079-31",
+    "IEC 60085",
+    "IEC 60529",
+    "IEC 61892-3",
+    "IEC 60034-1",
+    "IEC 60034-2-1",
+    "IEC 60034-4",
+    "IEC 60034-8",
+    "IEC 60034-11",
+    "IEC 60034-12",
+    "IEC 60034-15",
+    "IEC 60034-16-1",
+    "IEC 60034-18-1",
+    "IEC 60034-18-41",
+    "IEC 60034-26",
+    "IEC 60034-29",
+    "IEC 60034-30-1",
+    "IEC 60050-411",
+    "IEC 60068-2-30",
+    "IEC 60072-1",
+    "IEC 60255-149",
+    "IEC 60270",
+    "IEC 60664-3",
+    "IEC 60751",
+    "IEC 61086-1",
+    "IEC 61086-2",
+    "IEC 61131-1",
+    "IEC 61131-2",
+    "IEC 61131-3",
+    "IEC 60034",
+    "IEC 60079",
+    "IEC 61131",
+    "IEC 61850",
+    "IEC 60255-127",
+    "IEC 60255-151",
+    "IEC 61000",
+    "IEC 60034-27",
+    "IEC 60894",
+    "IEC 60034-17",
+    "ISO 281",
+    "ISO 1940-1",
+    "ISO 4624",
+    "ISO 4628-2",
+    "ISO 4628-3",
+    "ISO 4628-4",
+    "ISO 4628-5",
+    "ISO 10816-1",
+    "ISO 12944-1",
+    "ISO 12944-2",
+    "ISO 12944-3",
+    "ISO 12944-4",
+    "ISO 12944-5",
+    "ISO 12944-6",
+    "ISO 12944-7",
+    "ISO 20340",
+    "ISO 12944",
+    "ISO 4628",
+    "API STD 541",
+    "API RP 541",
+    "NFPA 20",
+    "IEEE 43",
+    "IEEE 1434",
+    "IEEE 112"
+  ]
+}

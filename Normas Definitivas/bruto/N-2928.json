@@ -1,0 +1,273 @@
+{
+  "codigo_norma": "N-2928",
+  "titulo": "RIEDADE DA ONTEC",
+  "tipo_documento": "norma",
+  "revisao": "REV. ISADA",
+  "data_norma": "06/2014",
+  "escopo": "40 páginas, 3 formulários e GT Transformadores de Potência Especificação Cabe à CONTEC - Subcomissão Autora, a orientação quanto à interpretação do texto desta Norma. A Unidade da PETROBRAS usuária desta Norma é a responsável pela adoção e aplicação das suas seções, subseções e enumerações. Comissão de Normalização Técnica Requisito Técnico: Prescrição estabelecida como a mais adequada e que deve ser utilizada estritamente em conformidade com esta Norma. Uma eventual resolução de não segui-la (“não-conformidade” com esta Norma) deve ter fundamentos técnico-gerenciais e deve ser aprovada e registrada pela Unidade da PETROBRAS usuária desta Norma. É caracterizada por verbos de caráter impositivo. Prática Recomendada: Prescrição que pode ser utilizada nas condições previstas por esta Norma, mas que admite (e adverte sobre) a possibilidade de alternativa (não escrita nesta Norma) mais adequada à aplicação específica. A alternativa adotada deve ser aprovada e registrada pela Unidade da PETROBRAS usuária desta Norma. É caracterizada por verbos de caráter não-impositivo. É indicada pela expressão: [Prática Recomendada]. SC - 06 Cópias dos registros das “não-conformidades” com esta Norma, ",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Acessórios para Transformadores Imersos em Líquido Isolante Máxima tensão operativa (Um) Um  36 kV Um > 36 kV",
+      "cabecalho": [
+        "Máxima tensão operativa (Um)",
+        "Um  36 kV",
+        "coluna_3",
+        "Um > 36 kV",
+        "coluna_5"
+      ],
+      "linhas": [
+        {
+          "Máxima tensão operativa (Um)": "Potências nominais (kVA)",
+          "Um  36 kV": "Sn < 5000",
+          "coluna_3": "Sn  5000",
+          "Um > 36 kV": "Sn < 5000",
+          "coluna_5": "Sn  5000"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador externo de nível de óleo",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador de temperatura do enrolamento",
+          "Um  36 kV": "O",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador de temperatura do óleo",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Dispositivo para alívio de pressão",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Relé detector de gás tipo Buchholz para transformadores não selados",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Painel auxiliar",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Válvula de drenagem de óleo",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios de ligação para filtro de óleo",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Dispositivo para retirada de amostra de óleo",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Conservador de óleo para transformadores não selados",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Respirador com secador de ar quando houver conservador",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Válvulas para retenção do óleo dos radiadores ou trocadores de calor, quando destacáveis",
+          "Um  36 kV": "O",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios de aterramento do tanque",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios para suspensão da parte ativa do transformador completamente montado, das tampas, do conservador de óleo e dos radiadores",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios para locomoção",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Apoios para macacos",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Abertura de inspeção",
+          "Um  36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Comutador de derivação sem tensão",
+          "Um  36 kV": "O",
+          "coluna_3": "O",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Comutador de derivação sob carga",
+          "Um  36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Relé de súbita pressão para transformadores selados",
+          "Um  36 kV": "X",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": ""
+        },
+        {
+          "Máxima tensão operativa (Um)": "Sistema de ventilação forçada",
+          "Um  36 kV": "O",
+          "coluna_3": "O",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicadores de circulação de óleo para resfriamento por circulação forçada",
+          "Um  36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Sistema de Monitoramento e Diagnóstico On-line",
+          "Um  36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Legenda: (X) - Obrigatório; (O) - Opcional (Deve ser definido na especificação).",
+          "Um  36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "Potências nominais (kVA) Sn < 5000 Sn  5000 Sn < 5000 Sn  5000 Indicador externo de nível de óleo X X X X Indicador de temperatura do enrolamento O X X X Indicador de temperatura do óleo X X X X Dispositivo para alívio de pressão X X X X Relé detector de gás tipo Buchholz para transformadores não selados X X X X"
+  ],
+  "formulas": [
+    "Um > 36 kV",
+    "a) 5 < Sn < 30 MVA: 99,30 %;",
+    "b) 30 Sn < 50 MVA: 99,40 %;",
+    "c) 50 Sn < 100 MVA: 99,50 %;",
+    "d) 100 Sn < 200 MVA: 99,60 %;"
+  ],
+  "valores_minimos": [
+    "72,5 kV",
+    "36 kV",
+    "230 kV",
+    "145 kV",
+    "10 A"
+  ],
+  "referencias_normativas": [
+    "N-2201",
+    "N-2547",
+    "N-220",
+    "NBR IEC 60529",
+    "NBR IEC 60156",
+    "NBR IEC 60450",
+    "IEC 601",
+    "IEC 6045",
+    "IEC 6052",
+    "IEC 60068-1",
+    "IEC 60068-2-14",
+    "IEC 60076-1",
+    "IEC 60076-2",
+    "IEC 60076-3",
+    "IEC 60076-4",
+    "IEC 60076-5",
+    "IEC 60076-6",
+    "IEC 60076-10",
+    "IEC 60076-11",
+    "IEC 60076-13",
+    "IEC 60076-16",
+    "IEC 60076-21",
+    "IEC 60146-1-3",
+    "IEC 60214-1",
+    "IEC 60247",
+    "IEC 60567",
+    "IEC 60599",
+    "IEC 60814",
+    "IEC 61000-4-3",
+    "IEC 61000-4-4",
+    "IEC 61000-4-5",
+    "IEC 61000-4-6",
+    "IEC 61181",
+    "IEC 61378-1",
+    "IEC 61892-3",
+    "IEC 60",
+    "IEC 61",
+    "IEC 6007",
+    "IEC 6",
+    "IEC 60529",
+    "IEC 600",
+    "IEC 61850",
+    "IEC 610",
+    "IEC 60156",
+    "IEC 60450",
+    "ISO 4624",
+    "ISO 12944",
+    "ISO 12944-4",
+    "ISO 12944-5",
+    "ISO 12944-6",
+    "ISO 12944-7",
+    "ISO 20340",
+    "ISO 12944-2",
+    "ISO 12944-1",
+    "ISO 12944-3",
+    "ANSI/ASME B1.20.1",
+    "ANSI 90"
+  ]
+}

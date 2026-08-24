@@ -1,0 +1,127 @@
+{
+  "codigo_norma": "N-2039",
+  "titulo": "Projeto de Subestações em Instalações Terrestres",
+  "tipo_documento": "Procedimento",
+  "revisao": "REV. D",
+  "data_norma": "06/2021",
+  "escopo": "Esta Norma fixa as condições mínimas exigidas para o projeto de subestações ao tempo ou abrigadas em instalações terrestres, para a PETROBRAS. Esta Norma não se aplica a instalações em plataformas marítimas. Esta Norma se aplica a projetos iniciados a partir da data de sua edição. Esta norma se aplica às subestações novas e ampliações de instalações existentes. NOTA Modificações destinadas a, por exemplo, acomodar novos equipamentos ou substituir os existentes não implicam necessariamente ampliação da subestação. Esta Norma contém Requisitos Técnicos e Práticas Recomendadas. A aplicação desta Norma não dispensa o atendimento aos regulamentos de órgãos públicos para os equipamentos, os serviços e as instalações.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Distâncias Mínimas (m)",
+      "cabecalho": [
+        "Distâncias mínimas",
+        "69 kV",
+        "138 kV",
+        "230 kV"
+      ],
+      "linhas": [
+        {
+          "Distâncias mínimas": "Entre fases, para barras rígidas",
+          "69 kV": "2,15",
+          "138 kV": "2,40",
+          "230 kV": "3,60"
+        },
+        {
+          "Distâncias mínimas": "Entre fases, para barras flexíveis",
+          "69 kV": "2,50",
+          "138 kV": "3,00",
+          "230 kV": "4,50"
+        },
+        {
+          "Distâncias mínimas": "Entre fase e terra, para barras rígidas",
+          "69 kV": "1,50",
+          "138 kV": "1,50",
+          "230 kV": "2,50"
+        },
+        {
+          "Distâncias mínimas": "Entre fase e terra, para barras flexíveis",
+          "69 kV": "2,00",
+          "138 kV": "2,20",
+          "230 kV": "3,40"
+        },
+        {
+          "Distâncias mínimas": "Altura mínima do solo, das partes vivas (Nota 2)",
+          "69 kV": "4,00",
+          "138 kV": "4,50",
+          "230 kV": "5,00"
+        },
+        {
+          "Distâncias mínimas": "Altura mínima do solo, das partes em tensão reduzidas a zero (porcelana, isoladores)",
+          "69 kV": "2,50",
+          "138 kV": "2,50",
+          "230 kV": "3,00"
+        },
+        {
+          "Distâncias mínimas": "NOTA 1 As chaves no barramento são consideradas como barras flexíveis. NOTA 2 As distâncias das partes vivas de barras flexíveis são do ponto de flecha máxima ao solo.",
+          "69 kV": "",
+          "138 kV": "",
+          "230 kV": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "seção que os cabos da linha de transmissão que chega à subestação; b) as distâncias mínimas da Tabela 1 devem ser obedecidas. Adicionalmente devem ser",
+    "atendidas as exigências da concessionária local e requisitos de coordenação de isolamento do projeto conforme ABNT NBR 6939; c) devem ser calculados e dimensionados para suportar todos os esforços decorrentes de",
+    "a) o sistema de HVAC deverá manter as condições internas de temperatura, umidade,",
+    "através de venezianas, tipo “dampers” com dispositivo manual para ajuste de pressão. Deverá ser acrescentado fator de segurança de 25% na vazão de ar de pressurização para suprir frestas não identificadas; h) a temperatura máxima ambiente no interior da sala de painéis não deve ultrapassar 40 °C",
+    "i) no caso de uso de baterias chumbo ácidas ventiladas e alcalinas a temperatura máxima",
+    "baterias deve ter a temperatura máxima controlada para não ultrapassar 25 °C, sendo permitida a recirculação parcial do ar conforme mencionado na IEC 62485-2 desde que a renovação do ar seja mantida; k) a menos que indicado em contrário pela PETROBRAS, o sistema de HVAC deverá ser",
+    "composto de equipamentos reservas para garantir o pleno atendimento às condições internas em caso de falha ou manutenção; l) devem ser instalados alarmes locais indicando temperatura alta, pressão diferencial baixa,",
+    "falha de equipamento e outras anormalidades. Deve ser previsto também, alarme remoto sumário indicando anormalidade do sistema de HVAC; m) a distribuição de ar nos ambientes deve ser dimensionada de forma a garantir temperatura"
+  ],
+  "formulas": [],
+  "valores_minimos": [
+    "1,0 kV",
+    "36,2 kV",
+    "1 kV",
+    "52 kV",
+    "2 A",
+    "3 A",
+    "4 A",
+    "70 mm2",
+    "69 kV",
+    "138 kV",
+    "230 kV",
+    "40 °C",
+    "35 °C",
+    "25 °C"
+  ],
+  "referencias_normativas": [
+    "N-300",
+    "N-1674",
+    "N-1996",
+    "N-1997",
+    "N-2006",
+    "N-2040",
+    "N-2830",
+    "N-2914",
+    "N-2918",
+    "NBR 5410",
+    "NBR 5419-1",
+    "NBR 5419-2",
+    "NBR 5419-3",
+    "NBR 5419-4",
+    "NBR 6939",
+    "NBR 9077",
+    "NBR 13231",
+    "NBR 14039",
+    "NBR 16401-1",
+    "NBR 16401-2",
+    "NBR 16401-3",
+    "NBR 16820",
+    "NBR 17240",
+    "NBR IEC 60079-13",
+    "NBR IEC 60947-1",
+    "NBR IEC 61439-1",
+    "NBR IEC 62271-200",
+    "NBR 5419",
+    "NBR 16401",
+    "IEC 60079-13",
+    "IEC 60947-1",
+    "IEC 61439-1",
+    "IEC 62271-200",
+    "IEC 61936-1",
+    "IEC 62485-2"
+  ]
+}

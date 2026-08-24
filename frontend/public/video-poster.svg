@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="glow" cx="30%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1a0d00" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#070A0F" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="copper" cx="60%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#3a1a00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#070A0F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <rect width="1920" height="1080" fill="url(#copper)"/>
+  <!-- subtle copper shimmer lines -->
+  <line x1="0" y1="400" x2="600" y2="560" stroke="#E2905B" stroke-width="1.5" stroke-opacity="0.12"/>
+  <line x1="0" y1="440" x2="580" y2="600" stroke="#E2905B" stroke-width="0.8" stroke-opacity="0.07"/>
+  <line x1="100" y1="300" x2="700" y2="480" stroke="#E2905B" stroke-width="1" stroke-opacity="0.05"/>
+  <!-- right side detail -->
+  <circle cx="1400" cy="540" r="300" fill="#E2905B" fill-opacity="0.03"/>
+</svg>

@@ -1,0 +1,48 @@
+{"version":8,"type":"context-options","origin":"testRunner","browserName":"","playwrightVersion":"1.62.1","options":{},"platform":"darwin","wallTime":1787552824112,"monotonicTime":1191.191,"sdkLanguage":"javascript","testTimeout":30000}
+{"type":"before","callId":"hook@1","stepId":"hook@1","startTime":1210.383,"class":"Test","method":"hook","title":"Before Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@31","stepId":"fixture@31","parentId":"hook@1","startTime":1220.498,"class":"Test","method":"fixture","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@32","stepId":"pw:api@32","parentId":"fixture@31","startTime":1222.827,"class":"Test","method":"pw:api","title":"Launch browser","params":{"handleSIGINT":"false","tracesDir":"/Users/guga/Desktop/calccabos-main/frontend/test-results/.playwright-artifacts-0/traces","artifactsDir":"/Users/guga/Desktop/calccabos-main/frontend/test-results/.playwright-artifacts-0","headless":"true","ignoreDefaultArgs":"undefined","ignoreAllDefaultArgs":"false","env":"undefined"},"stack":[]}
+{"type":"after","callId":"pw:api@32","endTime":1519.247,"annotations":[]}
+{"type":"after","callId":"fixture@31","endTime":1519.335,"annotations":[]}
+{"type":"before","callId":"fixture@35","stepId":"fixture@35","parentId":"hook@1","startTime":1520.254,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@36","stepId":"pw:api@36","parentId":"fixture@35","startTime":1522.318,"class":"Test","method":"pw:api","title":"Create context","params":{"recordVideo":"Object","selectorEngines":"[]","testIdAttributeName":"data-testid","acceptDownloads":"accept","bypassCSP":"false","colorScheme":"light","hasTouch":"false","ignoreHTTPSErrors":"false","isMobile":"false","javaScriptEnabled":"true","locale":"en-US","offline":"false","storageState":"Object","viewport":"Object","baseURL":"http://localhost:5173","serviceWorkers":"allow","noDefaultViewport":"false","extraHTTPHeaders":"undefined","reducedMotion":"undefined","forcedColors":"undefined","contrast":"undefined","clientCertificates":"undefined"},"stack":[]}
+{"type":"after","callId":"pw:api@36","endTime":1530.92,"annotations":[]}
+{"type":"after","callId":"fixture@35","endTime":1534.222,"annotations":[]}
+{"type":"before","callId":"fixture@37","stepId":"fixture@37","parentId":"hook@1","startTime":1534.514,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@38","stepId":"pw:api@38","parentId":"fixture@37","startTime":1535.539,"class":"Test","method":"pw:api","title":"Create page","params":{},"stack":[]}
+{"type":"after","callId":"pw:api@38","endTime":1716.432,"annotations":[]}
+{"type":"after","callId":"fixture@37","endTime":1716.482,"annotations":[]}
+{"type":"after","callId":"hook@1","endTime":1716.528,"annotations":[]}
+{"type":"before","callId":"pw:api@39","stepId":"pw:api@39","startTime":1718.081,"class":"Test","method":"pw:api","title":"Navigate to \"/\"","params":{"url":"/","waitUntil":"load"},"stack":[{"file":"/Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts","line":6,"column":14}]}
+{"type":"after","callId":"pw:api@39","endTime":2264.096,"annotations":[]}
+{"type":"before","callId":"pw:api@40","stepId":"pw:api@40","startTime":2266.032,"class":"Test","method":"pw:api","title":"Evaluate","params":{"expression":"() => JSON.stringify(localStorage)","isFunction":"true","arg":"Object"},"stack":[{"file":"/Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts","line":7,"column":49}]}
+{"type":"after","callId":"pw:api@40","endTime":2296.077,"annotations":[]}
+{"type":"stdout","timestamp":2296.394,"text":"localStorage antes: {}\n"}
+{"type":"before","callId":"pw:api@41","stepId":"pw:api@41","startTime":2297.987,"class":"Test","method":"pw:api","title":"Navigate to \"/login\"","params":{"url":"/login","waitUntil":"load"},"stack":[{"file":"/Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts","line":8,"column":14}]}
+{"type":"after","callId":"pw:api@41","endTime":2621.543,"annotations":[]}
+{"type":"before","callId":"pw:api@42","stepId":"pw:api@42","startTime":2626.651,"class":"Test","method":"pw:api","title":"Fill \"engenheiro@industria.com\" locator('input[name=\"email\"]')","params":{"selector":"input[name=\"email\"]","value":"engenheiro@industria.com"},"stack":[{"file":"/Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts","line":11,"column":14}]}
+{"type":"error","message":"\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m","stack":[]}
+{"type":"before","callId":"hook@43","stepId":"hook@43","startTime":31521.146,"class":"Test","method":"hook","title":"After Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@44","stepId":"fixture@44","parentId":"hook@43","startTime":31873.029,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@44","endTime":31873.176,"annotations":[]}
+{"type":"before","callId":"fixture@45","stepId":"fixture@45","parentId":"hook@43","startTime":31873.41,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@46","stepId":"pw:api@46","parentId":"fixture@45","startTime":32368.283,"class":"Test","method":"pw:api","title":"Close context","params":{"reason":"Test timeout of 30000ms exceeded."},"stack":[]}
+{"type":"after","callId":"pw:api@42","endTime":32463.776,"annotations":[],"error":{"name":"","message":"Error: page.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"email\"]')\u001b[22m\n","stack":"Error: page.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"email\"]')\u001b[22m\n\n    at /Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts:11:14"}}
+{"type":"error","message":"Error: page.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"email\"]')\u001b[22m\n","stack":[{"file":"/Users/guga/Desktop/calccabos-main/frontend/tests/auth.setup.ts","line":11,"column":14}]}
+{"type":"after","callId":"pw:api@46","endTime":32465.719,"annotations":[]}
+{"type":"after","callId":"fixture@45","endTime":32474.845,"attachments":[{"name":"video","contentType":"video/webm","sha1":"9de4612b1c7e59873e42fa0dda9b295f981f6572"}],"annotations":[]}
+{"type":"before","callId":"attach@e48e52221809f337ffee8328b48f0889","stepId":"attach@e48e52221809f337ffee8328b48f0889","startTime":32477.975,"class":"Test","method":"test.attach","title":"Attach \"error-context\"","params":{},"stack":[]}
+{"type":"after","callId":"attach@e48e52221809f337ffee8328b48f0889","endTime":32477.984,"attachments":[{"name":"error-context","contentType":"text/markdown","sha1":"a72a9d2081a3bd9f203f9ff5df3e3c40be0fdef2"}]}
+{"type":"before","callId":"fixture@55","stepId":"fixture@55","parentId":"hook@43","startTime":32478.786,"class":"Test","method":"fixture","title":"Fixture \"baseURL\"","params":{},"stack":[{"file":"project#setup","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@55","endTime":32478.829,"annotations":[]}
+{"type":"before","callId":"fixture@59","stepId":"fixture@59","parentId":"hook@43","startTime":32479.542,"class":"Test","method":"fixture","title":"Fixture \"storageState\"","params":{},"stack":[{"file":"project#setup","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@59","endTime":32479.561,"annotations":[]}
+{"type":"after","callId":"hook@43","endTime":32482.641,"attachments":[{"name":"screenshot","contentType":"image/png","sha1":"700681bcbc07faa5f5fe285ef18a8e20246d60dd"}],"annotations":[]}
+{"type":"before","callId":"hook@77","stepId":"hook@77","startTime":32482.813,"class":"Test","method":"hook","title":"Worker Cleanup","params":{},"stack":[]}
+{"type":"before","callId":"fixture@81","stepId":"fixture@81","parentId":"hook@77","startTime":32483.657,"class":"Test","method":"fixture","title":"Fixture \"video\"","params":{},"stack":[{"file":"project#setup","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@81","endTime":32483.674,"annotations":[]}
+{"type":"before","callId":"fixture@82","stepId":"fixture@82","parentId":"hook@77","startTime":32483.854,"class":"Test","method":"fixture","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@82","endTime":32516.188,"annotations":[]}
+{"type":"before","callId":"fixture@87","stepId":"fixture@87","parentId":"hook@77","startTime":32517.083,"class":"Test","method":"fixture","title":"Fixture \"screenshot\"","params":{},"stack":[{"file":"project#setup","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@87","endTime":32517.1,"annotations":[]}
+{"type":"after","callId":"hook@77","endTime":32517.903,"annotations":[]}

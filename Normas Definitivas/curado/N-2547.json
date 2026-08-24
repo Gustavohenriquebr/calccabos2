@@ -1,0 +1,387 @@
+{
+  "codigo_norma": "N-2547",
+  "titulo": "Conversor de Frequência para Controle de Rotação de Motor Elétrico",
+  "tipo_documento": "Procedimento",
+  "revisao": "REV. A",
+  "data_norma": "07/2017",
+  "escopo": "Esta Norma fixa as condições exigíveis e as práticas recomendadas para a especificação de conversor de frequência para controle de rotação de motor elétrico de corrente alternada, utilizado nas instalações da PETROBRAS. Esta Norma não se aplica a conversores de frequência de tensão de saída maior que 15 kV. Esta Norma não define a configuração do sistema elétrico alimentador do conversor de frequência, nem especifica nenhum componente elétrico ou eletrônico de proteção ou controle cujo uso depende da análise do sistema elétrico onde o conversor de frequência está instalado. Assim, não é do escopo desta Norma, por exemplo, a especificação de ramo de \"by-pass\" ou das características dos fusíveis ou dos disjuntores de proteção, entre outros. Para cada projeto, a especificação de tais componentes é de responsabilidade do projetista da instalação. Esta Norma se aplica a aquisições deste tipo de equipamento, a partir da data de sua edição. Esta Norma contém Requisitos Técnicos e Práticas Recomendadas.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Temperatura Ambiente",
+      "cabecalho": [
+        "Temperaturas",
+        "Unidades Terrestres",
+        "Unidades Marítimas"
+      ],
+      "linhas": [
+        {
+          "Temperaturas": "Mínima",
+          "Unidades Terrestres": "5 °C",
+          "Unidades Marítimas": "5 °C"
+        },
+        {
+          "Temperaturas": "Média Anual",
+          "Unidades Terrestres": "30 °C",
+          "Unidades Marítimas": "30 °C"
+        },
+        {
+          "Temperaturas": "Média Mensal",
+          "Unidades Terrestres": "32 °C",
+          "Unidades Marítimas": "35 °C"
+        },
+        {
+          "Temperaturas": "Média Diária",
+          "Unidades Terrestres": "35 °C",
+          "Unidades Marítimas": "40 °C"
+        },
+        {
+          "Temperaturas": "Máxima",
+          "Unidades Terrestres": "40 °C",
+          "Unidades Marítimas": "45 °C"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 2 - Terminologia para os Índices de Harmônicos",
+      "cabecalho": [
+        "Identificação da grandeza - Distorção harmônica total de tensão",
+        "Símbolo - DTT%"
+      ],
+      "linhas": [
+        {
+          "Identificação da grandeza - Distorção harmônica total de tensão": "Distorção harmônica total de tensão para as componentes pares não múltiplas de 3",
+          "Símbolo - DTT%": "DTT% P"
+        },
+        {
+          "Identificação da grandeza - Distorção harmônica total de tensão": "Distorção harmônica total de tensão para as componentes ímpares não múltiplas de 3",
+          "Símbolo - DTT%": "DTT% i"
+        },
+        {
+          "Identificação da grandeza - Distorção harmônica total de tensão": "Distorção harmônica total de tensão para as componentes múltiplas de 3",
+          "Símbolo - DTT%": "DTT% 3"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 3 - Limites das Distorções Harmônicas Totais (em% da Tensão Fundamental)",
+      "cabecalho": [
+        "Indicador",
+        "Tensão nominal",
+        "coluna_3",
+        "coluna_4"
+      ],
+      "linhas": [
+        {
+          "Indicador": "",
+          "Tensão nominal": "Vn ≤ 1,0 kV",
+          "coluna_3": "1,0 kV < Vn < 69 kV",
+          "coluna_4": "69 kV ≤ Vn < 230 kV"
+        },
+        {
+          "Indicador": "DTT%",
+          "Tensão nominal": "10,0%",
+          "coluna_3": "8,0%",
+          "coluna_4": "5,0%"
+        },
+        {
+          "Indicador": "DTT% P",
+          "Tensão nominal": "2,5%",
+          "coluna_3": "2,0%",
+          "coluna_4": "1,0%"
+        },
+        {
+          "Indicador": "DTT% i",
+          "Tensão nominal": "7,5%",
+          "coluna_3": "6,0%",
+          "coluna_4": "4,0%"
+        },
+        {
+          "Indicador": "DTT% 3",
+          "Tensão nominal": "6,5%",
+          "coluna_3": "5,0%",
+          "coluna_4": "3,0%"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 4 - Ensaios Padronizados do Conversor de Frequência de Média Tensão como Componente",
+      "cabecalho": [
+        "Ensaio",
+        "Ensaio de rotina",
+        "Ensaio de tipo",
+        "Ensaio especial",
+        "Norma técnica"
+      ],
+      "linhas": [
+        {
+          "Ensaio": "Verificação Inicial / Inspeção Visual (ver Nota 1)",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-5-1"
+        },
+        {
+          "Ensaio": "Isolamento",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Tensão Aplicada",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-5-1 IEC 60146-1-1"
+        },
+        {
+          "Ensaio": "Carga Leve e Operação",
+          "Ensaio de rotina": "X [Prática Recomendada]",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Corrente/Carga Nominal",
+          "Ensaio de rotina": "X [Prática Recomendada]",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Capacidade de sobrecorrente",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Divisão de corrente",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Divisão de tensão",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Medição de \"Ripple\" de tensão e corrente",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Determinação de perdas",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Elevação de temperatura",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Medição de Regulação de Tensão Inerente",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4 IEC 60146-1-1"
+        },
+        {
+          "Ensaio": "Verificação dos dispositivos auxiliares",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Verificação dos controles do equipamento",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Verificação dos dispositivos de proteção",
+          "Ensaio de rotina": "X",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Ruído Audível",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Fator de potência",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Medição de harmônicos de corrente",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 60146-1-1"
+        },
+        {
+          "Ensaio": "Imunidade à interferência eletromagnética",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-3"
+        },
+        {
+          "Ensaio": "Emissão eletromagnética",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 61800-3"
+        },
+        {
+          "Ensaio": "Variação inerente da tensão",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 60146-1-1"
+        },
+        {
+          "Ensaio": "Verificação das propriedades do controle do conversor de frequência",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "X",
+          "Ensaio especial": "",
+          "Norma técnica": "IEC 60146-1-1"
+        },
+        {
+          "Ensaio": "Vibração",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "Ensaios adicionais (ver Nota 2)",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "X",
+          "Norma técnica": "IEC 61800-4"
+        },
+        {
+          "Ensaio": "NOTA 1 Verificar conexões, componentes, dimensões e Grau de Proteção. NOTA 2 Devem ser considerados como ensaios adicionais \"Ride through\" e ensaios exigidos pela sociedade classificadora no caso de operação em unidades marítimas. NOTA 3 Os ensaios de tipo solicitados na Folha de Dados devem ser realizados em um conversor de frequência produzido de cada conjunto de conversores de frequência idênticos, a ser determinado pela PETROBRAS. São aceitos para ensaios de tipo os relatórios de ensaios certificados realizados em conversores de frequência idênticos e aprovados pela PETROBRAS.",
+          "Ensaio de rotina": "",
+          "Ensaio de tipo": "",
+          "Ensaio especial": "",
+          "Norma técnica": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "O conversor de frequência deve operar continuamente nas condições de temperatura ambiente da Tabela 1, sem perda de vida útil.",
+    "O projeto deve considerar temperaturas de armazenagem e transporte entre -25 °C e 55 °C.",
+    "O conversor deve operar continuamente com umidade relativa entre 15% e 90%, sem condensação.",
+    "Fiações de controle devem ser de cobre, encordoadas, com seção nominal mínima de 0,5 mm² para conexões internas e 1,5 mm² para conexões externas, com isolação de regime igual ou superior a 70 °C.",
+    "A fiação de controle deve ser separada da fiação de força e toda tensão alternada deve ser separada de toda tensão contínua por septos, distâncias adequadas ou uso de cabos blindados.",
+    "Conversores de 37,5 kW até 150 kW devem possuir rendimento nominal mínimo de 96% quando alimentados diretamente e de 95% quando alimentados via transformador.",
+    "Conversores de baixa tensão entre 150 kW e 1 000 kW devem possuir rendimento nominal mínimo de 97% quando alimentados diretamente e de 95% quando alimentados via transformador.",
+    "Conversores de média tensão devem possuir rendimento nominal mínimo de 96%, considerando perdas no transformador, ventilação e controle.",
+    "Conversores utilizados em unidades marítimas ou terrestres isoladas de concessionária devem possuir fator de deslocamento mínimo de 0,8, e em instalações supridas por concessionária, mínimo de 0,92.",
+    "Não é permitido banco de capacitores para correção do fator de deslocamento, exceto quando integrado a filtro passivo de harmônicos.",
+    "O conversor deve suportar 110% da corrente nominal durante 60 s a cada 10 min.",
+    "Para conversores de média tensão ou de baixa tensão com potência superior a 75 kW, a especificação harmônica deve considerar estudo específico e atender aos limites das Tabelas 2 e 3.",
+    "Quando a potência nominal do conversor for igual ou superior a 375 kW, só são aceitas soluções com 12 ou mais pulsos, retificador ativo/regenerativo ou filtro ativo incorporado ao retificador.",
+    "Em qualquer situação, a distorção harmônica da corrente de entrada do conversor deve ser menor ou igual a 15%.",
+    "Na compatibilização entre conversor e motor devem ser considerados o comprimento, o tipo, a formação e a seção dos cabos, conforme IEC TS 60034-25."
+  ],
+  "formulas": [
+    "37,5 kW ≤ P < 150 kW",
+    "150 kW ≤ P ≤ 1 000 kW",
+    "fator de deslocamento ≥ 0,8",
+    "fator de deslocamento ≥ 0,92",
+    "corrente nominal ≤ 16 A",
+    "16 A < corrente nominal ≤ 75 A",
+    "Vn ≤ 1,0 kV",
+    "1,0 kV < Vn < 69 kV",
+    "69 kV ≤ Vn < 230 kV",
+    "potência nominal do conversor ≥ 375 kW",
+    "distorção harmônica da corrente de entrada ≤ 15%"
+  ],
+  "valores_minimos": [
+    "15 kV",
+    "16 A",
+    "75 A",
+    "1 000 V",
+    "35 kV",
+    "1,0 kV",
+    "36,2 kV",
+    "60 °C",
+    "2,5 mm2",
+    "0,5 mm2",
+    "1,5 mm2",
+    "1 A",
+    "750 V",
+    "415 V",
+    "690 V",
+    "69 kV",
+    "230 kV",
+    "50 °C",
+    "45 °C",
+    "25 °C",
+    "55 °C",
+    "0,5 mm²",
+    "1,5 mm²",
+    "70 °C",
+    "37,5 kW",
+    "150 kW",
+    "1 000 kW",
+    "60 s",
+    "75 kW",
+    "375 kW"
+  ],
+  "referencias_normativas": [
+    "NBR IEC 60068-2-30",
+    "NBR IEC 60529",
+    "NBR IEC 61892-1",
+    "NBR IEC 62326-1",
+    "NBR IEC 62326-4",
+    "IEC 60068-2-30",
+    "IEC 60529",
+    "IEC 61892-1",
+    "IEC 62326-1",
+    "IEC 62326-4",
+    "IEC 60034-1",
+    "IEC 60076",
+    "IEC 60146-1-1",
+    "IEC 60146-2",
+    "IEC 60533",
+    "IEC 60664-1",
+    "IEC 60664-3",
+    "IEC 60721-3-3",
+    "IEC 61000",
+    "IEC 61000-3-2",
+    "IEC 61000-3-12",
+    "IEC 61086-1",
+    "IEC 61086-2",
+    "IEC 61188-5-1",
+    "IEC 61378-1",
+    "IEC 61800-2",
+    "IEC 61800-3",
+    "IEC 61800-4",
+    "IEC 61800-5-1"
+  ]
+}

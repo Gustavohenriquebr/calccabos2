@@ -1,0 +1,136 @@
+[
+  {
+    "timestamp": "2026-08-17T20:26:53.069120+00:00",
+    "projeto_id": 2,
+    "projeto_nome": "Planta Compressores P-55 — Petrobras",
+    "circuito_id": 1,
+    "circuito_tag": "CP-001",
+    "metodo_instalacao": "TRAY",
+    "agrupamento": 4,
+    "alteracoes": [
+      {
+        "campo": "fator_k2",
+        "valor_antigo": 0.65,
+        "valor_novo": 0.77
+      },
+      {
+        "campo": "secao_mm2",
+        "valor_antigo": 95.0,
+        "valor_novo": 70
+      },
+      {
+        "campo": "queda_tensao_pct",
+        "valor_antigo": 1.31,
+        "valor_novo": 1.71
+      },
+      {
+        "campo": "queda_tensao_acumulada",
+        "valor_antigo": 1.31,
+        "valor_novo": 1.71
+      },
+      {
+        "campo": "corrente_corrigida",
+        "valor_antigo": 221.43,
+        "valor_novo": 186.92
+      },
+      {
+        "campo": "ampacidade",
+        "valor_antigo": 258.0,
+        "valor_novo": 213.0
+      },
+      {
+        "campo": "secao_pe_mm2",
+        "valor_antigo": 50.0,
+        "valor_novo": 35
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-17T20:26:53.069120+00:00",
+    "projeto_id": 2,
+    "projeto_nome": "Planta Compressores P-55 — Petrobras",
+    "circuito_id": 2,
+    "circuito_tag": "BW-001",
+    "metodo_instalacao": "TRAY",
+    "agrupamento": 4,
+    "alteracoes": [
+      {
+        "campo": "fator_k2",
+        "valor_antigo": 0.65,
+        "valor_novo": 0.77
+      },
+      {
+        "campo": "secao_mm2",
+        "valor_antigo": 16.0,
+        "valor_novo": 10
+      },
+      {
+        "campo": "queda_tensao_pct",
+        "valor_antigo": 1.067,
+        "valor_novo": 1.708
+      },
+      {
+        "campo": "queda_tensao_acumulada",
+        "valor_antigo": 1.067,
+        "valor_novo": 1.708
+      },
+      {
+        "campo": "corrente_corrigida",
+        "valor_antigo": 66.48,
+        "valor_novo": 56.12
+      },
+      {
+        "campo": "ampacidade",
+        "valor_antigo": 85.0,
+        "valor_novo": 63.0
+      },
+      {
+        "campo": "secao_pe_mm2",
+        "valor_antigo": 16.0,
+        "valor_novo": 10
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-17T20:26:53.069120+00:00",
+    "projeto_id": 2,
+    "projeto_nome": "Planta Compressores P-55 — Petrobras",
+    "circuito_id": 4,
+    "circuito_tag": "HV-001",
+    "metodo_instalacao": "TRAY",
+    "agrupamento": 4,
+    "alteracoes": [
+      {
+        "campo": "fator_k2",
+        "valor_antigo": 0.65,
+        "valor_novo": 0.77
+      },
+      {
+        "campo": "corrente_corrigida",
+        "valor_antigo": 135.99,
+        "valor_novo": 114.79
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-17T20:26:53.069120+00:00",
+    "projeto_id": 2,
+    "projeto_nome": "Planta Compressores P-55 — Petrobras",
+    "circuito_id": 6,
+    "circuito_tag": "GE-001",
+    "metodo_instalacao": "TRAY",
+    "agrupamento": 2,
+    "alteracoes": [
+      {
+        "campo": "fator_k2",
+        "valor_antigo": 0.8,
+        "valor_novo": 0.88
+      },
+      {
+        "campo": "corrente_corrigida",
+        "valor_antigo": 76.35,
+        "valor_novo": 69.41
+      }
+    ]
+  }
+]

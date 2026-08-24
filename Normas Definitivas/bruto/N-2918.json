@@ -1,0 +1,2591 @@
+{
+  "codigo_norma": "N-2918",
+  "titulo": "Atmosferas Explosivas - Classificação de",
+  "tipo_documento": "norma",
+  "revisao": "REV. 0",
+  "data_norma": "08/2020",
+  "escopo": "239 páginas Atmosferas Explosivas - Classificação de Áreas Procedimento Cabe à CONTEC - Subcomissão Autora, a orientação quanto à interpretação do texto desta Norma. A Unidade da PETROBRAS usuária desta Norma é a responsável pela adoção e aplicação das suas seções, subseções e enumerações. Comissão de Normalização Técnica Requisito Técnico: Prescrição estabelecida como a mais adequada e que deve ser utilizada estritamente em conformidade com esta Norma. Uma eventual resolução de não a seguir (“não conformidade” com esta Norma) deve ter fundamentos técnico-gerenciais e deve ser aprovada e registrada pela Unidade da PETROBRAS usuária desta Norma. É caracterizada por verbos de caráter impositivo. SC - 06 Prática Recomendada: Prescrição que pode ser utilizada nas condições previstas por esta Norma, mas que admite (e adverte sobre) a possibilidade de alternativa (não escrita nesta Norma) mais adequada à aplicação específica. A alternativa adotada deve ser aprovada e registrada pela Unidade da PETROBRAS usuária desta Norma. É caracterizada por verbos de caráter não impositivo. É indicada pela expressão: [Prática Recomendada]. Cópias dos registros das “não conformidades” com esta Norma, q",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Magnitudes Relativas de uma Fonte de Risco",
+      "cabecalho": [
+        "Característica do processo",
+        "Magnitude baixa",
+        "Magnitude moderada",
+        "Magnitude elevada"
+      ],
+      "linhas": [
+        {
+          "Característica do processo": "Volume (m3)",
+          "Magnitude baixa": "< 18,9",
+          "Magnitude moderada": "18,9 a 94,6",
+          "Magnitude elevada": "> 94,6"
+        },
+        {
+          "Característica do processo": "Pressão (kgf/cm2)",
+          "Magnitude baixa": "< 7,0",
+          "Magnitude moderada": "7,0 a 35,2",
+          "Magnitude elevada": "> 35,2"
+        },
+        {
+          "Característica do processo": "Vazão (m3/h)",
+          "Magnitude baixa": "< 27,3",
+          "Magnitude moderada": "27,3 a 136,4",
+          "Magnitude elevada": "> 136,4"
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 2 - Tabela de Orientação para Desenvolvimento da Figura 1.1",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 5 - Tabela de Orientação para Desenvolvimento da Figura 3",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada ambiente: adequada Edificação: limitada Ventilação: forçada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 6 - Tabela de Orientação para Desenvolvimento da Figura 4",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: limitada ou impedida Ambiente externo: adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 7 - Tabela de Orientação para Desenvolvimento da Figura 5",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: limitada ou impedida",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 8 - Tabela de Orientação para Desenvolvimento da Figura 6",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: limitada ou impedida Sem ventilação forçada Ambiente externo 1: adequada Ambiente externo 2: limitada ou impedida",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 9 - Tabela de Orientação para Desenvolvimento da Figura 7",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: limitada ou impedida Sem ventilação mecânica Ambiente externo 1: adequada Ambiente externo 2: limitada ou impedida",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 10 - Tabela de Orientação para Desenvolvimento das Figuras 8 e 9",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: adequada Regiões internas: limitada ou impedida Ambiente externo: adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Aplicação",
+          "Baixa": "Todos, com exceção de E&P",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 11 - Tabela de Orientação para Desenvolvimento das Figuras 10 e 11",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Ambiente interno: limitada Regiões internas: impedida Ambiente externo: adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 15 - Tabela de Orientação para Desenvolvimento da Figura 16",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Área interna: limitada Área externa: adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que o ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 16 - Tabela de Orientação para Desenvolvimento da Figura 17",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Área interna: limitada Área externa 1: adequada Área externa 2: limitada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que o ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 19 - Tabela de Orientação para Desenvolvimento da Figura 23",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada (forçada)",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás ou vapor inflamável",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 20 - Tabela de Orientação para Desenvolvimento das Figuras 25.1 e 25.2",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 23 - Tabela de Orientação para Desenvolvimento da Figura 28",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "Superior a 19,3 kgf/cm2",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 24 - Tabela de Orientação para Desenvolvimento da Figura 29",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Limitada ou impedida",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 25 - Tabela de Orientação para Desenvolvimento da Figura 30",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 27 - Tabela de Orientação para Desenvolvimento da Figura 35",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada - X": "X",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 29 - Tabela de Orientação para Desenvolvimento da Figura 37",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Limitada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 30 - Tabela de Orientação para Desenvolvimento da Figura 38",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Elevada/Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Elevada/Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada - X": "X",
+          "Elevada/Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Elevada/Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada - X": "",
+          "Elevada/Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Elevada/Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 32 - Tabela de Orientação para Desenvolvimento da Figura 40",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Elevada - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada - X": "X",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido combustível (ponto de fulgor maior que 60 ºC",
+          "Moderada - X": "",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Elevada - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 33 - Tabela de Orientação para Desenvolvimento da Figura 41",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Elevada - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada": "X",
+          "Elevada - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada": "X",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada": "",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás ou líquido inflamável",
+          "Moderada": "",
+          "Elevada - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada": "",
+          "Elevada - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 34 - Tabela de Orientação para Desenvolvimento da Figura 42",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás ou líquido inflamável",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela 35 - Critérios de Potência de Recarga para Locação, Ventilação e Classificação",
+      "cabecalho": [
+        "Tipo de bateria de acumuladores",
+        "Potência",
+        "Local de instalação",
+        "Requisito mínimo",
+        "Classificação da área"
+      ],
+      "linhas": [
+        {
+          "Tipo de bateria de acumuladores": "Ventiladas",
+          "Potência": "maior que 2 kW",
+          "Local de instalação": "Sala separada",
+          "Requisito mínimo": "Exaustão forçada independente",
+          "Classificação da área": "Zona 2"
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "entre 0,2 kW e 2 kW",
+          "Local de instalação": "Sala separada",
+          "Requisito mínimo": "Exaustão forçada independente",
+          "Classificação da área": "Área não classificada"
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "",
+          "Local de instalação": "Armário separado",
+          "Requisito mínimo": "Ventilação natural (ver Nota 1) com abertura no topo, em local bem ventilado",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "menor do que 0,2 kW",
+          "Local de instalação": "Armário separado",
+          "Requisito mínimo": "",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "",
+          "Local de instalação": "Caixa de baterias",
+          "Requisito mínimo": "Ventilação natural (ver Nota 1) em ambiente aberto",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "VRLA (“Valve Regulated Lead Acid”)",
+          "Potência": "maior que 20 kW",
+          "Local de instalação": "Sala separada",
+          "Requisito mínimo": "Exaustão forçada independente",
+          "Classificação da área": "zona 2"
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "entre 2 kW e 20 kW",
+          "Local de instalação": "Sala separada",
+          "Requisito mínimo": "Exaustão forçada independente",
+          "Classificação da área": "Área não classificada"
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "",
+          "Local de instalação": "Armário separado",
+          "Requisito mínimo": "Ventilação natural (ver Nota 1) com abertura no topo, em local bem ventilado",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "menor do que 2 kW",
+          "Local de instalação": "Armário separado",
+          "Requisito mínimo": "",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "",
+          "Potência": "",
+          "Local de instalação": "Caixa de baterias",
+          "Requisito mínimo": "Ventilação natural (ver Nota 1) em ambiente aberto",
+          "Classificação da área": ""
+        },
+        {
+          "Tipo de bateria de acumuladores": "NOTA 1 Ventilação natural pode ser obtida por meio de um duto de grandes dimensões, terminando a, pelo menos, 1,25 m acima do armário, em pescoço de ganso, cabeça de cogumelo ou equivalente. Orifícios ou “venezianas” para a entrada de ar devem ser feitos em, pelo menos, dois lados opostos do armário, na parte inferior. NOTA 2 Bateria selada, VRLA ou de gel é um tipo de bateria chumbo-ácido.",
+          "Potência": "",
+          "Local de instalação": "",
+          "Requisito mínimo": "",
+          "Classificação da área": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela pagina 99",
+      "cabecalho": [
+        "Zona",
+        "Níveis de proteção de equipamentos (EPL) adequados para a instalação",
+        "Grupo"
+      ],
+      "linhas": [
+        {
+          "Zona": "0",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Ga’",
+          "Grupo": "II Gases inflamáveis"
+        },
+        {
+          "Zona": "1",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Ga’ ou ‘Gb’",
+          "Grupo": ""
+        },
+        {
+          "Zona": "2",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Ga’, ‘Gb’ ou ‘Gc’",
+          "Grupo": ""
+        },
+        {
+          "Zona": "20",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Da’",
+          "Grupo": "III Poeiras combustíveis"
+        },
+        {
+          "Zona": "21",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Da’ ou ‘Db’",
+          "Grupo": ""
+        },
+        {
+          "Zona": "22",
+          "Níveis de proteção de equipamentos (EPL) adequados para a instalação": "‘Da’, ‘Db’ ou ‘Dc’",
+          "Grupo": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela A.17 - Tabela de Orientação para Desenvolvimento da Figura A.40",
+      "cabecalho": [
+        "áreas no convés aberto",
+        "dentro de bacias de contenção em torno das"
+      ],
+      "linhas": [
+        {
+          "áreas no convés aberto": "válvulas do “manifold” de cargas e em torno destes, até uma altura de 2,5 m acima do",
+          "dentro de bacias de contenção em torno das": ""
+        },
+        {
+          "áreas no convés aberto": "convés.",
+          "dentro de bacias de contenção em torno das": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.1 - Tabela de Orientação para Desenvolvimento da Figura B.1",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.2 - Tabela de Orientação para Desenvolvimento da Figura B.2",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.3 - Tabela de Orientação para Desenvolvimento da Figura B.3",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "X",
+          "Moderada - X": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.6 - Tabela de Orientação para Desenvolvimento da Figura B.6",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada - X": "X",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "LAV (GLP)",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.10 - Tabela de Orientação para Desenvolvimento da Figura B.10",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Parte sob “pilotis”: adequada Parte sobre a laje: limitada ou adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar (menor que 0,8)",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.11 - Tabela de Orientação para Desenvolvimento da Figura B.11",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Parte sob “pilotis”: adequada Parte sobre a laje: limitada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar (maior do que 0,8 e menor do que 1,0)",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.12 - Tabela de Orientação para Desenvolvimento da Figura B.12",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Parte sob “pilotis”: adequada Parte sobre a laje: adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar (entre 0,8 e 1,0)",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.13 - Tabela de Orientação para Desenvolvimento da Figura B.13",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Externa: adequada Sobre a laje: impedida Sem ventilação mecânica",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar (entre 0,8 e 1,0)",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.16 - Tabela de Orientação para Desenvolvimento da Figura B.16",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável associado com gás mais leve do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar associado com maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.18 - Tabela de Orientação para Desenvolvimento da Figura B.23",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás natural (90 % metano e 9 % etano, propano, butano)",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.19 - Tabela de Orientação para Desenvolvimento da Figura B.24",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta e Gás combustível (50 % metano, 20 % hidrogênio e 30 % C +) 2",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar (nafta) associado com menor do que a do ar (gás combustível)",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.21 - Tabela de Orientação para Desenvolvimento da Figura B.26",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.24 - Tabela de Orientação para Desenvolvimento da Figura B.29",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás natural, hidrogênio e nafta",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor associada com maior do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.26 - Tabela de Orientação para Desenvolvimento da Figura B.31",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta e hidrogênio",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior associado com menor do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.28 - Tabela de Orientação para Desenvolvimento da Figura B.33",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta e hidrogênio",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior e menor do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.29 - Tabela de Orientação para Desenvolvimento da Figura B.34",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada - X": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás natural",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.30 - Tabela de Orientação para Desenvolvimento da Figura B.35",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada e forçada (descontínua)",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta ou gás natural e hidrogênio",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior e menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.31 - Tabela de Orientação para Desenvolvimento da Figura B.36",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta e hidrogênio",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior e menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.32 - Tabela de Orientação para Desenvolvimento da Figura B.37",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás natural",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.34 - Tabela de Orientação para Desenvolvimento da Figura B.39",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Hidrogênio",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.35 - Tabela de Orientação para Desenvolvimento da Figura B.40",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada - X": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Nafta, gás natural e hidrogênio",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior e menor do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.41 - Tabela de Orientação para Desenvolvimento da Figura B.50",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada - X": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Hidrogênio",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.42 - Tabela de Orientação para Desenvolvimento da Figura B.51",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Hidrogênio",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.44 - Tabela de Orientação para Desenvolvimento da Figura B.53",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada e forçada contínua",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Hidrogênio",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.48 - Tabela de Orientação para Desenvolvimento da Figura B.57",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "X",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada": "",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Adequada",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Hidrogênio, CO e CH 4",
+          "Moderada": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.50 - Tabela de Orientação para Desenvolvimento da Figura B.59",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Água contaminada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela B.52 - Tabela de Orientação para Desenvolvimento da Figura B.61",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "",
+          "Moderada": "",
+          "Alta": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Adequada",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Gás de refinaria ou gás natural",
+          "Moderada": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Menor do que a do ar",
+          "Moderada": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.1 - Tabela de Orientação para Desenvolvimento da Figura C.1",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Externa: adequada No interior do tanque: impedida",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.2 - Tabela de Orientação para Desenvolvimento da Figura C.2",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Externa: adequada No interior do tanque: impedida",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.3 - Tabela de Orientação para Desenvolvimento da Figura C.11",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Externa: adequada No interior da caixa: impedida",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.4 - Tabela de Orientação para Desenvolvimento da Figura C.12",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Externa: adequada No interior da caixa: limitada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "LAV",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.5 - Tabela de Orientação para Desenvolvimento da Figura C.13",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Externa: adequada No interior do equipamento: limitada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela C.7 - Tabela de Orientação para Desenvolvimento da Figura C.15",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa - X",
+        "Moderada - X",
+        "Alta"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa - X": "X",
+          "Moderada - X": "X",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa - X": "Externa: adequada Equipamento auxiliar: limitada",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa - X": "Líquido inflamável",
+          "Moderada - X": "",
+          "Alta": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa - X": "Maior do que a do ar",
+          "Moderada - X": "",
+          "Alta": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela D.1 - Tabela de Orientação para Desenvolvimento da Figura D.1 e D.2",
+      "cabecalho": [
+        "Magnitude relativa da fonte de risco - Volume",
+        "Baixa",
+        "Moderada - X",
+        "Alta - X"
+      ],
+      "linhas": [
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Pressão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Vazão",
+          "Baixa": "",
+          "Moderada - X": "X",
+          "Alta - X": "X"
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Ventilação",
+          "Baixa": "Externa: adequada",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Tipo de fluido",
+          "Baixa": "Gás tóxico e inflamável",
+          "Moderada - X": "",
+          "Alta - X": ""
+        },
+        {
+          "Magnitude relativa da fonte de risco - Volume": "Densidade relativa",
+          "Baixa": "Menor do que a do ar",
+          "Moderada - X": "",
+          "Alta - X": ""
+        }
+      ]
+    },
+    {
+      "titulo_tabela": "Tabela pagina 230",
+      "cabecalho": [
+        "Pressão de operação",
+        "Distância (X) (m) Locais bem ventilados",
+        "Distância (X) (m) Locais com ventilação restrita"
+      ],
+      "linhas": [
+        {
+          "Pressão de operação": "> 75 ≤ 100",
+          "Distância (X) (m) Locais bem ventilados": "1.5",
+          "Distância (X) (m) Locais com ventilação restrita": "2.0"
+        },
+        {
+          "Pressão de operação": "> 50 ≤ 75",
+          "Distância (X) (m) Locais bem ventilados": "1.5",
+          "Distância (X) (m) Locais com ventilação restrita": "2.0"
+        },
+        {
+          "Pressão de operação": "> 30 ≤ 50",
+          "Distância (X) (m) Locais bem ventilados": "1.0",
+          "Distância (X) (m) Locais com ventilação restrita": "1.5"
+        },
+        {
+          "Pressão de operação": "> 20 ≤ 30",
+          "Distância (X) (m) Locais bem ventilados": "1.0",
+          "Distância (X) (m) Locais com ventilação restrita": "1.5"
+        },
+        {
+          "Pressão de operação": "> 10 ≤ 20",
+          "Distância (X) (m) Locais bem ventilados": "0.75",
+          "Distância (X) (m) Locais com ventilação restrita": "1.0"
+        },
+        {
+          "Pressão de operação": "> 7 ≤ 10",
+          "Distância (X) (m) Locais bem ventilados": "0.0",
+          "Distância (X) (m) Locais com ventilação restrita": "0.75"
+        },
+        {
+          "Pressão de operação": "> 5 ≤ 7",
+          "Distância (X) (m) Locais bem ventilados": "0.0",
+          "Distância (X) (m) Locais com ventilação restrita": "0.75"
+        },
+        {
+          "Pressão de operação": "> 2 ≤ 5",
+          "Distância (X) (m) Locais bem ventilados": "0.0",
+          "Distância (X) (m) Locais com ventilação restrita": "0.5"
+        },
+        {
+          "Pressão de operação": "> 0.1 ≤ 2",
+          "Distância (X) (m) Locais bem ventilados": "0.0",
+          "Distância (X) (m) Locais com ventilação restrita": "0.5"
+        },
+        {
+          "Pressão de operação": "≤ 0.1",
+          "Distância (X) (m) Locais bem ventilados": "0.0",
+          "Distância (X) (m) Locais com ventilação restrita": "0.5"
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "- Subseção 13.3.10",
+    "ventilação natural movimentação do ar e sua renovação com ar limpo devido aos efeitos do vento ou gradientes de temperatura 3.10 ventilação artificial movimentação do ar e sua renovação com ar limpo através de meios artificiais, por exemplo ventiladores ou exaustores aplicados numa determinada área 3.11 ambiente com ventilação natural adequada uma edificação com ventilação natural pode ser considerada com ventilação adequada quando não possui nenhum obstáculo ao movimento do ar, com movimentação",
+    "áreas de produção são áreas em que os gases e líquidos inflamáveis são produzidos, processados, armazenados, transferidos ou manuseados antes de atingirem as instalações de transporte 3.28 “skid” Ex montagem pré-testada de equipamentos que pode consistir de um grande número de itens compatíveis com funcionalidades diferentes (equipamento principal e seus acessórios) que apresentam placas de marcação Ex individuais incluindo classe de temperatura, grupo e subgrupo, grau de proteção e níveis de pr",
+    "apenas de uma parte, incluindo classe de temperatura, grupo e subgrupo, grau de proteção e “Equipment Protection Levels” (EPL). NOTA 2 O “Skid” Ex, no caso de importação, necessita da certificação no Brasil no âmbito do",
+    "diferentes pontos de fulgor e classes de temperatura, a classificação de áreas deve seguir a característica do produto mais rigoroso. NOTA 2 Caso um tanque possua válvula de pressão e vácuo, mesmo armazenando produtos com",
+    "diferentes pontos de fulgor e classes de temperatura, a classificação de áreas deve seguir a característica do produto mais rigoroso.",
+    "como zona 1, Grupo II, Subgrupo C e Classe de Temperatura “T1”. 13.3.4 Os dutos de saída do sistema de exaustão necessitam ter suas saídas dispostas para um ambiente aberto e distante de outras tomadas de ar. 13.3.5 O arranjo de dutos deve favorecer o fluxo de extração no teto da sala e insuflamento ou entrada natural de ar por baixo. 13.3.6 Os critérios de potência de recarga para locação, ventilação e classificação de áreas são definidos na Tabela 35.",
+    "referentes aos limites de extensão das zonas 0, 1 e 2 ao redor das fontes de liberação; e) na coluna dados de CLASSE DE TEMPERATURA e GRUPO devem ser obtidos, por",
+    "NOTA Para os casos em que ocorrer variações quanto a Subgrupo ou Classe de Temperatura de zonas (ou sobreposições), os símbolos não devem ser diferenciados por cor e sim por variações nas hachuras.",
+    "Negativa 18.20 As áreas com pressurização negativa devem possuir a respectiva simbologia, juntamente com o grupo e subgrupo do gás e a classe de temperatura do local. 18.21 Outros símbolos complementares podem ser adotados no projeto, desde que constem em todos os desenhos de classificação de áreas da unidade e permitam claro reconhecimento tanto em reproduções a cores quanto em preto e branco.",
+    "a) área classificadas de zona 1 quando as áreas adjacentes forem de zona 1; b) área classificadas de zona 2 quando as áreas adjacentes forem de zona 2; c) área classificadas de zona 1 quando as áreas adjacentes forem de zona 1 e zona 2. 18.23.7 O símbolo e informações a serem utilizados nas legendas completas das plantas de classificação de áreas: indicar o símbolo da zona acrescido do grupo, subgrupo, classe de temperatura e EPL. Exemplo de legenda completa:",
+    "Subestrutura e no Interior da Torre, Vários Poços de Produção Abaixo e em Área com Ventilação Impedida A.5.4.4 Para unidades de perfuração móvel, sondas tipo auto elevatórias, semissubmersíveis, navios sondas e similares, os exemplos mostrados em outras partes desta seção podem ser utilizados, quando aplicáveis. A.5.5 Tanque de Lama A.5.5.1 A área ao redor do tanque de lama, com teto e paredes vazadas, localizado em ambiente terrestre, sobre o tanque de lama, com ventilação adequada pode ser cla",
+    "a) somente ocorre a liberação de hidrocarbonetos em temperaturas superiores a 100 ºC.",
+    "Frontal B.5 Unidades de Geração de Hidrogênio (UGH) CARGAS: gás natural e nafta. B.5.1 Seção de Pré-Tratamento de Cargas B.5.1.1 Vaso de Gás Natural (“Natural Gas Drum”) Local com fontes de risco de grau secundário de gás inflamável com densidade relativa menor do que o ar e pode ser representado de acordo com a Figura B.23.",
+    "Figura B.39 - Filtro Coalescedor de Óleo Combustível do Hidrogênio de Reciclo B.6.2 Seção de Reforma B.6.2.1 Forno Reformador (“Reformer”) com Queimadores no Topo (“Top Fired”) B.6.2.1.1 Forno reformador (”reformer”) com queimadores no topo (“top fired”) e tiragem induzida: as áreas de topo, fundo e ao redor de fornos do tipo “top fired”, com tiragem induzida, em ambiente bem ventilado, podem ser consideradas como áreas não classificadas e podem ser representadas de acordo com a Figura B.40.",
+    "Ambiente com Ventilação Adequada B.6.3 Seção de Geração de Vapor B.6.3.1 Caldeira recuperadora de calor (“waste heat boiler”): os arredores da entrada da caldeira podem ser considerados como áreas não classificadas, de acordo com Figura B.46. NOTA Áreas classificadas geradas por equipamentos de processo adjacentes à caldeira recuperadora de calor podem gerar áreas classificadas ao redor da caldeira.",
+    "Figura B.49 - Vaso de Purga em Ambiente com Ventilação Adequada B.6.3.5 Dessuperaquecedor de vapor para exportação (“export steam superheater”): a área ao seu redor pode ser considerada como não classificada. B.6.4 Seção de Purificação B.6.4.1 Reator de conversão de CO de alta temperatura [“high temperature shift reactor” (HTS)]: local com fontes de risco de grau secundário (45 % hidrogênio, 40 % vapor de água, 5 % CO2 e 10 % inflamáveis), em ambiente bem ventilado, e que pode ser representado d",
+    "NOTA As medidas estão em metros. Figura B.50 - Reator de Conversão de CO de Alta Temperatura B.6.4.2 Aquecedor de água de caldeira (“boiler feed water heater”): local com fontes de risco de grau secundário (50 % hidrogênio, 30 % vapor de água, 10 % CO2 e 10 % inflamáveis), em ambiente bem ventilado, e que pode ser representado de acordo com a Figura B.51.",
+    "Aplicável B.6.5 Seção de Combustível B.6.5.1 Vaso de gás combustível (“fuel gas drum”): local com fontes de risco de grau secundário de gás de refinaria (50 % metano, 20 % hidrogênio e 30 % C2+), gás natural (90 % metano e 9 % C2+) ou combinação destes, com densidade relativa menor do que a do ar, e que pode ser representado de acordo com a Figura B.61.",
+    "Biocombustíveis D.1 Fábrica de Fertilizantes (FAFEN) D.1.1 Os produtos que geram classificação de áreas são: hidrogênio (IIC, T1) e gás natural (IIA, T3). D.1.2 Para equipamentos com correntes de produção com mais de 15 % de amônia, a área pode ser considerada como não classificada. NOTA 1 A amônia possui alta toxicidade (IDLH = 300 ppm) e faixa de inflamabilidade entre 15 % e"
+  ],
+  "formulas": [
+    "Densidade < 0,8 ............................................................................................................ 145",
+    "Limitada e Densidade > 0,8 e < 1,0 .............................................................................. 146",
+    "Impedida e Densidade < 0,8 ......................................................................................... 149",
+    "propagação de chama, baixa densidade relativa (d = 0,07), baixo nível de energia mínima",
+    "de ignição (MIC = 28 µJ) e alta temperatura de ignição (Tig = 560 ºC).",
+    "Limitada e Densidade < 0,8",
+    "Ventilação Limitada e Densidade > 0,8 e < 1,0",
+    "Ventilação Impedida e Densidade < 0,8",
+    "secundário (75 % nafta, 25 % hidrogênio e < 200 ppm H2S), de vapor inflamável com",
+    "grau secundário de gás natural (95 % gás natural, 5 % hidrogênio e < 20 ppm H2S), com",
+    "NOTA 1 A amônia possui alta toxicidade (IDLH = 300 ppm) e faixa de inflamabilidade entre 15 % e"
+  ],
+  "valores_minimos": [
+    "1 A",
+    "2 A",
+    "4 A",
+    "60 °C",
+    "37,8 °C",
+    "21 °C",
+    "3 A"
+  ],
+  "referencias_normativas": [
+    "N-1645",
+    "N-381",
+    "N-1674",
+    "N-2040",
+    "N-2549",
+    "NBR IEC 61892-6",
+    "NBR IEC 60079-19",
+    "NBR IEC 60050-426",
+    "NBR IEC 60079-10-1",
+    "NBR IEC 60079-10-2",
+    "NBR IEC 60079-13",
+    "NBR IEC 60079-14",
+    "NBR IEC 60079-16",
+    "NBR IEC 60079-20-1",
+    "NBR IEC 61892-7",
+    "NBR IEC 60079",
+    "IEC 61892-6",
+    "IEC 60079-19",
+    "IEC 60050-426",
+    "IEC 60079-10-1",
+    "IEC 60079-10-2",
+    "IEC 60079-13",
+    "IEC 60079-14",
+    "IEC 60079-16",
+    "IEC 60079-20-1",
+    "IEC 61892-7",
+    "IEC 80079-20-2",
+    "IEC 60092-502",
+    "IEC 60079",
+    "API RP 505",
+    "NFPA 59",
+    "NFPA 497",
+    "NFPA 499"
+  ]
+}

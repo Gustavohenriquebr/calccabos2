@@ -1,0 +1,294 @@
+{
+  "codigo_norma": "N-2928",
+  "titulo": "Transformadores de Potência",
+  "tipo_documento": "Especificação",
+  "revisao": "REV. ISADA",
+  "data_norma": "06/2014",
+  "escopo": "Esta Norma fixa os requisitos para aquisição de transformadores de potência secos ou imersos em líquido isolante, com potência a partir de 500 kVA, para uso nas instalações da PETROBRAS.",
+  "tabelas": [
+    {
+      "titulo_tabela": "Tabela 1 - Acessórios para Transformadores Imersos em Líquido Isolante",
+      "cabecalho": [
+        "Máxima tensão operativa (Um)",
+        "Um ≤ 36 kV",
+        "coluna_3",
+        "Um > 36 kV",
+        "coluna_5"
+      ],
+      "linhas": [
+        {
+          "Máxima tensão operativa (Um)": "Potências nominais (kVA)",
+          "Um ≤ 36 kV": "Sn < 5000",
+          "coluna_3": "Sn ≥ 5000",
+          "Um > 36 kV": "Sn < 5000",
+          "coluna_5": "Sn ≥ 5000"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador externo de nível de óleo",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador de temperatura do enrolamento",
+          "Um ≤ 36 kV": "O",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicador de temperatura do óleo",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Dispositivo para alívio de pressão",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Relé detector de gás tipo Buchholz para transformadores não selados",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Painel auxiliar",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Válvula de drenagem de óleo",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios de ligação para filtro de óleo",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Dispositivo para retirada de amostra de óleo",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Conservador de óleo para transformadores não selados",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Respirador com secador de ar quando houver conservador",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Válvulas para retenção do óleo dos radiadores ou trocadores de calor, quando destacáveis",
+          "Um ≤ 36 kV": "O",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios de aterramento do tanque",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios para suspensão da parte ativa do transformador completamente montado, das tampas, do conservador de óleo e dos radiadores",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Meios para locomoção",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Apoios para macacos",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Abertura de inspeção",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "X",
+          "Um > 36 kV": "X",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Comutador de derivação sem tensão",
+          "Um ≤ 36 kV": "O",
+          "coluna_3": "O",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Comutador de derivação sob carga",
+          "Um ≤ 36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Relé de súbita pressão para transformadores selados",
+          "Um ≤ 36 kV": "X",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": ""
+        },
+        {
+          "Máxima tensão operativa (Um)": "Sistema de ventilação forçada",
+          "Um ≤ 36 kV": "O",
+          "coluna_3": "O",
+          "Um > 36 kV": "O",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Indicadores de circulação de óleo para resfriamento por circulação forçada",
+          "Um ≤ 36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": "X"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Sistema de Monitoramento e Diagnóstico On-line",
+          "Um ≤ 36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": "O"
+        },
+        {
+          "Máxima tensão operativa (Um)": "Legenda: (X) - Obrigatório; (O) - Opcional (Deve ser definido na especificação).",
+          "Um ≤ 36 kV": "",
+          "coluna_3": "",
+          "Um > 36 kV": "",
+          "coluna_5": ""
+        }
+      ]
+    }
+  ],
+  "criterios_dimensionamento": [
+    "A designação da ligação do transformador deve atender às características de projeto e, quando aplicável, às exigências da concessionária.",
+    "Para transformadores imersos em líquido isolante, os acessórios obrigatórios e opcionais devem seguir a Tabela 1 conforme a classe de tensão e a potência nominal.",
+    "Para transformadores com classe de tensão maior que 36 kV, o rendimento mínimo deve seguir os valores por faixa de potência nominal definidos no item 4.5.2.",
+    "O sistema local de supervisão e controle deve monitorar OLTC, ventilação forçada, temperaturas e eventos de alarme e trip.",
+    "Os recursos de supervisão e controle para a sala de controle devem ser disponibilizados via rede de comunicação em protocolo IEC 61850.",
+    "Quando solicitado, o OLTC deve atender à IEC 60214-1 e possuir chave local/remoto e manual/automático.",
+    "O OLTC deve possuir recursos para operação em paralelo, permitindo modos mestre/escravo e individualizado."
+  ],
+  "formulas": [
+    "Um ≤ 36 kV",
+    "Um > 36 kV",
+    "Sn < 5 000 kVA",
+    "Sn ≥ 5 000 kVA",
+    "5 MVA < Sn < 30 MVA",
+    "30 MVA ≤ Sn < 50 MVA",
+    "50 MVA ≤ Sn < 100 MVA",
+    "100 MVA ≤ Sn < 200 MVA",
+    "Sn ≥ 200 MVA",
+    "rendimento ≥ 99,30%",
+    "rendimento ≥ 99,40%",
+    "rendimento ≥ 99,50%",
+    "rendimento ≥ 99,60%",
+    "rendimento ≥ 99,70%"
+  ],
+  "valores_minimos": [
+    "72,5 kV",
+    "36 kV",
+    "230 kV",
+    "145 kV",
+    "10 A",
+    "5 000 kVA",
+    "5 MVA",
+    "30 MVA",
+    "50 MVA",
+    "100 MVA",
+    "200 MVA",
+    "99,30%",
+    "99,40%",
+    "99,50%",
+    "99,60%",
+    "99,70%"
+  ],
+  "referencias_normativas": [
+    "NBR IEC 60529",
+    "NBR IEC 60156",
+    "NBR IEC 60450",
+    "IEC 601",
+    "IEC 6045",
+    "IEC 6052",
+    "IEC 60068-1",
+    "IEC 60068-2-14",
+    "IEC 60076-1",
+    "IEC 60076-2",
+    "IEC 60076-3",
+    "IEC 60076-4",
+    "IEC 60076-5",
+    "IEC 60076-6",
+    "IEC 60076-10",
+    "IEC 60076-11",
+    "IEC 60076-13",
+    "IEC 60076-16",
+    "IEC 60076-21",
+    "IEC 60146-1-3",
+    "IEC 60214-1",
+    "IEC 60247",
+    "IEC 60567",
+    "IEC 60599",
+    "IEC 60814",
+    "IEC 61000-4-3",
+    "IEC 61000-4-4",
+    "IEC 61000-4-5",
+    "IEC 61000-4-6",
+    "IEC 61181",
+    "IEC 61378-1",
+    "IEC 61892-3",
+    "IEC 60",
+    "IEC 61",
+    "IEC 6007",
+    "IEC 6",
+    "IEC 60529",
+    "IEC 600",
+    "IEC 61850",
+    "IEC 610",
+    "IEC 60156",
+    "IEC 60450",
+    "ISO 4624",
+    "ISO 12944",
+    "ISO 12944-4",
+    "ISO 12944-5",
+    "ISO 12944-6",
+    "ISO 12944-7",
+    "ISO 20340",
+    "ISO 12944-2",
+    "ISO 12944-1",
+    "ISO 12944-3"
+  ]
+}
