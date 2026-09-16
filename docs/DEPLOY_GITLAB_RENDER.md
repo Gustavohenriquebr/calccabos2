@@ -1,6 +1,6 @@
-# CalcCabos v1.0: GitLab e Render
+# CalcCabos v1.0: GitHub e Render
 
-O repositorio de deploy e `guguinha2026br/calccabos` no GitLab.
+O repositorio de deploy e `Gustavohenriquebr/calccabos` no GitHub.
 O servico web executa o frontend React existente e a API Node na mesma origem.
 O motor FastAPI permanece em um segundo servico; MongoDB Atlas persiste usuarios,
 projetos e circuitos. Nao usar o antigo servidor emergencial com arrays em memoria.
@@ -41,7 +41,7 @@ Isso invalida sessoes antigas. Nao reutilizar os exemplos enviados em conversas.
 
 ## Procedimento
 
-1. Conectar o Render ao GitLab autorizado e selecionar este repositorio, branch `main`.
+1. Conectar o Render ao GitHub autorizado e selecionar este repositorio, branch `main`.
 2. Usar o `render.yaml` da raiz ou configurar os dois servicos conforme a tabela.
 3. Preencher Atlas, CORS e URL do motor no painel; manter planos Free.
 4. Confirmar que os logs mostram clonagem do GitLab e os arquivos completos.
