@@ -8,6 +8,17 @@ function value(value, fallback = 'N/D') {
   return value
 }
 
+function pdfSafeText(value) {
+  if (value === null || value === undefined) return value
+  return String(value)
+    .replace(/Δ/g, 'Delta')
+    .replace(/√/g, 'raiz')
+    .replace(/≤/g, '<=')
+    .replace(/≥/g, '>=')
+    .replace(/²/g, '2')
+    .replace(/³/g, '3')
+}
+
 function pct(value) {
   if (value === null || value === undefined || value === '') return 'N/D'
   return `${Number(value).toFixed(2)}%`
@@ -169,6 +180,10 @@ async function buildProfessionalPdf(snapshot) {
       Keywords: 'CalcCabos, memorial tecnico, cabos, projeto eletrico',
     },
   })
+  const originalText = doc.text.bind(doc)
+  doc.text = (text, ...args) => originalText(pdfSafeText(text), ...args)
+  const originalHeightOfString = doc.heightOfString.bind(doc)
+  doc.heightOfString = (text, ...args) => originalHeightOfString(pdfSafeText(text), ...args)
   const ready = collectPdf(doc)
   const project = snapshot.project
 

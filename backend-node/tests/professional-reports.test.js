@@ -40,6 +40,29 @@ const circuitoOk = {
   status_final: 'OK',
 }
 
+const circuitoMt = {
+  ...circuitoOk,
+  _id: '507f1f77bcf86cd799439013',
+  tag: 'MT-01',
+  descricao: 'Alimentador media tensao',
+  tensao: 13800,
+  tensao_unidade: 'kV',
+  status_final: 'ALERTA',
+  validacao_mensagem: 'ΔV% do trecho está próxima do limite.',
+  metadados_calculo: {
+    tensao: {
+      valor_informado: 13.8,
+      unidade: 'kV',
+      tensao_v: 13800,
+      tensao_kv: 13.8,
+      tipo_sistema: 'AC',
+      referencia: 'fase_fase',
+      classificacao: 'MT',
+      contexto_aplicacao: 'industrial',
+    },
+  },
+}
+
 test('report snapshot contains project data, premises, alerts and immutable hash', () => {
   const snapshot = buildReportSnapshot({
     projeto,
@@ -98,6 +121,22 @@ test('Excel report has professional sheets and uses the same snapshot hash', () 
   assert.equal(circuitos[1][18], snapshot.input_hash)
 })
 
+test('snapshot and Excel preserve informed kV voltage instead of mixing normalized volts with kV', () => {
+  const snapshot = buildReportSnapshot({ projeto, circuitos: [circuitoMt], requestedMode: 'preliminar' })
+  const circuit = snapshot.circuits[0]
+
+  assert.equal(circuit.dados_informados.tensao, 13.8)
+  assert.equal(circuit.dados_informados.tensao_unidade, 'kV')
+  assert.equal(circuit.dados_informados.tensao_v, 13800)
+  assert.equal(circuit.dados_informados.classificacao_tensao, 'MT')
+
+  const buffer = buildProfessionalExcel(snapshot)
+  const workbook = XLSX.read(buffer, { type: 'buffer' })
+  const circuitos = XLSX.utils.sheet_to_json(workbook.Sheets.Circuitos, { header: 1 })
+  assert.equal(circuitos[1][5], 13.8)
+  assert.equal(circuitos[1][6], 'kV')
+})
+
 test('PDF report is generated from the same snapshot and avoids approval language', async () => {
   const snapshot = buildReportSnapshot({ projeto, circuitos: [circuitoOk], requestedMode: 'final' })
   const buffer = await buildProfessionalPdf(snapshot)
@@ -107,6 +146,17 @@ test('PDF report is generated from the same snapshot and avoids approval languag
   assert.doesNotMatch(text, /PROJETO APROVADO|100% conforme|sem margem de erro/i)
   assert.equal(snapshot.input_hash.length, 64)
   assert.equal(snapshot.project.nome, 'Edificio Aurora')
+})
+
+test('PDF report sanitizes technical symbols that are unsafe for the default PDF font', async () => {
+  const snapshot = buildReportSnapshot({ projeto, circuitos: [circuitoMt], requestedMode: 'preliminar' })
+  const buffer = await buildProfessionalPdf(snapshot)
+  const raw = buffer.toString('latin1')
+  const textRuns = Array.from(raw.matchAll(/<([a-f0-9]+)>/gi), (match) => Buffer.from(match[1], 'hex').toString('latin1')).join('')
+
+  assert.match(textRuns, /13\.80 kV/)
+  assert.match(textRuns, /DeltaV% do trecho/)
+  assert.doesNotMatch(textRuns, /13800 kV/)
 })
 
 test('statusFinal maps report statuses safely', () => {

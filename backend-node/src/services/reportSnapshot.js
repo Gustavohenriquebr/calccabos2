@@ -78,6 +78,13 @@ function circuitSnapshot(circuito, index) {
   const queda = numberOrNull(circuito.queda_tensao_acumulada ?? circuito.queda_tensao_pct ?? circuito.queda)
   const status = statusFinal(circuito.status_final || circuito.status || circuito.validacao_status)
   const tensaoMeta = circuito.metadados_calculo?.tensao || {}
+  const tensaoUnidade = cleanText(tensaoMeta.unidade || circuito.tensao_unidade || 'V', 20)
+  const tensaoInformada = numberOrNull(tensaoMeta.valor_informado)
+  const tensaoDisplay = tensaoInformada ?? (
+    tensaoUnidade === 'kV'
+      ? numberOrNull(tensaoMeta.tensao_kv ?? (numberOrNull(circuito.tensao) !== null ? numberOrNull(circuito.tensao) / 1000 : null))
+      : numberOrNull(tensaoMeta.tensao_v ?? circuito.tensao)
+  )
   const alertas = []
   if (circuito.validacao_mensagem) alertas.push(cleanText(circuito.validacao_mensagem))
   if (circuito.protecao_nota) alertas.push(cleanText(circuito.protecao_nota))
@@ -98,8 +105,9 @@ function circuitSnapshot(circuito, index) {
     dados_informados: {
       potencia_kw: numberOrNull(circuito.potencia_kw),
       potencia_kva: numberOrNull(circuito.potencia_kva),
-      tensao: numberOrNull(circuito.tensao),
-      tensao_unidade: cleanText(circuito.tensao_unidade || tensaoMeta.unidade || 'V', 20),
+      tensao: tensaoDisplay,
+      tensao_valor_informado: tensaoInformada,
+      tensao_unidade: tensaoUnidade,
       tensao_v: numberOrNull(tensaoMeta.tensao_v),
       tensao_kv: numberOrNull(tensaoMeta.tensao_kv),
       tipo_sistema_tensao: cleanText(circuito.tipo_sistema_tensao || circuito.corrente_ac_dc || tensaoMeta.tipo_sistema || 'AC', 20),

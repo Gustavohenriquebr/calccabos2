@@ -669,6 +669,7 @@ router.post('/importar-circuitos/preview', importRateLimit, upload.single('arqui
     const projetoId = req.body.projeto_id || req.body.projetoId
     await checkProjeto(projetoId, req.user._id)
     await assertUsageAllowed(req.user, 'spreadsheet_import')
+    if (!req.file) throw validationError('Arquivo obrigatorio para pre-visualizacao da importacao.')
     // Mantem comportamento atual: fluxo local sem parser de planilha no Node.
     res.json({ linhas: [], colunas: [], mapeamento_sugerido: {} })
   } catch (err) {
