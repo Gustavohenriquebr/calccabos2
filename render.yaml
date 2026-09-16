@@ -2,7 +2,7 @@ services:
   # Frontend React e API Node na mesma origem, a partir do GitLab.
   - type: web
     name: calccabos-final
-    repo: https://github.com/Gustavohenriquebr/calccabos
+    repo: https://github.com/Gustavohenriquebr/calccabos2
     branch: main
     runtime: node
     plan: free
@@ -64,7 +64,7 @@ services:
   # Backend Python/FastAPI: motor de calculo, relatorios legados e endpoints tecnicos.
   - type: web
     name: calccabos-python-final
-    repo: https://github.com/Gustavohenriquebr/calccabos
+    repo: https://github.com/Gustavohenriquebr/calccabos2
     branch: main
     runtime: python
     plan: free
