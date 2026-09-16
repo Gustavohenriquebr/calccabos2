@@ -112,7 +112,28 @@ test('PDF report is generated from the same snapshot and avoids approval languag
 test('statusFinal maps report statuses safely', () => {
   assert.equal(statusFinal('OK'), 'OK')
   assert.equal(statusFinal('CRITICO'), 'BLOQUEADO')
+  assert.equal(statusFinal('BLOCKED'), 'BLOQUEADO')
   assert.equal(statusFinal('ALERTA'), 'ALERTA')
   assert.equal(statusFinal('PENDENTE'), 'INCOMPLETO')
   assert.equal(statusFinal(''), 'NAO_AVALIADO')
+})
+
+test('Free preliminary PDF includes content before the stream closes and supports watermark', async () => {
+  const snapshot = buildReportSnapshot({
+    projeto,
+    circuitos: [{ ...circuitoOk, status_final: 'BLOCKED' }],
+    requestedMode: 'final',
+  })
+  snapshot.watermark = true
+  assert.equal(snapshot.document_status, 'PRELIMINAR')
+  assert.equal(snapshot.final_released, false)
+  const buffer = await buildProfessionalPdf(snapshot)
+  const raw = buffer.toString('latin1')
+  assert.equal(buffer.subarray(0, 4).toString(), '%PDF')
+  assert.match(raw, /%%EOF/)
+  assert.ok(buffer.length > 5000, 'PDF must include the report, not only an empty page')
+  // PDFKit writes text as hex-encoded text runs when compression is disabled.
+  const textRuns = Array.from(raw.matchAll(/<([a-f0-9]+)>/gi), (match) => Buffer.from(match[1], 'hex').toString('latin1')).join('')
+  assert.match(textRuns, /Edificio Aurora/)
+  assert.match(textRuns, /PLANO FREE/)
 })

@@ -35,7 +35,6 @@ function collectPdf(doc) {
     doc.on('data', (chunk) => chunks.push(chunk))
     doc.on('end', () => resolve(Buffer.concat(chunks)))
     doc.on('error', reject)
-    doc.end()
   })
 }
 
@@ -70,7 +69,7 @@ function footer(doc, snapshot) {
         `Documento de apoio técnico. Validação profissional necessária. Página ${i + 1}/${range.count}`,
         46,
         doc.page.height - 36,
-        { align: 'center' }
+        { align: 'center', lineBreak: false }
       )
     header(doc, snapshot)
   }
@@ -84,13 +83,16 @@ function title(doc, text) {
 }
 
 function kvTable(doc, rows) {
-  const startX = doc.x
+  const startX = doc.page.margins.left
   rows.forEach(([label, val]) => {
     const y = doc.y
     doc.fontSize(8).fillColor('#64748b').text(label, startX, y, { width: 140 })
-    doc.fontSize(9).fillColor('#111827').text(String(value(val)), startX + 150, y, { width: 360 })
+    doc.fontSize(9).fillColor('#111827').text(String(value(val)), startX + 150, y, {
+      width: doc.page.width - doc.page.margins.right - startX - 150,
+    })
     doc.moveDown(0.2)
   })
+  doc.x = startX
   doc.moveDown(0.5)
 }
 
@@ -118,7 +120,10 @@ function circuitTableRows(snapshot) {
 }
 
 function drawSimpleTable(doc, headers, rows) {
-  const widths = [54, 128, 60, 58, 48, 54, 54, 52, 54, 64]
+  const proportions = [54, 128, 60, 58, 48, 54, 54, 52, 54, 64]
+  const availableWidth = doc.page.width - doc.page.margins.left - doc.page.margins.right
+  const total = proportions.reduce((sum, width) => sum + width, 0)
+  const widths = proportions.map((width) => width * availableWidth / total)
   const rowHeight = 22
   const left = 46
   let y = doc.y
@@ -147,6 +152,7 @@ function drawSimpleTable(doc, headers, rows) {
 
   drawRow(headers, true)
   rows.forEach((row) => drawRow(row))
+  doc.x = left
   doc.y = y + 8
 }
 
@@ -169,25 +175,21 @@ async function buildProfessionalPdf(snapshot) {
   doc.fontSize(22).fillColor('#111827').text('CalcCabos', { align: 'left' })
   doc.moveDown(0.4).fontSize(17).text('Memorial técnico de dimensionamento elétrico')
   doc.moveDown(0.5)
-  if (snapshot.document_status === 'PRELIMINAR') {
-    doc
-      .rect(46, doc.y, doc.page.width - 92, 34)
-      .fillAndStroke('#fef3c7', '#f59e0b')
-      .fillColor('#92400e')
-      .fontSize(12)
-      .text('RELATÓRIO PRELIMINAR — NÃO LIBERADO PARA EMISSÃO FINAL', 58, doc.y - 27)
-      .fillColor('#111827')
-      .moveDown(1.8)
-  } else {
-    doc
-      .rect(46, doc.y, doc.page.width - 92, 30)
-      .fillAndStroke('#dcfce7', '#22c55e')
-      .fillColor('#166534')
-      .fontSize(12)
-      .text('RELATÓRIO FINAL — DADOS MÍNIMOS SEM BLOQUEIO REGISTRADO', 58, doc.y - 24)
-      .fillColor('#111827')
-      .moveDown(1.5)
-  }
+  const preliminary = snapshot.document_status === 'PRELIMINAR'
+  const notice = preliminary
+    ? 'RELATÓRIO PRELIMINAR — NÃO LIBERADO PARA EMISSÃO FINAL'
+    : 'RELATÓRIO FINAL — DADOS MÍNIMOS SEM BLOQUEIO REGISTRADO'
+  const noticeY = doc.y
+  const noticeWidth = doc.page.width - 116
+  doc.fontSize(10)
+  const noticeHeight = Math.max(34, doc.heightOfString(notice, { width: noticeWidth }) + 20)
+  doc.rect(46, noticeY, doc.page.width - 92, noticeHeight)
+    .fillAndStroke(preliminary ? '#fef3c7' : '#dcfce7', preliminary ? '#f59e0b' : '#22c55e')
+    .fillColor(preliminary ? '#92400e' : '#166534')
+    .text(notice, 58, noticeY + 10, { width: noticeWidth })
+    .fillColor('#111827')
+  doc.x = 46
+  doc.y = noticeY + noticeHeight + 14
 
   kvTable(doc, [
     ['Projeto', project.nome],
@@ -272,6 +274,7 @@ async function buildProfessionalPdf(snapshot) {
   doc.fillColor('#111827')
 
   footer(doc, snapshot)
+  doc.end()
   return ready
 }
 

@@ -63,10 +63,13 @@ test-results/
 frontend/playwright-report/
 frontend/test-results/
 frontend/tests/screenshots/
+qa-output/
 
 # Bancos locais, uploads e temporarios
 calc.db
 *.db
+*.db-shm
+*.db-wal
 *.sqlite
 *.sqlite3
 recalculo_log.json
@@ -89,3 +92,4 @@ Thumbs.db
 .vscode/
 *.swp
 .vercel
+frontend/playwright/.auth/

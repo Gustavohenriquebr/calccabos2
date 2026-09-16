@@ -1,20 +1,23 @@
 services:
-  # Backend Node/Express: API publica consumida pelo frontend Vercel.
+  # Frontend React e API Node na mesma origem, a partir do GitLab.
   - type: web
-    name: calccabos-backend-node
+    name: calccabos-final
+    repo: https://gitlab.com/guguinha2026br/calccabos
+    branch: main
     runtime: node
     plan: free
     region: oregon
-    rootDir: backend-node
-    buildCommand: npm ci
+    buildCommand: npm run build:web
     startCommand: npm start
     healthCheckPath: /health
-    autoDeploy: false
+    autoDeployTrigger: "off"
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: "22"
       - key: PYTHON_SERVICE_URL
-        sync: false
+        value: https://calccabos-python-final.onrender.com
       - key: MONGODB_URI
         sync: false
       - key: MONGODB_DB_NAME
@@ -24,13 +27,13 @@ services:
       - key: MONGODB_TLS
         value: "true"
       - key: JWT_SECRET
-        sync: false
+        generateValue: true
       - key: SESSION_SECRET
-        sync: false
+        generateValue: true
       - key: JWT_EXPIRES
         value: 7d
       - key: CORS_ORIGINS
-        sync: false
+        value: https://calccabos-final.onrender.com
       - key: AI_ENABLED
         value: "false"
       - key: AI_PROVIDER
@@ -60,7 +63,9 @@ services:
 
   # Backend Python/FastAPI: motor de calculo, relatorios legados e endpoints tecnicos.
   - type: web
-    name: calccabos-backend-python
+    name: calccabos-python-final
+    repo: https://gitlab.com/guguinha2026br/calccabos
+    branch: main
     runtime: python
     plan: free
     region: oregon
@@ -68,7 +73,7 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
-    autoDeploy: false
+    autoDeployTrigger: "off"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.11
@@ -77,13 +82,15 @@ services:
       - key: DOCS_ENABLED
         value: "false"
       - key: SECRET_KEY
-        sync: false
+        generateValue: true
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "10080"
       - key: CORS_ORIGINS
-        sync: false
+        value: https://calccabos-final.onrender.com
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: calccabos-python-db
+          property: connectionString
       - key: GEMINI_API_KEY
         sync: false
       - key: GOOGLE_API_KEY

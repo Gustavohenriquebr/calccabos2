@@ -5,6 +5,8 @@
   "main": "electron/main.js",
   "author": "Gustavo Henrique",
   "scripts": {
+    "start": "node server.js",
+    "build:web": "node scripts/build-web.cjs",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"wait-on http://localhost:5173 && electron .\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && uvicorn main:app --reload --port 8000",

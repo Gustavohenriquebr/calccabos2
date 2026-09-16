@@ -112,6 +112,8 @@ app.use('/api/circuitos', require('./routes/circuitos'))
 app.use('/api/relatorios', require('./routes/relatorios'))
 app.use('/api/agente', require('./routes/agente'))
 
+app.use(require('./middleware/serveFrontend')())
+
 app.use((_req, res) => res.status(404).json({ error: 'not_found', detail: 'Rota nao encontrada' }))
 app.use(errorHandler)
 

@@ -40,7 +40,7 @@ function numberOrNull(value) {
 function statusFinal(value) {
   const text = String(value || '').trim().toUpperCase()
   if (text === 'OK') return 'OK'
-  if (text.includes('CR') || text.includes('BLOQUEADO') || text === 'ERRO') return 'BLOQUEADO'
+  if (text === 'BLOCKED' || text.includes('CR') || text.includes('BLOQUEADO') || text === 'ERRO') return 'BLOQUEADO'
   if (text.includes('ALERTA') || text.includes('WARNING')) return 'ALERTA'
   if (text.includes('PENDENTE') || text.includes('INCOMPLETO')) return 'INCOMPLETO'
   return 'NAO_AVALIADO'
@@ -183,8 +183,14 @@ function buildReportSnapshot({ projeto, circuitos = [], usuario = {}, requestedM
     ['cliente', project.cliente],
     ['tensao de referência', project.tensao_referencia_v],
   ].filter(([, value]) => value === null || value === undefined || value === '').map(([label]) => label)
+  const unresolvedCircuits = circuits.filter((circuit) => (
+    circuit.status === 'BLOQUEADO' ||
+    circuit.status === 'ALERTA' ||
+    circuit.status === 'INCOMPLETO' ||
+    circuit.status === 'NAO_AVALIADO'
+  ))
   const blocking = [
-    ...circuits.filter((circuit) => circuit.status === 'BLOQUEADO').map((circuit) => `${circuit.tag}: ${circuit.alertas[0] || 'bloqueio técnico'}`),
+    ...unresolvedCircuits.map((circuit) => `${circuit.tag}: ${circuit.alertas[0] || `status ${circuit.status}`}`),
     ...missingProjectFields.map((field) => `Dado obrigatório ausente: ${field}`),
   ]
   const warnings = circuits
