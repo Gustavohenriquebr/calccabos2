@@ -103,7 +103,7 @@ async function checkProjeto(projetoId, usuarioId) {
   return projeto
 }
 
-const PROJETO_CREATE_FIELDS = ['nome', 'descricao', 'cliente', 'contexto', 'tensao_ref']
+const PROJETO_CREATE_FIELDS = ['nome', 'descricao', 'cliente', 'contexto', 'tensao_ref', 'responsavelTecnico']
 const PROJETO_UPDATE_FIELDS = [
   'nome',
   'descricao',
