@@ -40,9 +40,9 @@ const T = {
 
 const BENEFICIOS = [
   ['Dimensionamento de cabos', 'Corrente de projeto, ampacidade, queda de tensão e critérios de seleção.', Cable],
-  ['Validação automática', 'Status técnico por circuito e módulo para revisar pendências com clareza.', ClipboardCheck],
-  ['Proteções e Icc', 'Disjuntores, Icu, curto-circuito e verificações de compatibilidade.', ShieldCheck],
-  ['Memorial PDF/Excel', 'Documentação técnica exportável para revisão, auditoria e emissão.', FileSpreadsheet],
+  ['Verificação assistida', 'Status técnico por circuito e módulo para revisar pendências com clareza.', ClipboardCheck],
+  ['Proteções e Icc', 'Disjuntores, Icu, curto-circuito e verificações documentadas.', ShieldCheck],
+  ['Memorial PDF/Excel', 'Documentação técnica exportável para revisão e rastreabilidade.', FileSpreadsheet],
   ['Diagrama unifilar', 'Representação simples do projeto, transformador, barramento e circuitos.', Network],
   ['Agente com IA', 'Apoio para explicar cálculos, pendências e decisões técnicas.', Bot],
 ]
@@ -56,13 +56,19 @@ const PASSOS = [
   ['Crie um projeto', 'Defina cliente, contexto normativo e tensão de referência.'],
   ['Cadastre a entrada', 'Informe transformador, sistema elétrico e premissas principais.'],
   ['Importe ou crie circuitos', 'Monte a lista de cargas manualmente ou por planilha.'],
-  ['Valide pendências', 'Revise alertas, críticos, proteções, Icc e documentação técnica.'],
+  ['Revise pendências', 'Analise alertas, críticos, proteções, Icc e documentação técnica.'],
   ['Gere o memorial', 'Exporte PDF/Excel e use a IA para apoiar a revisão.'],
 ]
 
 const PUBLICOS = [
   'Engenheiros eletricistas', 'Projetistas industriais', 'Empresas de manutenção',
   'Consultorias técnicas', 'Estudantes de engenharia', 'Times de engenharia industrial',
+]
+
+const AVISOS_TECNICOS = [
+  'O CalcCabos é uma ferramenta de apoio técnico e rastreabilidade, não um substituto da responsabilidade profissional.',
+  'Relatórios, memoriais, ART/RRT, laudos e decisões de conformidade devem ser revisados por profissional habilitado.',
+  'Critérios normativos, requisitos de concessionária e dados de fabricante devem ser conferidos conforme o caso real e a edição vigente aplicável.',
 ]
 
 /* ============================================================
@@ -309,7 +315,7 @@ export default function Landing() {
                 className="max-w-3xl text-[2.6rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl"
               >
                 Dimensione cabos industriais{' '}
-                <span style={{ color: T.copper }}>com a precisão</span> que a norma exige.
+                <span style={{ color: T.copper }}>com rastreabilidade</span> técnica.
               </motion.h1>
 
               <motion.p
@@ -319,8 +325,8 @@ export default function Landing() {
                 className="mt-5 max-w-2xl text-lg leading-8"
                 style={{ color: T.textDim }}
               >
-                Cálculo, validação de proteções e memorial técnico em um único fluxo —
-                do transformador ao último circuito, com apoio de IA.
+                Cálculo, verificação de proteções e memorial técnico em um único fluxo —
+                do transformador ao último circuito, com apoio técnico e IA contextual.
               </motion.p>
 
               <motion.div
@@ -434,7 +440,8 @@ export default function Landing() {
               Do cálculo à documentação, num fluxo único.
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6" style={{ color: T.textDim }}>
-              O CalcCabos organiza cálculo, validação e documentação para projetos industriais.
+              O CalcCabos organiza cálculo, verificação e documentação para projetos industriais,
+              mantendo premissas, alertas e limitações visíveis.
             </p>
           </Reveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -452,7 +459,8 @@ export default function Landing() {
             <div className="mb-3 font-mono text-xs tracking-[0.18em]" style={{ color: T.copper }}>MÓDULOS</div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Um ambiente completo</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6" style={{ color: T.textDim }}>
-              Estruture o memorial elétrico industrial além da tabela de cabos.
+              Estruture o memorial elétrico industrial além da tabela de cabos, com módulos
+              técnicos claros e revisão por disciplina.
             </p>
           </Reveal>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -499,7 +507,7 @@ export default function Landing() {
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
           <Reveal>
             <div className="mb-3 font-mono text-xs tracking-[0.18em]" style={{ color: T.copper }}>PARA QUEM É</div>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Feito para quem assina o projeto</h2>
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Feito para quem projeta, revisa e documenta</h2>
           </Reveal>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {PUBLICOS.map((publico, i) => (
@@ -516,6 +524,36 @@ export default function Landing() {
           </div>
         </section>
 
+        <CircuitTrace />
+
+        {/* Aviso técnico */}
+        <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+          <Reveal>
+            <div
+              className="rounded-2xl border p-6"
+              style={{ borderColor: T.line, backgroundColor: T.surface }}
+            >
+              <div className="mb-3 font-mono text-xs tracking-[0.18em]" style={{ color: T.copper }}>
+                USO RESPONSÁVEL
+              </div>
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                Apoio técnico, não aprovação automática
+              </h2>
+              <div className="mt-5 grid gap-3 lg:grid-cols-3">
+                {AVISOS_TECNICOS.map((aviso) => (
+                  <div
+                    key={aviso}
+                    className="rounded-lg border p-4 text-sm leading-6"
+                    style={{ borderColor: T.line, backgroundColor: T.bg, color: T.textDim }}
+                  >
+                    {aviso}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
         {/* CTA final */}
         <section className="px-4 py-16 sm:px-6">
           <Reveal>
@@ -523,11 +561,6 @@ export default function Landing() {
               className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border p-8 sm:p-12"
               style={{ borderColor: T.line, backgroundColor: T.bgAlt }}
             >
-              <div
-                className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full blur-3xl"
-                style={{ backgroundColor: T.copper, opacity: 0.12 }}
-                aria-hidden="true"
-              />
               <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <div className="flex items-center gap-2 font-mono text-xs" style={{ color: T.copperBright }}>
@@ -538,7 +571,7 @@ export default function Landing() {
                     Comece seu próximo memorial industrial.
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm leading-6" style={{ color: T.textDim }}>
-                    Crie projetos, valide pendências e gere documentação técnica com mais clareza.
+                    Crie projetos, revise pendências e gere documentação técnica com mais clareza.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
