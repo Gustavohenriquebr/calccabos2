@@ -52,28 +52,28 @@ Remover somente depois de confirmar que `calccabos2` e `calccabos2-python` conti
 
 ### Smoke test publico mais recente
 
-Em 2026-09-18, os servicos publicados responderam:
+Em 2026-09-18, apos o deploy do commit `a7e453b`, os servicos publicados
+responderam:
 
 - landing `https://calccabos2.onrender.com/`: HTTP 200;
 - Node `/health`: HTTP 200, MongoDB conectado e Python respondendo;
+- Node `/health/live`: HTTP 200;
+- Node `/health/ready`: HTTP 200;
 - Python `/api/health`: HTTP 200;
 - Python `/api/ready`: HTTP 200.
 
-O deploy publico ainda nao contem as alteracoes locais dos probes de prontidao:
-`/health/live` e `/health/ready` retornam HTTP 404 online. Portanto, a
-configuracao local esta validada, mas a publicacao final ainda requer um novo
-deploy controlado.
+O smoke test publico completo passou sem erros.
 
 No aceite online controlado da mesma data:
 
 - cadastro com conta temporaria: HTTP 201;
 - `/api/auth/me` autenticado: HTTP 200;
 - criacao de projeto basico: HTTP 201;
-- criacao de projeto com `uf` e `cidade`: HTTP 400, pois esses campos ainda nao
-  existem na revisao publicada.
+- criacao de projeto com `uf`, `cidade` e concessionaria: HTTP 201;
+- criacao de projeto de transmissao com 1.000.000 V: HTTP 201.
 
-Conclusao: o fluxo basico esta operacional, mas a revisao publicada nao deve
-ser considerada equivalente ao estado local atual.
+Conclusao: o fluxo autenticado e os campos universais de projeto estao
+operacionais no deploy publicado.
 
 Artefatos locais:
 
