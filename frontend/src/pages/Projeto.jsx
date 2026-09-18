@@ -282,6 +282,7 @@ function parseProjetoJson(valor) {
 
 const AGENTE_TIMEOUT_MS = 180000
 const EXPORT_TIMEOUT_MS = 180000
+const CALCULO_TIMEOUT_MS = 180000
 
 function circuitoVazioProjeto(projeto) {
   const transformador = parseProjetoJson(projeto?.transformador_dados)
@@ -382,6 +383,7 @@ export default function Projeto() {
   const nav = useNavigate()
   const [projeto, setProjeto] = useState(null)
   const [circuitos, setCircuitos] = useState([])
+  const [revisoes, setRevisoes] = useState([])
   const [msgs, setMsgs] = useState([{ role: 'assistant', content: 'Olá! Sou o agente de engenharia do CalcCabos. Posso analisar ampacidade, queda de tensão, curto-circuito térmico e critérios Petrobras dos circuitos.' }])
   const [inputMsg, setInputMsg] = useState('')
   const [loadingIA, setLoadingIA] = useState(false)
@@ -406,13 +408,19 @@ export default function Projeto() {
     if (id === DEMO_PROJECT_ID) {
       setProjeto(DEMO_PROJECT)
       setCircuitos(DEMO_CIRCUITS)
+      setRevisoes([])
       return
     }
     try {
-      const [rp, rc] = await Promise.all([api.get(`/projetos/${id}`), api.get(`/circuitos/projeto/${id}`)])
+      const [rp, rc, rr] = await Promise.all([
+        api.get(`/projetos/${id}`),
+        api.get(`/circuitos/projeto/${id}`),
+        api.get(`/projetos/${id}/revisoes`).catch(() => ({ data: [] })),
+      ])
       setProjeto(rp.data)
       const listaC = Array.isArray(rc.data) ? rc.data : (rc.data?.items || [])
       setCircuitos(listaC)
+      setRevisoes(Array.isArray(rr.data) ? rr.data : [])
     } catch (error) {
       toast.error('Erro ao carregar o projeto. Verifique sua conexão.')
       nav('/dashboard')
@@ -425,7 +433,7 @@ export default function Projeto() {
       return
     }
     try {
-      const r = await api.post(`/circuitos/calcular-lote/${id}`)
+      const r = await api.post(`/circuitos/calcular-lote/${id}`, null, { timeout: CALCULO_TIMEOUT_MS })
       await carregar()
       const { calculados, total, erros = [] } = r.data
       if (erros.length > 0) {
@@ -434,7 +442,7 @@ export default function Projeto() {
         toast.success(`${calculados} circuito(s) calculados`)
       }
     } catch (error) {
-      toast.error('Erro ao calcular circuitos')
+      toast.error(mensagemErroApi(error, 'O motor de calculo esta iniciando ou temporariamente indisponivel. Aguarde e tente novamente.'))
     }
   }
 
@@ -719,6 +727,7 @@ export default function Projeto() {
             <VisaoGeralProjeto
               projeto={projeto}
               circuitos={circuitos}
+              revisoes={revisoes}
               health={health}
               total={circuitos.length}
               ok={ok}

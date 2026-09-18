@@ -20,42 +20,33 @@ function mongoStateLabel(readyState) {
   }
 }
 
+function safePythonError(code = 'python_unavailable') {
+  return {
+    code,
+    message: 'Serviço técnico Python indisponível no momento.',
+  }
+}
+
 async function checkPythonHealth() {
   const config = getPythonServiceConfig()
-  const baseHealthUrl = config.baseUrl ? `${config.baseUrl}/api/health` : null
-  const baseReadyUrl = config.baseUrl ? `${config.baseUrl}/api/ready` : null
 
   if (config.missingInProduction) {
     return {
       status: 'down',
-      baseUrl: null,
       required: true,
       explicit: false,
       pythonServiceUrlConfigured: false,
-      pythonHealthUrl: null,
-      pythonReadyUrl: null,
-      error: {
-        message: 'PYTHON_SERVICE_URL não configurado no Render.',
-        statusCode: null,
-        detail: 'PYTHON_SERVICE_URL não configurado no Render.',
-      },
+      error: safePythonError('python_service_url_missing'),
     }
   }
 
   if (config.loopbackInProduction) {
     return {
       status: 'down',
-      baseUrl: config.baseUrl,
       required: config.required,
       explicit: config.explicit,
       pythonServiceUrlConfigured: false,
-      pythonHealthUrl: baseHealthUrl,
-      pythonReadyUrl: baseReadyUrl,
-      error: {
-        message: 'PYTHON_SERVICE_URL não configurado no Render.',
-        statusCode: null,
-        detail: `Valor atual aponta para loopback (${config.baseUrl}). Em producao Render, use a URL publica do backend Python.`,
-      },
+      error: safePythonError('python_service_url_invalid'),
     }
   }
 
@@ -70,36 +61,32 @@ async function checkPythonHealth() {
 
     return {
       status: 'ok',
-      baseUrl: config.baseUrl,
       required: config.required,
       explicit: config.explicit,
       pythonServiceUrlConfigured: true,
-      pythonHealthUrl: healthUrl,
-      pythonReadyUrl: readyUrl,
       endpoints: {
-        health: { statusCode: healthRes.status, body: healthRes.data },
-        ready: { statusCode: readyRes.status, body: readyRes.data },
+        health: { statusCode: healthRes.status },
+        ready: { statusCode: readyRes.status },
       },
     }
-  } catch (err) {
+  } catch {
     return {
       status: 'down',
-      baseUrl: config.baseUrl,
       required: config.required,
       explicit: config.explicit,
       pythonServiceUrlConfigured: true,
-      pythonHealthUrl: healthUrl,
-      pythonReadyUrl: readyUrl,
-      error: {
-        message: err.message,
-        statusCode: err.response?.status || null,
-        detail: err.response?.data?.detail || err.response?.data || null,
-      },
+      error: safePythonError('python_unavailable'),
     }
   }
 }
 
-router.get('/', async (_req, res) => {
+// Liveness is intentionally dependency-free so Render can keep the process
+// running while MongoDB or the Python engine recover from a cold start.
+router.get('/live', (_req, res) => {
+  res.json({ status: 'ok', service: 'calccabos-backend-node' })
+})
+
+async function healthPayload() {
   const mongoReadyState = mongoose.connection.readyState
   const mongoStatus = mongoReadyState === 1 ? 'ok' : 'down'
   const python = await checkPythonHealth()
@@ -110,7 +97,7 @@ router.get('/', async (_req, res) => {
 
   const overall = mongoStatus === 'ok' && python.status === 'ok' ? 'ok' : 'degraded'
 
-  res.json({
+  return {
     status: overall,
     service: 'calccabos-backend-node',
     timestamp: new Date().toISOString(),
@@ -128,8 +115,17 @@ router.get('/', async (_req, res) => {
     },
     python,
     pythonServiceUrlConfigured: Boolean(python.pythonServiceUrlConfigured),
-    pythonHealthUrl: python.pythonHealthUrl || null,
-  })
+  }
+}
+
+router.get('/', async (_req, res) => {
+  res.json(await healthPayload())
+})
+
+router.get('/ready', async (_req, res) => {
+  const payload = await healthPayload()
+  if (payload.status !== 'ok') return res.status(503).json(payload)
+  return res.json(payload)
 })
 
 module.exports = router

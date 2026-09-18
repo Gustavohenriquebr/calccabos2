@@ -142,6 +142,27 @@ cd backend-node
 npm test
 ```
 
+Gate de pre-lancamento:
+
+```bash
+./scripts/release_gate.sh
+```
+
+Para incluir a verificacao dos servicos publicados:
+
+```bash
+RUN_PUBLIC_SMOKE=1 ./scripts/release_gate.sh
+```
+
+O gate valida diff, arquivos sensiveis, motor, APIs, importacao e build web.
+O smoke publico verifica a landing, o backend Node e o motor FastAPI.
+
+Documentacao operacional:
+
+- `docs/LAUNCH_CHECKLIST.md`: aceite e criterios da v1.0;
+- `docs/OPERATIONS_RUNBOOK.md`: health checks, diagnostico e recuperacao;
+- `docs/DEPLOY.md`: configuracao de staging e variaveis do deploy.
+
 ## Seguranca
 
 Medidas ja aplicadas:

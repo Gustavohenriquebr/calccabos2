@@ -1,7 +1,7 @@
 services:
-  # Frontend React e API Node na mesma origem, a partir do GitLab.
+  # Frontend React e API Node na mesma origem, a partir do GitHub.
   - type: web
-    name: calccabos-final
+    name: calccabos2
     repo: https://github.com/Gustavohenriquebr/calccabos2
     branch: main
     runtime: node
@@ -9,7 +9,7 @@ services:
     region: oregon
     buildCommand: npm run build:web
     startCommand: npm start
-    healthCheckPath: /health
+    healthCheckPath: /health/live
     autoDeployTrigger: "off"
     envVars:
       - key: NODE_ENV
@@ -17,7 +17,7 @@ services:
       - key: NODE_VERSION
         value: "22"
       - key: PYTHON_SERVICE_URL
-        value: https://calccabos-python-final.onrender.com
+        value: https://calccabos2-python.onrender.com
       - key: MONGODB_URI
         sync: false
       - key: MONGODB_DB_NAME
@@ -33,7 +33,7 @@ services:
       - key: JWT_EXPIRES
         value: 7d
       - key: CORS_ORIGINS
-        value: https://calccabos-final.onrender.com
+        value: https://calccabos2.onrender.com
       - key: AI_ENABLED
         value: "false"
       - key: AI_PROVIDER
@@ -63,7 +63,7 @@ services:
 
   # Backend Python/FastAPI: motor de calculo, relatorios legados e endpoints tecnicos.
   - type: web
-    name: calccabos-python-final
+    name: calccabos2-python
     repo: https://github.com/Gustavohenriquebr/calccabos2
     branch: main
     runtime: python
@@ -86,11 +86,7 @@ services:
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "10080"
       - key: CORS_ORIGINS
-        value: https://calccabos-final.onrender.com
-      - key: DATABASE_URL
-        fromDatabase:
-          name: calccabos-python-db
-          property: connectionString
+        value: https://calccabos2.onrender.com
       - key: GEMINI_API_KEY
         sync: false
       - key: GOOGLE_API_KEY

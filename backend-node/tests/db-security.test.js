@@ -8,6 +8,7 @@ const { assertValidMongoUri, resolveMongoConfig } = require('../src/config/datab
 const User = require('../src/models/User')
 const Projeto = require('../src/models/Projeto')
 const Circuito = require('../src/models/Circuito')
+const ProjetoRevision = require('../src/models/ProjetoRevision')
 
 test('Mongo config requires MONGODB_URI in production', () => {
   assert.throws(
@@ -59,6 +60,28 @@ test('Projeto requires immutable usuarioId owner', () => {
   const err = projeto.validateSync()
   assert.match(err.message, /usuarioId/)
   assert.equal(Projeto.schema.path('usuarioId').options.immutable, true)
+})
+
+test('Projeto persists revision and revision history keeps ownership immutable', () => {
+  assert.equal(Projeto.schema.path('revisao').options.default, '0')
+  assert.equal(ProjetoRevision.schema.path('projetoId').options.immutable, true)
+  assert.equal(ProjetoRevision.schema.path('usuarioId').options.immutable, true)
+  assert.equal(ProjetoRevision.schema.indexes().some(([fields]) => fields.projetoId === 1 && fields.criado_em === -1), true)
+})
+
+test('Projeto supports universal locality data and high-voltage reference values', () => {
+  const projeto = new Projeto({
+    nome: 'Subestação de transmissão',
+    usuarioId: new mongoose.Types.ObjectId(),
+    uf: 'SP',
+    cidade: 'Campinas',
+    concessionaria: 'Concessionária de teste',
+    contexto: 'transmissao',
+    tensao_ref: 1000000,
+  })
+  assert.equal(projeto.validateSync(), undefined)
+  assert.equal(projeto.uf, 'SP')
+  assert.equal(projeto.tensao_ref, 1000000)
 })
 
 test('Circuito requires project and rejects invalid negative engineering values', () => {

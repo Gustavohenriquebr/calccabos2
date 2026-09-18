@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const Projeto = require('../models/Projeto')
 const Circuito = require('../models/Circuito')
+const ProjetoRevision = require('../models/ProjetoRevision')
 const requireAuth = require('../middleware/auth')
 const { buildPythonServiceUrl } = require('../config/pythonService')
 const { buildPythonUpstreamError } = require('../utils/upstreamError')
@@ -103,17 +104,27 @@ async function checkProjeto(projetoId, usuarioId) {
   return projeto
 }
 
-const PROJETO_CREATE_FIELDS = ['nome', 'descricao', 'cliente', 'contexto', 'tensao_ref', 'responsavelTecnico']
+const PROJETO_CREATE_FIELDS = [
+  'nome', 'descricao', 'cliente', 'contexto', 'tensao_ref', 'uf', 'cidade', 'concessionaria', 'responsavelTecnico',
+]
 const PROJETO_UPDATE_FIELDS = [
   'nome',
   'descricao',
   'cliente',
   'contexto',
   'tensao_ref',
+  'uf',
+  'cidade',
+  'concessionaria',
   'normaVersao',
   'responsavelTecnico',
+  'revisao',
 ]
-const CONTEXTOS = ['industrial', 'offshore', 'hospitalar', 'residencial']
+const CONTEXTOS = [
+  'industrial', 'offshore', 'hospitalar', 'residencial', 'comercial', 'predial',
+  'mineracao', 'subestacao', 'distribuicao', 'transmissao', 'geracao',
+  'hidreletrica', 'termeletrica', 'nuclear', 'fotovoltaico', 'data_center', 'outro',
+]
 
 function sanitizeProjetoPayload(body, allowedFields, { create = false } = {}) {
   assertPlainObject(body)
@@ -125,11 +136,15 @@ function sanitizeProjetoPayload(body, allowedFields, { create = false } = {}) {
   if (body.descricao !== undefined) out.descricao = asString(body.descricao, { label: 'descricao', max: 2000 })
   if (body.cliente !== undefined) out.cliente = asString(body.cliente, { label: 'cliente', max: 200 })
   if (body.contexto !== undefined) out.contexto = asEnum(body.contexto, CONTEXTOS, { label: 'contexto' })
-  if (body.tensao_ref !== undefined) out.tensao_ref = asNumber(body.tensao_ref, { label: 'tensao_ref', min: 1, max: 100000 })
+  if (body.tensao_ref !== undefined) out.tensao_ref = asNumber(body.tensao_ref, { label: 'tensao_ref', min: 1, max: 2000000 })
+  if (body.uf !== undefined) out.uf = asString(body.uf, { label: 'uf', max: 2 }).toUpperCase()
+  if (body.cidade !== undefined) out.cidade = asString(body.cidade, { label: 'cidade', max: 120 })
+  if (body.concessionaria !== undefined) out.concessionaria = asString(body.concessionaria, { label: 'concessionaria', max: 160 })
   if (body.normaVersao !== undefined) out.normaVersao = asString(body.normaVersao, { label: 'normaVersao', max: 80 })
   if (body.responsavelTecnico !== undefined) {
     out.responsavelTecnico = asString(body.responsavelTecnico, { label: 'responsavelTecnico', max: 200 })
   }
+  if (body.revisao !== undefined) out.revisao = asString(body.revisao, { label: 'revisao', max: 60 })
 
   return Object.fromEntries(Object.entries(out).filter(([, value]) => value !== undefined))
 }
@@ -180,15 +195,63 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+function revisionSnapshot(projeto) {
+  return {
+    nome: projeto.nome || null,
+    descricao: projeto.descricao || null,
+    cliente: projeto.cliente || null,
+    contexto: projeto.contexto || null,
+    tensao_ref: projeto.tensao_ref ?? null,
+    normaVersao: projeto.normaVersao || null,
+    responsavelTecnico: projeto.responsavelTecnico || null,
+    revisao: projeto.revisao || '0',
+  }
+}
+
+function changedRevisionFields(before, after) {
+  return Object.keys(after).filter((field) => JSON.stringify(before[field]) !== JSON.stringify(after[field]))
+}
+
+router.get('/:id/revisoes', async (req, res, next) => {
+  try {
+    assertObjectId(req.params.id, 'ID')
+    const projeto = await checkProjeto(req.params.id, req.user._id)
+    await assertUsageAllowed(req.user, 'revision_history')
+    const limit = Math.min(asNumber(req.query.limit ?? 50, { label: 'limit', min: 1, max: 100, nullable: false }), 100)
+    const revisoes = await ProjetoRevision.find({ projetoId: projeto._id, usuarioId: req.user._id })
+      .sort({ criado_em: -1 })
+      .limit(limit)
+      .lean()
+    res.json(revisoes.map((item) => ({ ...item, id: item._id.toString() })))
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:id', async (req, res, next) => {
   try {
     assertObjectId(req.params.id, 'ID')
-    await checkProjeto(req.params.id, req.user._id)
+    const anterior = await checkProjeto(req.params.id, req.user._id)
 
     const update = sanitizeProjetoPayload(req.body, PROJETO_UPDATE_FIELDS)
 
     const projeto = await Projeto.findByIdAndUpdate(req.params.id, update, { new: true, lean: true })
     if (projeto) projeto.id = projeto._id.toString()
+    if (projeto) {
+      const antes = revisionSnapshot(anterior)
+      const depois = revisionSnapshot(projeto)
+      const camposAlterados = changedRevisionFields(antes, depois)
+      if (camposAlterados.length > 0) {
+        await ProjetoRevision.create({
+          projetoId: projeto._id,
+          usuarioId: req.user._id,
+          revisao: depois.revisao,
+          camposAlterados,
+          antes,
+          depois,
+        })
+      }
+    }
     res.json(projeto)
   } catch (err) {
     next(err)

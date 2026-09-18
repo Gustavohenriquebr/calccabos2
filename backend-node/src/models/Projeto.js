@@ -16,10 +16,17 @@ const ProjetoSchema = new mongoose.Schema(
     cliente:   { type: String, default: null, trim: true, maxlength: 200 },
     contexto:  {
       type: String,
-      enum: ['industrial', 'offshore', 'hospitalar', 'residencial'],
+      enum: [
+        'industrial', 'offshore', 'hospitalar', 'residencial', 'comercial', 'predial',
+        'mineracao', 'subestacao', 'distribuicao', 'transmissao', 'geracao',
+        'hidreletrica', 'termeletrica', 'nuclear', 'fotovoltaico', 'data_center', 'outro',
+      ],
       default: 'industrial',
     },
-    tensao_ref: { type: Number, default: 380, min: 1, max: 100000 },
+    tensao_ref: { type: Number, default: 380, min: 1, max: 2000000 },
+    uf:          { type: String, default: null, trim: true, uppercase: true, maxlength: 2 },
+    cidade:      { type: String, default: null, trim: true, maxlength: 120 },
+    concessionaria: { type: String, default: null, trim: true, maxlength: 160 },
 
     // Módulos calculados — armazenados como JSON livre (espelho dos campos Python)
     transformador_dados:       { type: mongoose.Schema.Types.Mixed, default: null },
@@ -32,6 +39,7 @@ const ProjetoSchema = new mongoose.Schema(
     // Campos extras N-2040
     normaVersao:        { type: String, default: 'NBR 5410:2004', trim: true, maxlength: 80 },
     responsavelTecnico: { type: String, default: null, trim: true, maxlength: 200 },
+    revisao:            { type: String, default: '0', trim: true, maxlength: 60 },
   },
   {
     timestamps: { createdAt: 'criado_em', updatedAt: 'atualizado_em' },

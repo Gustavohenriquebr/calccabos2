@@ -31,7 +31,7 @@ export default function ProjectWorkspaceHeader({ projeto, health }) {
         {topValue('CONCESSIONÁRIA', metaProjeto(projeto, 'concessionaria'), true)}
         {topValue('TENSÃO REF.', projeto?.tensao_ref ? `${projeto.tensao_ref} V` : metaProjeto(projeto, 'tensao_referencia'))}
         {topValue('REVISÃO', `Rev. ${projeto?.revisao || '0'}`)}
-        {topValue('RESP. TÉCNICO', metaProjeto(projeto, 'responsavel_tecnico'), true)}
+        {topValue('RESP. TÉCNICO', projeto?.responsavelTecnico || metaProjeto(projeto, 'responsavel_tecnico'), true)}
         <div className="ml-auto">
           <div className={`whitespace-nowrap px-2 py-1 text-xs font-bold leading-4 ${statusOk ? 'cc-status-ok' : 'cc-status-alerta'}`} style={{ borderRadius: 3 }}>
             {statusOk ? 'Projeto validado' : 'Projeto em validação'}

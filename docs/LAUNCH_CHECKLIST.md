@@ -50,6 +50,31 @@ Remover somente depois de confirmar que `calccabos2` e `calccabos2-python` conti
 - Excel tecnico com aba Circuitos: aprovado.
 - Excel preserva 13.8 kV: aprovado.
 
+### Smoke test publico mais recente
+
+Em 2026-09-18, os servicos publicados responderam:
+
+- landing `https://calccabos2.onrender.com/`: HTTP 200;
+- Node `/health`: HTTP 200, MongoDB conectado e Python respondendo;
+- Python `/api/health`: HTTP 200;
+- Python `/api/ready`: HTTP 200.
+
+O deploy publico ainda nao contem as alteracoes locais dos probes de prontidao:
+`/health/live` e `/health/ready` retornam HTTP 404 online. Portanto, a
+configuracao local esta validada, mas a publicacao final ainda requer um novo
+deploy controlado.
+
+No aceite online controlado da mesma data:
+
+- cadastro com conta temporaria: HTTP 201;
+- `/api/auth/me` autenticado: HTTP 200;
+- criacao de projeto basico: HTTP 201;
+- criacao de projeto com `uf` e `cidade`: HTTP 400, pois esses campos ainda nao
+  existem na revisao publicada.
+
+Conclusao: o fluxo basico esta operacional, mas a revisao publicada nao deve
+ser considerada equivalente ao estado local atual.
+
 Artefatos locais:
 
 - `qa-output/regression/online-regression-report.json`
@@ -90,3 +115,19 @@ Executar uma rodada manual de aceite com usuario real:
 5. Conferir dashboard, Circuitos, Unifilar e Memorial.
 6. Gerar PDF e Excel.
 7. Registrar qualquer erro visual, texto confuso ou comportamento lento.
+
+## Gate local de pre-lancamento
+
+Antes de publicar uma revisao, executar na raiz do projeto:
+
+```bash
+./scripts/release_gate.sh
+```
+
+Esse comando verifica diff, arquivos sensiveis rastreados, testes tecnicos,
+testes de API/importacao e build web. Para incluir o smoke test do ambiente
+publicado, executar:
+
+```bash
+RUN_PUBLIC_SMOKE=1 ./scripts/release_gate.sh
+```

@@ -56,7 +56,7 @@ function PendenciaItem({ item }) {
   )
 }
 
-export default function VisaoGeralProjeto({ projeto, circuitos = [], health, onNavigate, onPrimaryAction, onSaveProject }) {
+export default function VisaoGeralProjeto({ projeto, circuitos = [], revisoes = [], health, onNavigate, onPrimaryAction, onSaveProject }) {
   const resumo = health || buildProjectHealth(projeto, circuitos)
   const transformador = parseDados(projeto?.transformador_dados)
   const protecao = parseDados(projeto?.protecao_geral_dados)
@@ -81,7 +81,7 @@ export default function VisaoGeralProjeto({ projeto, circuitos = [], health, onN
     contexto: projeto?.contexto || 'industrial',
     tensao_ref: projeto?.tensao_ref || 380,
     revisao: projeto?.revisao || '0',
-    responsavel_tecnico: projeto?.responsavel_tecnico || '',
+    responsavelTecnico: projeto?.responsavelTecnico || projeto?.responsavel_tecnico || '',
     descricao: projeto?.descricao || ''
   }), [projeto])
   return <div className="space-y-4">
@@ -97,7 +97,7 @@ export default function VisaoGeralProjeto({ projeto, circuitos = [], health, onN
 
     <div className="grid gap-4 xl:grid-cols-[340px_1fr_220px]">
       <Panel title="Identificação" subtitle="Dados universais aplicados ao projeto">
-        {!editando ? <dl><Linha label="Projeto" valor={projeto?.nome} /><Linha label="Cliente" valor={projeto?.cliente} /><Linha label="UF / Cidade" valor={projeto?.uf || projeto?.cidade ? `${projeto?.uf || ''} / ${projeto?.cidade || ''}` : projeto?.contexto} /><Linha label="Concessionária" valor={projeto?.concessionaria} /><Linha label="Tensão de referência" valor={fmt(projeto?.tensao_ref, ' V', 0)} /><Linha label="Revisão" valor={`Rev. ${projeto?.revisao || '0'}`} /><Linha label="Responsável técnico" valor={projeto?.responsavel_tecnico} /></dl> :
+        {!editando ? <dl><Linha label="Projeto" valor={projeto?.nome} /><Linha label="Cliente" valor={projeto?.cliente} /><Linha label="UF / Cidade" valor={projeto?.uf || projeto?.cidade ? `${projeto?.uf || ''} / ${projeto?.cidade || ''}` : projeto?.contexto} /><Linha label="Concessionária" valor={projeto?.concessionaria} /><Linha label="Tensão de referência" valor={fmt(projeto?.tensao_ref, ' V', 0)} /><Linha label="Revisão" valor={`Rev. ${projeto?.revisao || '0'}`} /><Linha label="Responsável técnico" valor={projeto?.responsavelTecnico || projeto?.responsavel_tecnico} /></dl> :
           <form className="grid gap-3" onSubmit={async (e) => { e.preventDefault(); await onSaveProject?.(dados); setEditando(false) }}>
             <label className="cc-label">Nome<input required className="cc-field mt-1 w-full" value={dados.nome || ''} onChange={(e) => setDados({ ...dados, nome: e.target.value })} /></label>
             <label className="cc-label">Cliente<input required className="cc-field mt-1 w-full" value={dados.cliente || ''} onChange={(e) => setDados({ ...dados, cliente: e.target.value })} /></label>
@@ -111,7 +111,7 @@ export default function VisaoGeralProjeto({ projeto, circuitos = [], health, onN
               <label className="cc-label">Tensão ref. (V)<input required type="number" className="cc-field mt-1 w-full" value={dados.tensao_ref || ''} onChange={(e) => setDados({ ...dados, tensao_ref: Number(e.target.value) })} /></label>
               <label className="cc-label">Revisão<input className="cc-field mt-1 w-full" value={dados.revisao || ''} onChange={(e) => setDados({ ...dados, revisao: e.target.value })} /></label>
             </div>
-            <label className="cc-label">Responsável técnico<input className="cc-field mt-1 w-full" value={dados.responsavel_tecnico || ''} onChange={(e) => setDados({ ...dados, responsavel_tecnico: e.target.value })} /></label>
+            <label className="cc-label">Responsável técnico<input className="cc-field mt-1 w-full" value={dados.responsavelTecnico || ''} onChange={(e) => setDados({ ...dados, responsavelTecnico: e.target.value })} /></label>
             <button className="cc-button cc-button-primary">Salvar dados do projeto</button>
           </form>}
         <button type="button" onClick={() => setEditando(!editando)} className="mt-3 text-xs font-bold text-[#0e5992]">{editando ? 'Cancelar edição' : 'Editar identificação'}</button>
@@ -171,14 +171,15 @@ export default function VisaoGeralProjeto({ projeto, circuitos = [], health, onN
     </div>
 
     <Panel title="Últimas revisões" subtitle="Histórico técnico do projeto">
-      <div className="grid gap-2 text-sm md:grid-cols-3">
-        {['Ajuste de cargas e circuitos do pav. tipo', 'Entrada atualizada para tensão de referência', 'Cadastro inicial do projeto'].map((item, index) => (
-          <div key={item} className="border border-[#e6eaee] bg-[#fbfcfd] p-3">
-            <span className="font-bold text-[#0e5992]">REV. {String(3 - index).padStart(2, '0')}</span>
-            <p className="mt-1 text-[#121820]">{item}</p>
+      {revisoes.length ? <div className="grid gap-2 text-sm md:grid-cols-3">
+        {revisoes.slice(0, 6).map((item) => (
+          <div key={item.id || `${item.revisao}-${item.criado_em}`} className="border border-[#e6eaee] bg-[#fbfcfd] p-3">
+            <span className="font-bold text-[#0e5992]">REV. {item.revisao || '0'}</span>
+            <p className="mt-1 text-[#121820]">Campos alterados: {(item.camposAlterados || []).join(', ') || 'Dados do projeto'}</p>
+            <p className="mt-1 text-xs text-[#606e7d]">{item.criado_em ? new Date(item.criado_em).toLocaleString('pt-BR') : 'Data não informada'}</p>
           </div>
         ))}
-      </div>
+      </div> : <p className="text-sm text-[#606e7d]">Nenhuma alteração registrada nesta revisão ou o histórico ampliado não está disponível no plano atual.</p>}
     </Panel>
 
   </div>

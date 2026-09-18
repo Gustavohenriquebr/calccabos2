@@ -34,6 +34,8 @@ echo "[2/5] Backend Python - smoke tests legados"
 echo
 echo "[3/5] Backend Node - seguranca, relatorios e API"
 cd "$ROOT_DIR/backend-node"
+# build-web uses production-only dependencies; restore test tooling before running QA.
+npm install --include=dev --ignore-scripts
 npm test
 
 echo

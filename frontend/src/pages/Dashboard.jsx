@@ -49,6 +49,15 @@ const TENSOES = [
   [440, '440 V'],
   [690, '690 V'],
   [13800, '13,8 kV'],
+  [23000, '23 kV'],
+  [34500, '34,5 kV'],
+  [69000, '69 kV'],
+  [138000, '138 kV'],
+  [230000, '230 kV'],
+  [345000, '345 kV'],
+  [500000, '500 kV'],
+  [765000, '765 kV'],
+  [1000000, '1.000 kV'],
 ]
 
 function projetoStatus(projeto) {
@@ -172,7 +181,11 @@ export default function Dashboard() {
     setSalvando(true)
     setErroCriar('')
     try {
-      const payload = { ...form, tensao_ref: parseInt(form.tensao_ref, 10) }
+      const tensaoRef = Number(form.tensao_ref)
+      if (!Number.isFinite(tensaoRef) || tensaoRef <= 0) {
+        throw new Error('Informe uma tensao de referencia positiva.')
+      }
+      const payload = { ...form, tensao_ref: tensaoRef }
       const r = await api.post('/projetos', payload)
       setModal(false)
       toast.success('Projeto criado')
@@ -501,13 +514,26 @@ export default function Dashboard() {
                   </Select>
                   <Select
                     label="Tensao de referencia"
-                    value={form.tensao_ref}
-                    onChange={(e) => setForm((f) => ({ ...f, tensao_ref: parseInt(e.target.value, 10) }))}
+                    value={TENSOES.some(([valor]) => valor === Number(form.tensao_ref)) ? form.tensao_ref : 'outro'}
+                    onChange={(e) => setForm((f) => ({ ...f, tensao_ref: e.target.value === 'outro' ? '' : Number(e.target.value) }))}
                   >
+                    <option value="outro">Outro / valor livre</option>
                     {TENSOES.map(([valor, label]) => (
                       <option key={valor} value={valor}>{label}</option>
                     ))}
                   </Select>
+                  {!TENSOES.some(([valor]) => valor === Number(form.tensao_ref)) && (
+                    <Input
+                      label="Tensao personalizada (V)"
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      value={form.tensao_ref}
+                      onChange={(e) => setForm((f) => ({ ...f, tensao_ref: e.target.value }))}
+                      helperText="Use qualquer valor positivo; os presets sao apenas atalhos."
+                      required
+                    />
+                  )}
                 </div>
 
                 <div className="flex gap-3 pt-2">

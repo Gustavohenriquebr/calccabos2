@@ -22,6 +22,19 @@ test('validateSpreadsheetFile rejects unsupported files and oversized spreadshee
   assert.equal(validateSpreadsheetFile({ name: 'circuitos.xlsx', size: 1200 }), true)
 })
 
+test('import preview neutralizes spreadsheet formula-like cells', async () => {
+  const file = new File(
+    ['TAG,Descricao\nC-01,=HYPERLINK("https://example.invalid")'],
+    'circuitos.csv',
+    { type: 'text/csv' },
+  )
+
+  // The parser must return the value as data, never as an executable formula.
+  const { parseExcelFile } = await import('../src/utils/excelImport.js')
+  const parsed = await parseExcelFile(file)
+  assert.ok(!String(parsed.sheets[0].rows[1][1] || '').startsWith('='))
+})
+
 test('applyImportFilters supports text filters before validation', () => {
   const rows = [
     ['TAG', 'Descricao', 'Quadro', 'Potencia', 'Tensao', 'FP', 'Distancia'],
