@@ -95,6 +95,35 @@ test('final report is released only without blocking items and required fields m
   assert.equal(blockedSnapshot.final_released, false)
 })
 
+test('final report may contain non-blocking technical alerts', () => {
+  const snapshot = buildReportSnapshot({
+    projeto,
+    circuitos: [{ ...circuitoOk, status_final: 'ALERTA', validacao_mensagem: 'Margem próxima do limite.' }],
+    requestedMode: 'final',
+  })
+
+  assert.equal(snapshot.document_status, 'FINAL')
+  assert.equal(snapshot.final_released, true)
+  assert.equal(snapshot.summary.alertas, 1)
+  assert.equal(snapshot.summary.bloqueados, 0)
+})
+
+test('final report remains blocked when protection is not evaluated', () => {
+  const snapshot = buildReportSnapshot({
+    projeto,
+    circuitos: [{
+      ...circuitoOk,
+      status_final: 'ALERTA',
+      protecao_avaliacao_status: 'NOT_EVALUATED',
+      protecao_nota: 'Curva de proteção não informada.',
+    }],
+    requestedMode: 'final',
+  })
+
+  assert.equal(snapshot.document_status, 'PRELIMINAR')
+  assert.equal(snapshot.final_released, false)
+})
+
 test('Excel report has professional sheets and uses the same snapshot hash', () => {
   const snapshot = buildReportSnapshot({ projeto, circuitos: [circuitoOk], requestedMode: 'final' })
   const buffer = buildProfessionalExcel(snapshot)

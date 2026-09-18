@@ -137,6 +137,7 @@ function circuitSnapshot(circuito, index) {
       curva_fonte: cleanText(circuito.protecao_curva_fonte || ''),
       curva_pontos: safeObject(circuito.protecao_curva_pontos || []),
       verificacao_atuacao: safeObject(circuito.protecao_verificacoes?.automatic_disconnection || null),
+      protecao_avaliacao_status: cleanText(circuito.protecao_avaliacao_status || ''),
       isc_local_ka: numberOrNull(circuito.isc_local),
       isc_cabo_ka: numberOrNull(circuito.isc_cabo),
     },
@@ -197,9 +198,10 @@ function buildReportSnapshot({ projeto, circuitos = [], usuario = {}, requestedM
   ].filter(([, value]) => value === null || value === undefined || value === '').map(([label]) => label)
   const unresolvedCircuits = circuits.filter((circuit) => (
     circuit.status === 'BLOQUEADO' ||
-    circuit.status === 'ALERTA' ||
     circuit.status === 'INCOMPLETO' ||
-    circuit.status === 'NAO_AVALIADO'
+    circuit.status === 'NAO_AVALIADO' ||
+    circuit.resultados.protecao_avaliacao_status === 'BLOCKED' ||
+    circuit.resultados.protecao_avaliacao_status === 'NOT_EVALUATED'
   ))
   const blocking = [
     ...unresolvedCircuits.map((circuit) => `${circuit.tag}: ${circuit.alertas[0] || `status ${circuit.status}`}`),
