@@ -81,6 +81,39 @@ def test_corrente_cc_referencia_sem_fp_ou_raiz_de_tres():
     assert "√3" not in formula
 
 
+def test_curva_tempo_corrente_documentada_pode_liberar_atuacao():
+    resultado = calcular_circuito(circuito(
+        isc_local=10,
+        disjuntor_corrente_nominal=32,
+        disjuntor_icu=25,
+        disjuntor_curva="C",
+        disjuntor_fabricante="Fabricante de teste",
+        protecao_curva_fonte="datasheet://fabricante/modelo",
+        protecao_curva_pontos=[
+            {"multiplo_in": 5, "tempo_max_s": 0.2},
+            {"multiplo_in": 250, "tempo_max_s": 0.05},
+        ],
+        tempo_atuacao=0.1,
+    ))
+    verificacao = resultado["protecao_verificacoes"]["automatic_disconnection"]
+    assert verificacao["status"] == "OK"
+    assert resultado["protecao_status"] == "OK"
+
+
+def test_curva_fora_da_faixa_nao_e_extrapolada():
+    resultado = calcular_circuito(circuito(
+        isc_local=0.1,
+        disjuntor_corrente_nominal=32,
+        disjuntor_icu=25,
+        disjuntor_curva="C",
+        disjuntor_fabricante="Fabricante de teste",
+        protecao_curva_fonte="datasheet://fabricante/modelo",
+        protecao_curva_pontos=[{"multiplo_in": 5, "tempo_max_s": 0.2}],
+        tempo_atuacao=0.1,
+    ))
+    assert resultado["protecao_verificacoes"]["automatic_disconnection"]["status"] == "NOT_EVALUATED"
+
+
 def test_kva_monofasico_e_legado_bifasico_usam_sobre_v_nao_sobre_2v():
     comum = dict(
         configuracao_eletrica="ac_monofasico",

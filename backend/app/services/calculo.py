@@ -12,6 +12,7 @@ from app.services.curto_circuito import curto_por_transformador, corrente_trifas
 from app.services.disjuntor_selector import selecionar_disjuntor
 from app.services.normativa_protecao import validar_protecao
 from app.services.tensao import analisar_tensao
+from app.services.protecao_curvas import avaliar_curva
 
 
 SECOES = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300]
@@ -494,6 +495,8 @@ def _verificar_protecao(c, V, ib, iz_corrigida, isc_ka, disjuntor_sugerido, disj
         icu = icu_informado or None
         curva = str(_valor(c, "disjuntor_curva", "") or "").strip().upper() or None
     fabricante = str(_valor(c, "disjuntor_fabricante", "") or "").strip() or None
+    curva_fonte = str(_valor(c, "protecao_curva_fonte", "") or "").strip() or None
+    curva_pontos = _valor(c, "protecao_curva_pontos", []) or []
 
     status = "OK"
     status_auditavel = "OK"
@@ -562,26 +565,38 @@ def _verificar_protecao(c, V, ib, iz_corrigida, isc_ka, disjuntor_sugerido, disj
         status = status_mais_grave(status, "ALERTA")
         notas.append("Icc nao informado; Icu nao pode ser validado")
 
-    # A corrente no fim da linha, isoladamente, não comprova atuação. Exigir
-    # curva/tempo e dados identificáveis do dispositivo evita falsa aprovação.
+    # A corrente no fim da linha só pode ser verificada quando os pontos da
+    # curva vêm de uma fonte documentada do fabricante. Sem isso, permanece
+    # NOT_EVALUATED e o relatório final continua bloqueado.
     curva_informada = _tem_valor(c, "disjuntor_curva")
     tempo_informado = _tem_valor(c, "tempo_atuacao")
-    fabricante_informado = bool(fabricante)
-    atuacao_avaliavel = bool(isc_cabo_ka and curva_informada and tempo_informado and fabricante_informado)
-    verificacoes["automatic_disconnection"] = {
+    curva_disponivel = bool(curva_pontos and curva_informada and fabricante and curva_fonte)
+    curva_avaliacao = avaliar_curva(
+        curva_pontos,
+        (isc_cabo_ka * 1000) if isc_cabo_ka else None,
+        in_disjuntor,
+        _float(_valor(c, "tempo_atuacao", 0), 0),
+    ) if curva_disponivel else {
         "status": "NOT_EVALUATED",
-        "icc_end_ka": round(isc_cabo_ka, 6) if isc_cabo_ka else None,
-        "reason": (
-            "Curva tempo-corrente parametrizada por fabricante ainda não está disponível no motor."
-            if atuacao_avaliavel else
-            "Icc no fim, curva, tempo e fabricante são necessários para verificar a atuação."
-        ),
+        "motivo": "Icc no fim, In, curva, tempo, fabricante, fonte e pontos tempo-corrente são necessários.",
     }
-    if status_auditavel != "BLOCKED":
-        status_auditavel = "NOT_EVALUATED"
-    if status == "OK":
-        status = "ALERTA"
-    notas.append("Atuacao automatica no fim do circuito nao verificada; requer curva tempo-corrente e dados do fabricante.")
+    verificacoes["automatic_disconnection"] = {
+        **curva_avaliacao,
+        "icc_end_ka": round(isc_cabo_ka, 6) if isc_cabo_ka else None,
+        "curva": curva,
+        "fabricante": fabricante,
+        "fonte": curva_fonte,
+    }
+    if curva_avaliacao["status"] == "BLOCKED":
+        status = "CRITICO"
+        status_auditavel = "BLOCKED"
+        notas.append("Curva tempo-corrente indica tempo de atuação acima do limite informado.")
+    elif curva_avaliacao["status"] == "NOT_EVALUATED":
+        if status_auditavel != "BLOCKED":
+            status_auditavel = "NOT_EVALUATED"
+        if status == "OK":
+            status = "ALERTA"
+        notas.append("Atuacao automatica no fim do circuito nao verificada; informe curva documentada e fonte do fabricante.")
 
     return {
         "disjuntor_tensao_nominal": round(vn_disjuntor, 2),
@@ -589,6 +604,8 @@ def _verificar_protecao(c, V, ib, iz_corrigida, isc_ka, disjuntor_sugerido, disj
         "disjuntor_icu": round(icu, 3) if icu else None,
         "disjuntor_curva": curva,
         "disjuntor_fabricante": fabricante,
+        "protecao_curva_fonte": curva_fonte,
+        "protecao_curva_pontos": curva_pontos if isinstance(curva_pontos, list) else [],
         "protecao_status": normalizar_status(status),
         "protecao_avaliacao_status": status_auditavel,
         "protecao_verificacoes": verificacoes,

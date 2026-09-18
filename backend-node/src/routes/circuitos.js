@@ -417,6 +417,8 @@ const CIRCUITO_INPUT_FIELDS = [
   'disjuntor_icu',
   'disjuntor_curva',
   'disjuntor_fabricante',
+  'protecao_curva_fonte',
+  'protecao_curva_pontos',
   'classe_tensao_kv',
   'nbi_kv',
   'tafi_ka',
@@ -494,6 +496,7 @@ function normalizarEntrada(body, projetoId) {
     'modo_selecao_componentes',
     'disjuntor_curva',
     'disjuntor_fabricante',
+    'protecao_curva_fonte',
     'sequencia_operacao',
     'meio_extincao',
     'tipo_acionamento',
@@ -503,6 +506,24 @@ function normalizarEntrada(body, projetoId) {
   textOptionals.forEach((field) => {
     if (body[field] !== undefined) dados[field] = asString(body[field], { label: field, max: 200 })
   })
+
+  if (body.protecao_curva_pontos !== undefined) {
+    if (!Array.isArray(body.protecao_curva_pontos) || body.protecao_curva_pontos.length > 32) {
+      throw validationError('protecao_curva_pontos deve ser uma lista com no maximo 32 pontos.')
+    }
+    dados.protecao_curva_pontos = body.protecao_curva_pontos.map((point, index) => {
+      if (!point || typeof point !== 'object' || Array.isArray(point)) {
+        throw validationError(`protecao_curva_pontos[${index}] invalido.`)
+      }
+      const keys = Object.keys(point)
+      if (keys.some((key) => !['multiplo_in', 'tempo_max_s'].includes(key))) {
+        throw validationError(`protecao_curva_pontos[${index}] possui campo desconhecido.`)
+      }
+      const multiplo = asNumber(point.multiplo_in, { label: `protecao_curva_pontos[${index}].multiplo_in`, min: 0.01, max: 100000 })
+      const tempo = asNumber(point.tempo_max_s, { label: `protecao_curva_pontos[${index}].tempo_max_s`, min: 0.000001, max: 100000 })
+      return { multiplo_in: multiplo, tempo_max_s: tempo }
+    }).sort((a, b) => a.multiplo_in - b.multiplo_in)
+  }
 
   if (body.usar_kva_informado !== undefined) dados.usar_kva_informado = asBoolean(body.usar_kva_informado, { label: 'usar_kva_informado' })
   if (body.acessorios !== undefined) {

@@ -115,6 +115,35 @@ test('Circuito preserves tempo de atuacao from the API input allowlist', () => {
   assert.equal(normalized.tempo_atuacao, 0.1)
 })
 
+test('Circuito accepts only structured protection curve points', () => {
+  const projetoId = new mongoose.Types.ObjectId()
+  const normalized = circuitosRouter._internal.normalizarEntrada({
+    descricao: 'Curva documentada',
+    tensao: 380,
+    potencia_kw: 10,
+    distancia_m: 20,
+    disjuntor_curva: 'C',
+    disjuntor_fabricante: 'Fabricante de teste',
+    protecao_curva_fonte: 'datasheet://fabricante/modelo',
+    protecao_curva_pontos: [
+      { multiplo_in: 20, tempo_max_s: 0.05 },
+      { multiplo_in: 5, tempo_max_s: 0.2 },
+    ],
+  }, projetoId)
+
+  assert.deepEqual(normalized.protecao_curva_pontos, [
+    { multiplo_in: 5, tempo_max_s: 0.2 },
+    { multiplo_in: 20, tempo_max_s: 0.05 },
+  ])
+  assert.throws(() => circuitosRouter._internal.normalizarEntrada({
+    descricao: 'Curva invalida',
+    tensao: 380,
+    potencia_kw: 10,
+    distancia_m: 20,
+    protecao_curva_pontos: [{ multiplo_in: 5, segredo: 'nao permitido' }],
+  }, projetoId), /campo desconhecido/)
+})
+
 test.after(() => {
   mongoose.deleteModel(/.+/)
 })

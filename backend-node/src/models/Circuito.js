@@ -67,6 +67,8 @@ const CircuitoSchema = new mongoose.Schema(
     disjuntor_icu:              { type: Number, default: null, min: 0 },
     disjuntor_curva:            { type: String, default: null, trim: true, maxlength: 80 },
     disjuntor_fabricante:       { type: String, default: null, trim: true, maxlength: 200 },
+    protecao_curva_fonte:       { type: String, default: null, trim: true, maxlength: 500 },
+    protecao_curva_pontos:      { type: [mongoose.Schema.Types.Mixed], default: [] },
 
     // ── Campos MT/AT ───────────────────────────────────────────────────────
     classe_tensao_kv:   { type: Number, default: null, min: 0 },

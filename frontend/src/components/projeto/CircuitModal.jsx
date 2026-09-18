@@ -371,6 +371,26 @@ const CircuitModalComponent = ({
               <Campo label="Fabricante">
                 <input className="input w-full" value={draftC.disjuntor_fabricante || ''} onChange={(e) => setDraftC((m) => ({ ...m, disjuntor_fabricante: e.target.value }))} />
               </Campo>
+              <Campo label={<LabelWithTooltip label="Fonte da curva" tooltip="Informe a referência pública do catálogo ou folha de dados usada para os pontos." />}>
+                <input className="input w-full" placeholder="Catálogo / datasheet / referência" value={draftC.protecao_curva_fonte || ''} onChange={(e) => setDraftC((m) => ({ ...m, protecao_curva_fonte: e.target.value }))} />
+              </Campo>
+              <div className="col-span-full">
+                <Campo label={<LabelWithTooltip label="Pontos da curva tempo-corrente" tooltip={'JSON com pontos documentados: [{"multiplo_in":10,"tempo_max_s":0.1}]. Sem pontos, a atuação permanece não avaliada.'} />}>
+                  <textarea
+                    className="input min-h-24 w-full font-mono text-xs"
+                    value={JSON.stringify(draftC.protecao_curva_pontos || [], null, 2)}
+                    onChange={(e) => {
+                      try {
+                        const pontos = JSON.parse(e.target.value)
+                        if (Array.isArray(pontos)) setDraftC((m) => ({ ...m, protecao_curva_pontos: pontos }))
+                      } catch {
+                        // Mantém os últimos pontos válidos até o JSON ser corrigido.
+                      }
+                    }}
+                    placeholder='[{"multiplo_in":10,"tempo_max_s":0.1}]'
+                  />
+                </Campo>
+              </div>
 
               {icuCritico && (
                 <div className="col-span-full">

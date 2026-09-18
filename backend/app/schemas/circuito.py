@@ -29,6 +29,8 @@ class CircuitoBase(BaseModel):
     disjuntor_icu: Optional[float] = None
     disjuntor_curva: Optional[str] = None
     disjuntor_fabricante: Optional[str] = None
+    protecao_curva_fonte: Optional[str] = None
+    protecao_curva_pontos: Optional[List[Dict[str, float]]] = None
     corrente_ac_dc: str = "AC"
     potencia_kva: Optional[float] = None
     usar_kva_informado: bool = False
