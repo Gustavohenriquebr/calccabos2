@@ -395,6 +395,7 @@ const CIRCUITO_INPUT_FIELDS = [
   'comprimento_real',
   'queda_tensao_alimentador',
   'isc_local',
+  'tempo_atuacao',
   'usar_kva_informado',
   'configuracao_eletrica',
   'referencia_tensao',
@@ -461,6 +462,7 @@ function normalizarEntrada(body, projetoId) {
     'comprimento_real',
     'queda_tensao_alimentador',
     'isc_local',
+    'tempo_atuacao',
     'corrente_informada',
     'secao_minima_aplicacao',
     'secao_minima_mecanica',
@@ -865,3 +867,4 @@ router.post('/importar-circuitos/confirmar', importRateLimit, upload.single('fil
 })
 
 module.exports = router
+module.exports._internal = { normalizarEntrada, CIRCUITO_INPUT_FIELDS }

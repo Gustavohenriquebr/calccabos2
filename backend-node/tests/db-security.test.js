@@ -8,6 +8,7 @@ const { assertValidMongoUri, resolveMongoConfig } = require('../src/config/datab
 const User = require('../src/models/User')
 const Projeto = require('../src/models/Projeto')
 const Circuito = require('../src/models/Circuito')
+const circuitosRouter = require('../src/routes/circuitos')
 const ProjetoRevision = require('../src/models/ProjetoRevision')
 
 test('Mongo config requires MONGODB_URI in production', () => {
@@ -99,6 +100,19 @@ test('Circuito has owner traversal indexes by projetoId', () => {
   const indexes = Circuito.schema.indexes()
   assert.equal(indexes.some(([fields]) => fields.projetoId === 1 && fields.ordem === 1), true)
   assert.equal(indexes.some(([fields]) => fields.projetoId === 1 && fields.status_final === 1), true)
+})
+
+test('Circuito preserves tempo de atuacao from the API input allowlist', () => {
+  const projetoId = new mongoose.Types.ObjectId()
+  const normalized = circuitosRouter._internal.normalizarEntrada({
+    descricao: 'Teste de protecao',
+    tensao: 380,
+    potencia_kw: 10,
+    distancia_m: 20,
+    tempo_atuacao: 0.1,
+  }, projetoId)
+
+  assert.equal(normalized.tempo_atuacao, 0.1)
 })
 
 test.after(() => {
